@@ -150,12 +150,13 @@ class _SignUpState extends State<SignUp> {
                         print("saving profile data");
                         // Create a CollectionReference called users that references the firestore collection
                         FirebaseFirestore.instance.collection('users')
-                            .add({
+                          .doc(FirebaseAuth.instance.currentUser.uid)
+                          .set({
                           'email': email,
                           'name': name,
                           'hale': hale,
                           'room': room
-                            })
+                          })
                             .then((value) => print("User Profile Added"))
                             .catchError((error) => print("Failed to add user profile: $error"));
 

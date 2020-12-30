@@ -40,7 +40,7 @@ class _SignUpState extends State<SignUp> {
                       margin: EdgeInsets.only(right: 20, left: 10),
                       child: TextField(
                         onChanged: (value){
-                          email = value.toString();
+                          email = value;
                         },
                         decoration: InputDecoration(hintText: "Email"),
                       ),

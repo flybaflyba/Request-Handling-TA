@@ -29,10 +29,9 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       // home: MyHomePage(title: 'Flutter Demo Home Page'),
-      initialRoute: "SignIn",
+      initialRoute: "MyHomePage",
       routes: {
-        "MyHomePage" : (context) => MyHomePage(title: 'Flutter Demo Home Page'),
-        "SignIn" : (context) => SignIn(),
+        "MyHomePage" : (context) => MyHomePage(title: 'Request Help'),
       },
     );
   }

@@ -10,6 +10,8 @@ class Universals {
 
   static String taSecretCode = "";
 
+  static var courses = <String>['CIS 101', 'CIS 202', 'CIS 205', 'CIS 206', 'CS 203', ""];
+
   static void showToast(String msg) {
     Fluttertoast.showToast(
         msg: msg,

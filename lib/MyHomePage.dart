@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:virtual_approval_flutter/SignIn.dart';
+import 'package:virtual_approval_flutter/Universals.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -19,17 +21,74 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  var name = "";
+  var email = "";
+  var course = "";
+  var question = "";
+
+  TextEditingController courseTextEditingController = new TextEditingController();
+  bool courseTextEditingEnable = true;
+
+  Future<void> _showCourseDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Select a Course', textAlign: TextAlign.center,),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      DropdownButton<String>(
+                        // value: dropdownValue,
+                        value: course,
+                        icon: Icon(Icons.arrow_drop_down),
+                        iconSize: 24,
+                        elevation: 16,
+                        style: TextStyle(color: Colors.deepPurple),
+                        underline: Container(
+                          height: 2,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                        onChanged: (String newValue) {
+                          setState(() {
+                            // dropdownValue = newValue;
+                            course = newValue;
+                            print(course);
+                            courseTextEditingController.text = course;
+                            courseTextEditingEnable = true;
+                            Navigator.of(context).pop();
+                          });
+                        },
+                        items: Universals.courses
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+
+              ],
+            ),
+          ),
+          // actions: <Widget>[
+          //   TextButton(
+          //     child: Text('Confirm'),
+          //     onPressed: () {
+          //       Navigator.of(context).pop();
+          //     },
+          //   ),
+          // ],
+        );
+      },
+    );
   }
 
   @override
@@ -44,43 +103,142 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
+        backgroundColor: Universals.appBarColor,
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+      body:      ListView(
+        children: [
+          SizedBox(height: 20,),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Row(
+              children: <Widget>[
+                IconButton(icon: Icon(Icons.person), onPressed: null),
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.only(right: 20, left: 10),
+                    child: TextField(
+                      onChanged: (value){
+                         name = value;
+                      },
+                      decoration: InputDecoration(hintText: "Name"),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Row(
+              children: <Widget>[
+                IconButton(icon: Icon(Icons.email), onPressed: null),
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.only(right: 20, left: 10),
+                    child: TextField(
+                      onChanged: (value){
+                         email = value;
+                      },
+                      decoration: InputDecoration(hintText: "Email"),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Row(
+              children: <Widget>[
+                IconButton(icon: Icon(Icons.menu_book), onPressed: null),
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.only(right: 20, left: 10),
+                    child:
+                    TextField(
+                      enabled: courseTextEditingEnable,
+                      controller: courseTextEditingController,
+                      onTap: () {
+                        courseTextEditingEnable = false;
+                        FocusScope.of(context).requestFocus(new FocusNode()); // do not show keyboard
+                        _showCourseDialog();
+                      },
+                      decoration: InputDecoration(hintText: 'Course'),
+                    ),
+
+
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Row(
+              children: <Widget>[
+                IconButton(icon: Icon(Icons.question_answer), onPressed: null),
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.only(right: 20, left: 10),
+                    child:
+                    TextField(
+                      minLines: 1,
+                      maxLines: 100,
+                      // textAlign: TextAlign.center,
+                      onChanged: (value) {
+                         question = value;
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: Container(
+                height: 60,
+                child: RaisedButton(
+                  onPressed: () async {
+                    print(name);
+                    print(email);
+                    print(course);
+                    print(question);
+                  },
+                  color: Universals.buttonColor,
+                  child: Text(
+                    'Request Help',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          Padding(
+              padding: const EdgeInsets.all(5.0),
+              child:
+              TextButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SignIn(),));
+                },
+                child: Text("Are you a TA?"),
+              )
+
+          ),
+        ],
+
+      )
     );
   }
 }

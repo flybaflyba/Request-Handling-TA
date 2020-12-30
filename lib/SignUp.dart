@@ -150,7 +150,7 @@ class _SignUpState extends State<SignUp> {
                         print("saving profile data");
                         // Create a CollectionReference called users that references the firestore collection
                         FirebaseFirestore.instance.collection('users')
-                          .doc(FirebaseAuth.instance.currentUser.uid)
+                          .doc(email)
                           .set({
                           'email': email,
                           'name': name,

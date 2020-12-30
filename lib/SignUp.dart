@@ -27,9 +27,9 @@ class _SignUpState extends State<SignUp> {
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
           title: Text("SignUp"),
-          backgroundColor: UniversalValues.appBarColor,
+          backgroundColor: Universals.appBarColor,
         ),
-      backgroundColor: UniversalValues.backgroundColor,
+      backgroundColor: Universals.backgroundColor,
       body:
         ListView(
           children: [
@@ -151,23 +151,21 @@ class _SignUpState extends State<SignUp> {
                       on FirebaseAuthException catch (e) {
                         if (e.code == 'weak-password') {
                           print('The password provided is too weak');
-                          UniversalValues.showToast('The password provided is too weak');
+                          Universals.showToast('The password provided is too weak');
                         } else if (e.code == 'email-already-in-use') {
                           print('The account already exists for that email');
-                          UniversalValues.showToast("The account already exists for that email");
+                          Universals.showToast("The account already exists for that email");
                         }
                         else if (e.code == 'invalid-email') {
                           print('Invalid email');
-                          UniversalValues.showToast("Invalid email");
+                          Universals.showToast("Invalid email");
                         }
                       }
                       catch (e) {
                         print(e);
                       }
-
-
                     },
-                    color: UniversalValues.buttonColor,
+                    color: Universals.buttonColor,
                     child: Text(
                       'SIGN UP',
                       style: TextStyle(

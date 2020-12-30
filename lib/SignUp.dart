@@ -105,45 +105,52 @@ class _SignUpState extends State<SignUp> {
                       print(email);
                       print(password);
                       print(taSecretCode);
+                      print(Universals.taSecretCode);
 
+                      if (email == null || password == null || taSecretCode == null) {
+                        Universals.showToast('Please complete all fields');
+                      } else {
+                        if (taSecretCode != Universals.taSecretCode) {
+                          Universals.showToast('Wrong TA secret code ');
+                        } else {
+                          try {
+                            UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                              email: email,
+                              password: password,
+                            );
 
-                      try {
-                        UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                          email: email,
-                          password: password,
-                        );
+                            print("saving profile data");
+                            // Create a CollectionReference called users that references the firestore collection
+                            FirebaseFirestore.instance.collection('users')
+                                .doc(email)
+                                .set({
+                              'email': email,
+                            })
+                                .then((value) => print("User Profile Added"))
+                                .catchError((error) => print("Failed to add user profile: $error"));
 
-                        print("saving profile data");
-                        // Create a CollectionReference called users that references the firestore collection
-                        FirebaseFirestore.instance.collection('users')
-                          .doc(email)
-                          .set({
-                          'email': email,
-                          })
-                            .then((value) => print("User Profile Added"))
-                            .catchError((error) => print("Failed to add user profile: $error"));
-
-                        // FirebaseAuth.instance.signOut();
-                        print(userCredential);
-                        Navigator.pop(context);
-                      }
-                      on FirebaseAuthException catch (e) {
-                        if (e.code == 'weak-password') {
-                          print('The password provided is too weak');
-                          Universals.showToast('The password provided is too weak');
-                        } else if (e.code == 'email-already-in-use') {
-                          print('The account already exists for that email');
-                          Universals.showToast("The account already exists for that email");
+                            // FirebaseAuth.instance.signOut();
+                            print(userCredential);
+                            Navigator.pop(context);
+                          }
+                          on FirebaseAuthException catch (e) {
+                            if (e.code == 'weak-password') {
+                              print('The password provided is too weak');
+                              Universals.showToast('The password provided is too weak');
+                            } else if (e.code == 'email-already-in-use') {
+                              print('The account already exists for that email');
+                              Universals.showToast("The account already exists for that email");
+                            }
+                            else if (e.code == 'invalid-email') {
+                              print('Invalid email');
+                              Universals.showToast("Invalid email");
+                            }
+                          }
+                          catch (e) {
+                            print(e);
+                          }
                         }
-                        else if (e.code == 'invalid-email') {
-                          print('Invalid email');
-                          Universals.showToast("Invalid email");
-                        }
                       }
-                      catch (e) {
-                        print(e);
-                      }
-
                     },
                     color: Universals.buttonColor,
                     child: Text(

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/SignUp.dart';
 import 'package:virtual_approval_flutter/Universals.dart';
 
@@ -116,6 +117,7 @@ class _SignInState extends State<SignIn> {
                 TextButton(
                   onPressed: () {
                     // Respond to button press
+                    DatabaseInteractions.getTaSecretCode();
                     Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp(),));
                   },
                   child: Text("Register"),

@@ -8,6 +8,8 @@ class Universals {
   static Color buttonColor = Color(0xff0077d7);
   static Color backgroundColor = Color(0xffffffff);
 
+  static String taSecretCode = "";
+
   static void showToast(String msg) {
     Fluttertoast.showToast(
         msg: msg,

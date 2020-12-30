@@ -1,7 +1,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:virtual_approval_flutter/Universals.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -15,11 +14,7 @@ class _SignUpState extends State<SignUp> {
 
   var email;
   var password;
-  var name;
-  var hale;
-  var room;
-
-  FirebaseAuth auth = FirebaseAuth.instance;
+  var taSecretCode;
 
   @override
   Widget build(BuildContext context) {
@@ -77,15 +72,15 @@ class _SignUpState extends State<SignUp> {
               padding: const EdgeInsets.all(20.0),
               child: Row(
                 children: <Widget>[
-                  IconButton(icon: Icon(Icons.person), onPressed: null),
+                  IconButton(icon: Icon(Icons.code), onPressed: null),
                   Expanded(
                     child: Container(
                       margin: EdgeInsets.only(right: 20, left: 10),
                       child: TextField(
                         onChanged: (value){
-                          name = value;
+                          taSecretCode = value;
                         },
-                        decoration: InputDecoration(hintText: "Name"),
+                        decoration: InputDecoration(hintText: "TA secret code"),
                       ),
                     ),
                   ),
@@ -94,41 +89,10 @@ class _SignUpState extends State<SignUp> {
             ),
             Padding(
               padding: const EdgeInsets.all(20.0),
-              child: Row(
-                children: <Widget>[
-                  IconButton(icon: Icon(Icons.house), onPressed: null),
-                  Expanded(
-                    child: Container(
-                      margin: EdgeInsets.only(right: 20, left: 10),
-                      child: TextField(
-                        onChanged: (value){
-                          hale = value;
-                        },
-                        decoration: InputDecoration(hintText: "Hale"),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                children: <Widget>[
-                  IconButton(icon: Icon(Icons.room), onPressed: null),
-                  Expanded(
-                    child: Container(
-                      margin: EdgeInsets.only(right: 20, left: 10),
-                      child: TextField(
-                        onChanged: (value){
-                          room = value;
-                        },
-                        decoration: InputDecoration(hintText: "Room"),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              child: Text(
+                "No TA secret code? Get it from your professor.",
+                textAlign: TextAlign.center,
+              )
             ),
             Padding(
               padding: const EdgeInsets.all(20.0),
@@ -140,6 +104,8 @@ class _SignUpState extends State<SignUp> {
                     onPressed: () async {
                       print(email);
                       print(password);
+                      print(taSecretCode);
+
 
                       try {
                         UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -153,9 +119,6 @@ class _SignUpState extends State<SignUp> {
                           .doc(email)
                           .set({
                           'email': email,
-                          'name': name,
-                          'hale': hale,
-                          'room': room
                           })
                             .then((value) => print("User Profile Added"))
                             .catchError((error) => print("Failed to add user profile: $error"));
@@ -180,6 +143,7 @@ class _SignUpState extends State<SignUp> {
                       catch (e) {
                         print(e);
                       }
+
                     },
                     color: Universals.buttonColor,
                     child: Text(

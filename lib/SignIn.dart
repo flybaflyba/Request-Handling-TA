@@ -111,7 +111,7 @@ class _SignInState extends State<SignIn> {
             ),
 
             Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(5.0),
                 child:
                 TextButton(
                   onPressed: () {

@@ -1,5 +1,8 @@
+
 import 'package:flutter/material.dart';
-import 'package:virtual_approval_flutter/UniversalValues.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:virtual_approval_flutter/Universals.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 class SignUp extends StatefulWidget {
@@ -15,6 +18,7 @@ class _SignUpState extends State<SignUp> {
   var hale;
   var room;
 
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +44,7 @@ class _SignUpState extends State<SignUp> {
                       margin: EdgeInsets.only(right: 20, left: 10),
                       child: TextField(
                         onChanged: (value){
-                          email = value;
+                          email = value.toString();
                         },
                         decoration: InputDecoration(hintText: "Email"),
                       ),
@@ -125,7 +129,6 @@ class _SignUpState extends State<SignUp> {
                 ],
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: ClipRRect(
@@ -134,6 +137,34 @@ class _SignUpState extends State<SignUp> {
                   height: 60,
                   child: RaisedButton(
                     onPressed: () async {
+                      print(email);
+                      print(password);
+
+                      try {
+                        UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                            email: email,
+                            password: password
+                        );
+                        print(userCredential);
+                        Navigator.pop(context);
+                      }
+                      on FirebaseAuthException catch (e) {
+                        if (e.code == 'weak-password') {
+                          print('The password provided is too weak');
+                          UniversalValues.showToast('The password provided is too weak');
+                        } else if (e.code == 'email-already-in-use') {
+                          print('The account already exists for that email');
+                          UniversalValues.showToast("The account already exists for that email");
+                        }
+                        else if (e.code == 'invalid-email') {
+                          print('Invalid email');
+                          UniversalValues.showToast("Invalid email");
+                        }
+                      }
+                      catch (e) {
+                        print(e);
+                      }
+
 
                     },
                     color: UniversalValues.buttonColor,

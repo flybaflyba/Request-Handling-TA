@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:virtual_approval_flutter/SignUp.dart';
-import 'package:virtual_approval_flutter/UniversalValues.dart';
+import 'package:virtual_approval_flutter/Universals.dart';
 
 
 class SignIn extends StatefulWidget {

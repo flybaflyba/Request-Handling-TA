@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "720199662006",
+    "project_id": "virtual-approval-flutter",
+    "storage_bucket": "virtual-approval-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720199662006:android:263a8716fbf20bc5cea917",
+        "android_client_info": {
+          "package_name": "com.litianzhang.virtual_approval_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "720199662006-ii7es6c23dblrkk3hm6tnmooj742sag9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN1GEA7Jg4RCh3u5m2n6B0Y3xjFqUxP0c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "720199662006-ii7es6c23dblrkk3hm6tnmooj742sag9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

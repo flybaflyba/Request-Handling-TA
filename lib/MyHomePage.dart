@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/SignIn.dart';
 import 'package:virtual_approval_flutter/Universals.dart';
 
@@ -213,6 +214,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     print(course);
                     print(question);
 
+                    DatabaseInteractions.saveNewRequest(name, email, course, question);
 
 
 

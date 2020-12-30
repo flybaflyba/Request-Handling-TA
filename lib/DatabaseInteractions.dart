@@ -29,4 +29,25 @@ class DatabaseInteractions {
         .catchError((error) => print("Failed to add user profile: $error"));
   }
 
+  static void saveNewRequest(String name, String email, String course, String question) {
+    var now = new DateTime.now();
+    print(now.add(Duration(hours: -10)));
+    var nowHawaii = now.add(Duration(hours: -10));
+
+    FirebaseFirestore.instance.collection(course)
+        .doc("new")
+        .collection("new")
+        .doc(nowHawaii.toString())
+        .set({
+      'name': name,
+      'email': email,
+      'course': course,
+      'questions': question,
+      'requested time': nowHawaii,
+      'status': "new"
+    })
+        .then((value) => print("New Request Added"))
+        .catchError((error) => print("Failed to save new request: $error"));
+  }
+
 }

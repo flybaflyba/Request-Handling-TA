@@ -1,6 +1,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/Universals.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -118,16 +119,7 @@ class _SignUpState extends State<SignUp> {
                               email: email,
                               password: password,
                             );
-
-                            print("saving profile data");
-                            // Create a CollectionReference called users that references the firestore collection
-                            FirebaseFirestore.instance.collection('users')
-                                .doc(email)
-                                .set({
-                              'email': email,
-                            })
-                                .then((value) => print("User Profile Added"))
-                                .catchError((error) => print("Failed to add user profile: $error"));
+                            DatabaseInteractions.saveUserProfile(email);
 
                             // FirebaseAuth.instance.signOut();
                             print(userCredential);

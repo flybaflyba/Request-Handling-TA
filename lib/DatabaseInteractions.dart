@@ -4,7 +4,6 @@ import 'package:virtual_approval_flutter/Universals.dart';
 class DatabaseInteractions {
 
   static void getTaSecretCode() {
-
     FirebaseFirestore.instance
         .collection('ta secret codes')
         .doc("ta secret codes")
@@ -18,7 +17,16 @@ class DatabaseInteractions {
         Universals.taSecretCode = "";
       }
     });
+  }
 
+  static void saveUserProfile(String email) {
+    FirebaseFirestore.instance.collection('users')
+        .doc(email)
+        .set({
+      'email': email,
+    })
+        .then((value) => print("User Profile Added"))
+        .catchError((error) => print("Failed to add user profile: $error"));
   }
 
 }

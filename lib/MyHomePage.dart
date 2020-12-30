@@ -192,6 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       onChanged: (value) {
                          question = value;
                       },
+                      decoration: InputDecoration(hintText: 'Question'),
                     ),
                   ),
                 ),
@@ -211,6 +212,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     print(email);
                     print(course);
                     print(question);
+
+
+
+
                   },
                   color: Universals.buttonColor,
                   child: Text(

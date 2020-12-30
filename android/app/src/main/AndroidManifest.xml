@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.litianzhang.virtual_approval_flutter">
    <application
+
         android:label="virtual_approval_flutter"
         android:icon="@mipmap/ic_launcher">
         <activity

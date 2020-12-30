@@ -20,7 +20,7 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text("SignIn"),
+        title: Text("Sign In"),
         backgroundColor: Universals.appBarColor,
 
       ),
@@ -99,7 +99,7 @@ class _SignInState extends State<SignIn> {
                     },
                     color: Universals.buttonColor,
                     child: Text(
-                      'SIGN In',
+                      'SIGN IN',
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,

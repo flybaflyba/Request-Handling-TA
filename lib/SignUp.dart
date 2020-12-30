@@ -1,4 +1,5 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:virtual_approval_flutter/Universals.dart';
@@ -26,7 +27,7 @@ class _SignUpState extends State<SignUp> {
         appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
-          title: Text("SignUp"),
+          title: Text("Sign Up"),
           backgroundColor: Universals.appBarColor,
         ),
       backgroundColor: Universals.backgroundColor,
@@ -142,9 +143,23 @@ class _SignUpState extends State<SignUp> {
 
                       try {
                         UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                            email: email,
-                            password: password
+                          email: email,
+                          password: password,
                         );
+
+                        print("saving profile data");
+                        // Create a CollectionReference called users that references the firestore collection
+                        FirebaseFirestore.instance.collection('users')
+                            .add({
+                          'email': email,
+                          'name': name,
+                          'hale': hale,
+                          'room': room
+                            })
+                            .then((value) => print("User Profile Added"))
+                            .catchError((error) => print("Failed to add user profile: $error"));
+
+                        // FirebaseAuth.instance.signOut();
                         print(userCredential);
                         Navigator.pop(context);
                       }

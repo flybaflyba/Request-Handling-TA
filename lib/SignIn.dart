@@ -97,10 +97,10 @@ class _SignInState extends State<SignIn> {
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'user-not-found') {
                           print('No user found for that email.');
-                          Universals.showToast('No user found for that email');
+                          Universals.showToast('No user found for that email', Universals.toastMessageTypeWarning);
                         } else if (e.code == 'wrong-password') {
                           print('Wrong password provided for that user.');
-                          Universals.showToast('Wrong password provided for that user');
+                          Universals.showToast('Wrong password provided for that user', Universals.toastMessageTypeWarning);
                         }
                       }
 

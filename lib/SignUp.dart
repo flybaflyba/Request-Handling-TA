@@ -109,10 +109,10 @@ class _SignUpState extends State<SignUp> {
                       print(Universals.taSecretCode);
 
                       if (email == null || password == null || taSecretCode == null) {
-                        Universals.showToast('Please complete all fields');
+                        Universals.showToast('Please complete all fields', Universals.toastMessageTypeWarning);
                       } else {
                         if (taSecretCode != Universals.taSecretCode) {
-                          Universals.showToast('Wrong TA secret code ');
+                          Universals.showToast('Wrong TA secret code ', Universals.toastMessageTypeWarning);
                         } else {
                           try {
                             UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -128,14 +128,14 @@ class _SignUpState extends State<SignUp> {
                           on FirebaseAuthException catch (e) {
                             if (e.code == 'weak-password') {
                               print('The password provided is too weak');
-                              Universals.showToast('The password provided is too weak');
+                              Universals.showToast('The password provided is too weak', Universals.toastMessageTypeWarning);
                             } else if (e.code == 'email-already-in-use') {
                               print('The account already exists for that email');
-                              Universals.showToast("The account already exists for that email");
+                              Universals.showToast("The account already exists for that email", Universals.toastMessageTypeWarning);
                             }
                             else if (e.code == 'invalid-email') {
                               print('Invalid email');
-                              Universals.showToast("Invalid email");
+                              Universals.showToast("Invalid email", Universals.toastMessageTypeWarning);
                             }
                           }
                           catch (e) {

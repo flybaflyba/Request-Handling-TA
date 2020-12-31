@@ -8,6 +8,8 @@ class Universals {
   static Color buttonColor = Color(0xff0077d7);
   static Color backgroundColor = Color(0xffffffff);
   static Color transparentColorWhite = Color(0x55000000);
+  static Color toastMessageTypeGood = Colors.blue;
+  static Color toastMessageTypeWarning = Colors.red;
 
   static String taSecretCode = "";
 
@@ -22,13 +24,13 @@ class Universals {
     {"Other": ["Other"]}
     ]''';
 
-  static void showToast(String msg) {
+  static void showToast(String msg, Color toastMessageType) {
     Fluttertoast.showToast(
         msg: msg,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
+        backgroundColor: toastMessageType,
         textColor: Colors.white,
         fontSize: 16.0
     );

@@ -195,11 +195,10 @@ class _RequestPageState extends State<RequestPage> {
                     print(course);
                     print(question);
 
-                    // check if this person has submitted a request
 
                     Request request;
                     var requestMessageBack = "";
-
+                    // check if this person has submitted a request
                     try {
                       FirebaseFirestore.instance
                           .collection('new requests')
@@ -209,7 +208,7 @@ class _RequestPageState extends State<RequestPage> {
                             if (querySnapshot.docs.isNotEmpty) {
                               requestMessageBack = "You already submitted a request";
                               print(requestMessageBack);
-                              Universals.showToast(requestMessageBack);
+                              Universals.showToast(requestMessageBack, Universals.toastMessageTypeWarning);
                               var name = querySnapshot.docs[0]["name"];
                               var email = querySnapshot.docs[0]["email"];
                               var course = querySnapshot.docs[0]["course"];
@@ -220,7 +219,7 @@ class _RequestPageState extends State<RequestPage> {
                             } else {
                               requestMessageBack = "Your Requested is submitted successfully";
                               print(requestMessageBack);
-                              Universals.showToast(requestMessageBack);
+                              Universals.showToast(requestMessageBack, Universals.toastMessageTypeGood);
                               request = new Request(name: name, email: email, course: course, question: question);
                               var now = new DateTime.now();
                               print(now.add(Duration(hours: -10)));

@@ -194,7 +194,12 @@ class _RequestPageState extends State<RequestPage> {
                     print(course);
                     print(question);
                     Request request = new Request(name: name, email: email, course: course, question: question);
-                    DatabaseInteractions.saveNewRequest(request);
+                    var now = new DateTime.now();
+                    print(now.add(Duration(hours: -10)));
+                    var nowHawaii = now.add(Duration(hours: -10)).toString();
+                    request.requestedTimeHawaii = nowHawaii;
+                    request.status = "new";
+                    DatabaseInteractions.saveRequest(request);
                   },
                   color: Universals.buttonColor,
                   child: Text(

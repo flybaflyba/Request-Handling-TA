@@ -30,26 +30,30 @@ class DatabaseInteractions {
         .catchError((error) => print("Failed to add user profile: $error"));
   }
 
-  static void saveNewRequest(Request request) {
-    var now = new DateTime.now();
-    print(now.add(Duration(hours: -10)));
-    var nowHawaii = now.add(Duration(hours: -10)).toString();
-
-    request.requestedTimeHawaii = nowHawaii;
-    request.status = "new";
-
-    FirebaseFirestore.instance.collection("new requests")
-        .doc(nowHawaii.toString())
+  static void saveRequest(Request request) {
+    FirebaseFirestore.instance.collection(request.status + " requests")
+        .doc(request.requestedTimeHawaii)
         .set({
       'name': request.name,
       'email': request.email,
       'course': request.course,
       'question': request.question,
       'requested time hawaii': request.requestedTimeHawaii,
-      'status': request.status
+      'status': request.status,
+      "requestTakenTimeHawaii": request.requestTakenTimeHawaii,
+      "requestDoneTimeHawaii": request.requestDoneTimeHawaii,
+      "timeSpent": request.timeSpent,
     })
         .then((value) => print("New Request Added"))
         .catchError((error) => print("Failed to save new request: $error"));
+  }
+
+  static void deleteRequest(Request request) {
+    FirebaseFirestore.instance.collection("new requests")
+        .doc(request.requestedTimeHawaii)
+        .delete()
+        .then((value) => print("Request Deleted"))
+        .catchError((error) => print("Failed to delete request: $error"));
   }
 
 }

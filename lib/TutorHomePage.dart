@@ -5,6 +5,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/Request.dart';
 import 'package:virtual_approval_flutter/Universals.dart';
 import 'package:intl/intl.dart';
@@ -195,6 +196,8 @@ class _TutorHomePageState extends State<TutorHomePage> {
                                 request.timeSpent = DateTime.now().difference(requestTakenTime).toString();
                                 request.status = "done";
                                 print(request.show());
+                                DatabaseInteractions.deleteRequest(request);
+                                DatabaseInteractions.saveRequest(request);
                               });
 
                             },

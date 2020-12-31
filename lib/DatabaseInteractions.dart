@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:virtual_approval_flutter/Request.dart';
 import 'package:virtual_approval_flutter/Universals.dart';
 
 class DatabaseInteractions {
@@ -29,20 +30,23 @@ class DatabaseInteractions {
         .catchError((error) => print("Failed to add user profile: $error"));
   }
 
-  static void saveNewRequest(String name, String email, String course, String question) {
+  static void saveNewRequest(Request request) {
     var now = new DateTime.now();
     print(now.add(Duration(hours: -10)));
     var nowHawaii = now.add(Duration(hours: -10));
 
+    request.requestedTime = nowHawaii;
+    request.status = "new";
+
     FirebaseFirestore.instance.collection("new requests")
         .doc(nowHawaii.toString())
         .set({
-      'name': name,
-      'email': email,
-      'course': course,
-      'questions': question,
-      'requested time': nowHawaii,
-      'status': "new"
+      'name': request.name,
+      'email': request.email,
+      'course': request.course,
+      'questions': request.question,
+      'requested time': request.requestedTime,
+      'status': request.status
     })
         .then((value) => print("New Request Added"))
         .catchError((error) => print("Failed to save new request: $error"));

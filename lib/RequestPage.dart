@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
+import 'package:virtual_approval_flutter/Request.dart';
 import 'package:virtual_approval_flutter/SignIn.dart';
 import 'package:virtual_approval_flutter/Universals.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class RequestPage extends StatefulWidget {
+  RequestPage({Key key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -18,10 +19,10 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _RequestPageState createState() => _RequestPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _RequestPageState extends State<RequestPage> {
 
   var name = "";
   var email = "";
@@ -214,8 +215,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     print(course);
                     print(question);
 
-                    DatabaseInteractions.saveNewRequest(name, email, course, question);
-
+                    Request request = new Request(name: name, email: email, course: course, question: question);
+                    DatabaseInteractions.saveNewRequest(request);
 
 
                   },

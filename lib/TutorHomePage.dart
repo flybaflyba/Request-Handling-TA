@@ -66,7 +66,8 @@ class _TutorHomePageState extends State<TutorHomePage> {
                               print(requestTakenTime.add(Duration(hours: -10)));
                               var requestTakenTimeHawaii = requestTakenTime.add(Duration(hours: -10)).toString();
                               request.requestTakenTimeHawaii = requestTakenTimeHawaii;
-
+                              // delete request once it's taken.
+                              DatabaseInteractions.deleteRequest(request);
                               showGeneralDialog(
                                 context: context,
                                 // barrierColor: Colors.black12.withOpacity(0.6), // background color
@@ -196,7 +197,7 @@ class _TutorHomePageState extends State<TutorHomePage> {
                                 request.timeSpent = DateTime.now().difference(requestTakenTime).toString();
                                 request.status = "done";
                                 print(request.show());
-                                DatabaseInteractions.deleteRequest(request);
+
                                 DatabaseInteractions.saveRequest(request);
                               });
 

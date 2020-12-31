@@ -13,8 +13,8 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
 
-  var email;
-  var password;
+  var email = "";
+  var password = "";
 
   @override
   Widget build(BuildContext context) {
@@ -80,29 +80,42 @@ class _SignInState extends State<SignIn> {
                       print(email);
                       print(password);
 
-                      try {
-                        UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-                            email: email,
-                            password: password
-                        );
-                        print(userCredential);
-                        Navigator.popUntil(context, (route) => false); // pop all past screens
-                        // Navigator.pop(context); // pop current screen
+                      if(email == "" || password == "") {
+                        Universals.showToast("Please complete all fields", Universals.toastMessageTypeWarning);
+                      } else {
+                        try {
+                          UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+                              email: email,
+                              password: password
+                          );
+                          print(userCredential);
+                          Navigator.popUntil(context, (route) => false); // pop all past screens
+                          // Navigator.pop(context); // pop current screen
 
-                        if(userCredential != null) {
-                          // sign in
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => TutorHomePage(),));
-                        }
+                          if(userCredential != null) {
+                            // sign in
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => TutorHomePage(),));
+                          }
 
-                      } on FirebaseAuthException catch (e) {
-                        if (e.code == 'user-not-found') {
-                          print('No user found for that email.');
-                          Universals.showToast('No user found for that email', Universals.toastMessageTypeWarning);
-                        } else if (e.code == 'wrong-password') {
-                          print('Wrong password provided for that user.');
-                          Universals.showToast('Wrong password provided for that user', Universals.toastMessageTypeWarning);
+                        } on FirebaseAuthException catch (e) {
+                          print(e);
+                          if (e.code == 'user-not-found') {
+                            print('No user found for that email.');
+                            Universals.showToast('No user found for that email', Universals.toastMessageTypeWarning);
+                          } else if (e.code == 'wrong-password') {
+                            print('Wrong password provided for that user.');
+                            Universals.showToast('Wrong password provided for that user', Universals.toastMessageTypeWarning);
+                          } else if (e.code == 'invalid-email') {
+                            print('invalid-email');
+                            Universals.showToast('Invalid email', Universals.toastMessageTypeWarning);
+                          } else {
+                            Universals.showToast("Something went wrong", Universals.toastMessageTypeWarning);
+                          }
                         }
                       }
+
+
+
 
 
                     },

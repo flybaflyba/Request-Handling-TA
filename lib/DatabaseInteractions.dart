@@ -34,9 +34,7 @@ class DatabaseInteractions {
     print(now.add(Duration(hours: -10)));
     var nowHawaii = now.add(Duration(hours: -10));
 
-    FirebaseFirestore.instance.collection(course)
-        .doc("new")
-        .collection("new")
+    FirebaseFirestore.instance.collection("new requests")
         .doc(nowHawaii.toString())
         .set({
       'name': name,

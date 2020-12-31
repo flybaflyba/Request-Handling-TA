@@ -33,9 +33,9 @@ class DatabaseInteractions {
   static void saveNewRequest(Request request) {
     var now = new DateTime.now();
     print(now.add(Duration(hours: -10)));
-    var nowHawaii = now.add(Duration(hours: -10));
+    var nowHawaii = now.add(Duration(hours: -10)).toString();
 
-    request.requestedTime = nowHawaii;
+    request.requestedTimeHawaii = nowHawaii;
     request.status = "new";
 
     FirebaseFirestore.instance.collection("new requests")
@@ -44,8 +44,8 @@ class DatabaseInteractions {
       'name': request.name,
       'email': request.email,
       'course': request.course,
-      'questions': request.question,
-      'requested time': request.requestedTime,
+      'question': request.question,
+      'requested time hawaii': request.requestedTimeHawaii,
       'status': request.status
     })
         .then((value) => print("New Request Added"))

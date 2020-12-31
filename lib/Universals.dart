@@ -10,7 +10,16 @@ class Universals {
 
   static String taSecretCode = "";
 
-  static var courses = <String>['CIS 101', 'CIS 202', 'CIS 205', 'CIS 206', 'CS 203', ""];
+  static const courses =
+  '''[
+    {"CIS": ["101","202","205","206"]},
+    {"CS": ["203","210","301","490R"]},
+    {"IT": ["224","240","280","320","390R","420","480"]},
+    {"IS": [350]},
+    {"MATH": ["107","110","111","119","121","212","213","301","421"]},
+    {"PHYS": ["115","115L","121","121L"]},
+    {"Other": ["Other"]}
+    ]''';
 
   static void showToast(String msg) {
     Fluttertoast.showToast(
@@ -23,4 +32,6 @@ class Universals {
         fontSize: 16.0
     );
   }
+
+
 }

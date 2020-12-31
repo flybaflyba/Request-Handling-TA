@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/Request.dart';
 import 'package:virtual_approval_flutter/SignIn.dart';
 import 'package:virtual_approval_flutter/Universals.dart';
+import 'package:flutter_picker/flutter_picker.dart';
 
 class RequestPage extends StatefulWidget {
   RequestPage({Key key, this.title}) : super(key: key);
@@ -32,66 +35,7 @@ class _RequestPageState extends State<RequestPage> {
   TextEditingController courseTextEditingController = new TextEditingController();
   bool courseTextEditingEnable = true;
 
-  Future<void> _showCourseDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: true,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Select a Course', textAlign: TextAlign.center,),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      DropdownButton<String>(
-                        // value: dropdownValue,
-                        value: course,
-                        icon: Icon(Icons.arrow_drop_down),
-                        iconSize: 24,
-                        elevation: 16,
-                        style: TextStyle(color: Colors.deepPurple),
-                        underline: Container(
-                          height: 2,
-                          color: Colors.deepPurpleAccent,
-                        ),
-                        onChanged: (String newValue) {
-                          setState(() {
-                            // dropdownValue = newValue;
-                            course = newValue;
-                            print(course);
-                            courseTextEditingController.text = course;
-                            courseTextEditingEnable = true;
-                            Navigator.of(context).pop();
-                          });
-                        },
-                        items: Universals.courses
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      ),
-                    ],
-                  ),
-
-              ],
-            ),
-          ),
-          // actions: <Widget>[
-          //   TextButton(
-          //     child: Text('Confirm'),
-          //     onPressed: () {
-          //       Navigator.of(context).pop();
-          //     },
-          //   ),
-          // ],
-        );
-      },
-    );
-  }
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +46,8 @@ class _RequestPageState extends State<RequestPage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
+        key: _scaffoldKey,
+        appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         backgroundColor: Universals.appBarColor,
@@ -165,7 +110,27 @@ class _RequestPageState extends State<RequestPage> {
                       onTap: () {
                         courseTextEditingEnable = false;
                         FocusScope.of(context).requestFocus(new FocusNode()); // do not show keyboard
-                        _showCourseDialog();
+                        // show course picker
+                        Picker picker = Picker(
+                          adapter: PickerDataAdapter<String>(pickerdata: JsonDecoder().convert(Universals.courses)),
+                          changeToFirst: false,
+                          textAlign: TextAlign.left,
+                          textStyle: const TextStyle(color: Colors.blue),
+                          selectedTextStyle: TextStyle(color: Colors.red),
+                          columnPadding: const EdgeInsets.all(8.0),
+                          onConfirm: (Picker picker, List value) {
+                            print(value.toString()); // index
+                            print(picker.getSelectedValues()); // value
+                            course = picker.getSelectedValues()[0] + " " + picker.getSelectedValues()[1];
+                            print(course);
+                            courseTextEditingController.text = course;
+                            courseTextEditingEnable = true;
+                          },
+                          onCancel: () {
+                            courseTextEditingEnable = true;
+                          },
+                        );
+                        picker.show(_scaffoldKey.currentState);
                       },
                       decoration: InputDecoration(hintText: 'Course'),
                     ),

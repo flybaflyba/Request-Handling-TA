@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "virtual-approval-flutter"
+  },
+  "targets": {
+    "virtual-approval-flutter": {
+      "hosting": {
+        "byuhtutoring": [
+          "virtual-approval-flutter"
+        ]
+      }
+    }
+  }
+}

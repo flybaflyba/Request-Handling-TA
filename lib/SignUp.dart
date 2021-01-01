@@ -13,9 +13,10 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
 
-  var email;
-  var password;
-  var taSecretCode;
+  var name = "";
+  var email = "";
+  var password = "";
+  var taSecretCode = "";
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,25 @@ class _SignUpState extends State<SignUp> {
         ListView(
           children: [
             SizedBox(height: 20,),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Row(
+                children: <Widget>[
+                  IconButton(icon: Icon(Icons.person), onPressed: null),
+                  Expanded(
+                    child: Container(
+                      margin: EdgeInsets.only(right: 20, left: 10),
+                      child: TextField(
+                        onChanged: (value){
+                          name = value;
+                        },
+                        decoration: InputDecoration(hintText: "Name"),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Row(
@@ -108,7 +128,7 @@ class _SignUpState extends State<SignUp> {
                       print(taSecretCode);
                       print(Universals.taSecretCode);
 
-                      if (email == null || password == null || taSecretCode == null) {
+                      if (name == "" || email == null || password == null || taSecretCode == null) {
                         Universals.showToast('Please complete all fields', Universals.toastMessageTypeWarning);
                       } else {
                         if (taSecretCode != Universals.taSecretCode) {
@@ -119,7 +139,7 @@ class _SignUpState extends State<SignUp> {
                               email: email,
                               password: password,
                             );
-                            DatabaseInteractions.saveUserProfile(email);
+                            DatabaseInteractions.saveUserProfile(name, email);
 
                             // FirebaseAuth.instance.signOut();
                             print(userCredential);

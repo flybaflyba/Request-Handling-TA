@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:virtual_approval_flutter/Request.dart';
 import 'package:virtual_approval_flutter/Universals.dart';
 
@@ -20,10 +21,11 @@ class DatabaseInteractions {
     });
   }
 
-  static void saveUserProfile(String email) {
+  static void saveUserProfile(String name, String email) {
     FirebaseFirestore.instance.collection('users')
         .doc(email)
         .set({
+      "name": name,
       'email': email,
     })
         .then((value) => print("User Profile Added"))

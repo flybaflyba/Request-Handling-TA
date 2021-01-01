@@ -1,16 +1,31 @@
-# virtual_approval_flutter
+# BYUH Tutoring
 
-A new Flutter application.
+A cross platform application that helps with schools tutoring communication.
 
-## Getting Started
+## Versions: 
 
-This project is a starting point for a Flutter application.
+Andorid version: completed, not deployed
+iOS version: develping 
+Web version: deployed  
 
-A few resources to get you started if this is your first Flutter project:
+## Features:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- Students send request without registration, but data validation 
+- Only one request allowed for one student at one time 
+- Tutor registration with secret code from professor 
+- Tutor login to take request 
+- Real time updates of request for all students and tutors 
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Future features: 
+
+- Tutor can filter requsts by subjects 
+- Tutoring info for subjects 
+- Requests history 
+- etc
+
+A few resources:
+
+- [App's web version](https://byuhtutoring.litianzhang.com/#MyHomePage)
+- [School](https://www.byuh.edu/)
+- [Author](https://litianzhang.com/)
+

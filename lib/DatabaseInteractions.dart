@@ -40,9 +40,11 @@ class DatabaseInteractions {
       'question': request.question,
       'requested time hawaii': request.requestedTimeHawaii,
       'status': request.status,
-      "requestTakenTimeHawaii": request.requestTakenTimeHawaii,
-      "requestDoneTimeHawaii": request.requestDoneTimeHawaii,
-      "timeSpent": request.timeSpent,
+      "request taken timeHawaii": request.requestTakenTimeHawaii,
+      "request done timeHawaii": request.requestDoneTimeHawaii,
+      "time spent": request.timeSpent,
+      "taken by": request.takenBy,
+      "taker email": request.takerEmail,
     })
         .then((value) => print("New Request Added"))
         .catchError((error) => print("Failed to save new request: $error"));

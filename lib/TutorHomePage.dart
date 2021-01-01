@@ -4,6 +4,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/Request.dart';
@@ -66,6 +67,8 @@ class _TutorHomePageState extends State<TutorHomePage> {
                               print(requestTakenTime.add(Duration(hours: -10)));
                               var requestTakenTimeHawaii = requestTakenTime.add(Duration(hours: -10)).toString();
                               request.requestTakenTimeHawaii = requestTakenTimeHawaii;
+                              request.takenBy = FirebaseAuth.instance.currentUser.uid;
+                              request.takerEmail = FirebaseAuth.instance.currentUser.email;
                               // delete request once it's taken.
                               DatabaseInteractions.deleteRequest(request);
 

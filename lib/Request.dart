@@ -11,6 +11,9 @@ class Request {
   var requestDoneTimeHawaii = "";
   var timeSpent = "";
 
+  var takenBy = "";
+  var takerEmail = "";
+
   Request({
     var email,
     var name,
@@ -37,6 +40,8 @@ class Request {
       requestTakenTimeHawaii,
       requestDoneTimeHawaii,
       timeSpent,
+      takenBy,
+      takerEmail,
     ];
   }
 

@@ -52,6 +52,26 @@ class DatabaseInteractions {
         .catchError((error) => print("Failed to save new request: $error"));
   }
 
+  static void updateNewRequest(Request request) {
+    FirebaseFirestore.instance.collection("new requests")
+        .doc(request.requestedTimeHawaii)
+        .update({
+      'name': request.name,
+      'email': request.email,
+      'course': request.course,
+      'question': request.question,
+      'requested time hawaii': request.requestedTimeHawaii,
+      'status': request.status,
+      "request taken timeHawaii": request.requestTakenTimeHawaii,
+      "request done timeHawaii": request.requestDoneTimeHawaii,
+      "time spent": request.timeSpent,
+      "taken by": request.takenBy,
+      "taker email": request.takerEmail,
+    })
+        .then((value) => print("Request Updated"))
+        .catchError((error) => print("Failed to update request: $error"));
+  }
+
   static void deleteRequest(Request request) {
     FirebaseFirestore.instance.collection("new requests")
         .doc(request.requestedTimeHawaii)

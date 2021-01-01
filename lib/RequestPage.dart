@@ -205,8 +205,6 @@ class _RequestPageState extends State<RequestPage> {
                         if(!email.contains("byuh")){
                           Universals.showToast("Please use your BYUH email", Universals.toastMessageTypeWarning);
                         } else {
-                          Request request;
-                          var requestMessageBack = "";
                           // check if this person has submitted a request
                           try {
                             FirebaseFirestore.instance
@@ -215,21 +213,21 @@ class _RequestPageState extends State<RequestPage> {
                                 .get()
                                 .then((QuerySnapshot querySnapshot) {
                               if (querySnapshot.docs.isNotEmpty) {
-                                requestMessageBack = "You already submitted a request";
+                                String requestMessageBack = "You already submitted a request";
                                 print(requestMessageBack);
                                 Universals.showToast(requestMessageBack, Universals.toastMessageTypeWarning);
-                                var name = querySnapshot.docs[0]["name"];
-                                var email = querySnapshot.docs[0]["email"];
-                                var course = querySnapshot.docs[0]["course"];
-                                var question = querySnapshot.docs[0]["question"];
-                                var requestedTimeHawaii = querySnapshot.docs[0]["requested time hawaii"];
-                                var status = querySnapshot.docs[0]["status"];
-                                request = new Request(name: name, email: email, course: course, question: question, requestedTimeHawaii: requestedTimeHawaii, status: status);
+                                // var name = querySnapshot.docs[0]["name"];
+                                // var email = querySnapshot.docs[0]["email"];
+                                // var course = querySnapshot.docs[0]["course"];
+                                // var question = querySnapshot.docs[0]["question"];
+                                // var requestedTimeHawaii = querySnapshot.docs[0]["requested time hawaii"];
+                                // var status = querySnapshot.docs[0]["status"];
+                                // request = new Request(name: name, email: email, course: course, question: question, requestedTimeHawaii: requestedTimeHawaii, status: status);
                               } else {
-                                requestMessageBack = "Your Requested is submitted successfully";
+                                String requestMessageBack = "Your Requested is submitted successfully";
                                 print(requestMessageBack);
                                 Universals.showToast(requestMessageBack, Universals.toastMessageTypeGood);
-                                request = new Request(name: name, email: email, course: course, question: question);
+                                Request request = new Request(name: name, email: email, course: course, question: question);
                                 var now = new DateTime.now();
                                 print(now.add(Duration(hours: -10)));
                                 var nowHawaii = now.add(Duration(hours: -10)).toString();
@@ -238,7 +236,6 @@ class _RequestPageState extends State<RequestPage> {
                                 DatabaseInteractions.saveRequest(request);
                               }
 
-                              print(request.show());
                               showGeneralDialog(
                                 context: context,
                                 // barrierColor: Colors.black12.withOpacity(0.6), // background color
@@ -247,114 +244,145 @@ class _RequestPageState extends State<RequestPage> {
                                 transitionDuration: Duration(milliseconds: 400), // how long it takes to popup dialog after button click
                                 pageBuilder: (_, __, ___) { // your widget implementation
                                   return SizedBox.expand( // makes widget fullscreen
-                                    child: Column(
-                                      children: <Widget>[
-                                        Expanded(
-                                          flex: 3,
-                                          child: SizedBox.expand(
-                                            child: RaisedButton(
-                                              color: Universals.transparentColorWhite,
-                                              child: Text(
-                                                "Waiting",
-                                                style: TextStyle(fontSize: 40),
-                                              ),
-                                              textColor: Colors.white,
-                                              onPressed: () {
-                                                // Navigator.pop(context);
-                                              },
-                                            ),
-                                          ),
-                                        ),
+                                    child:
+                                    StreamBuilder<QuerySnapshot>(
+                                        stream: FirebaseFirestore.instance
+                                            .collection('new requests')
+                                            .where('email', isEqualTo: email)
+                                            .snapshots(),
+                                        builder: (context, snapshot){
+                                          var requestInfo = Column(children: [Text("HI")],);
+                                          if(snapshot.hasData){
+                                            // final content = snapshot.data.documents[0];
+                                            print(snapshot.data.docs.length);
+                                            final content = snapshot.data.documents[0];
+                                            var name = content["name"];
+                                            var email = content["email"];
+                                            var course = content["course"];
+                                            var question = content["question"];
+                                            var requestedTimeHawaii = content["requested time hawaii"];
+                                            var status = content["status"];
+                                            Request request = new Request(name: name, email: email, course: course, question: question, requestedTimeHawaii: requestedTimeHawaii, status: status);
 
-                                        Expanded(
-                                          flex: 12,
-                                          child: SizedBox.expand(
-                                            child: RaisedButton(
-                                              color: Universals.transparentColorWhite,
-                                              child: ListView(
-                                                children: [
-                                                  Padding(
-                                                    padding: const EdgeInsets.all(5.0),
-                                                    child: Center(child: Text(request.name),),
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.all(5.0),
-                                                    child:  Center(child: Text(request.email),),
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.all(5.0),
-                                                    child: Center(child: Text(request.course),),
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.all(5.0),
-                                                    child: Center(child: Text("requested at " + request.requestedTimeHawaii.toString().substring(0, 16)),),
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.all(5.0),
-                                                    child: Center(child:
-                                                    Text(
-                                                      "Question:",
-                                                      style: TextStyle(
-                                                        fontSize: 20,
-                                                        color: Colors.grey[300],
+                                            requestInfo =
+                                                Column(
+                                                  children: <Widget>[
+                                                    Expanded(
+                                                      flex: 3,
+                                                      child: SizedBox.expand(
+                                                        child: RaisedButton(
+                                                          color: Universals.transparentColorWhite,
+                                                          child: Text(
+                                                            "Waiting",
+                                                            style: TextStyle(fontSize: 40),
+                                                          ),
+                                                          textColor: Colors.white,
+                                                          onPressed: () {
+                                                            // Navigator.pop(context);
+                                                          },
+                                                        ),
                                                       ),
                                                     ),
-                                                    ),
-                                                  ),
-                                                  Center(child: Text(request.question),),
-                                                ],
-                                              ),
-                                              textColor: Colors.white,
-                                              onPressed: () {
-                                                // Navigator.pop(context);
-                                              },
-                                            ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          flex: 3,
-                                          child: SizedBox.expand(
-                                            child: RaisedButton(
-                                              color: Universals.transparentColorWhite,
-                                              child:
-                                              StreamBuilder<DateTime>(
-                                                stream: Stream.periodic(const Duration(seconds: 1)),
-                                                builder: (context, snapshot) {
-                                                  return
-                                                    Center(
-                                                      child:
-                                                      Text(
-                                                        "Time Waited: " +
-                                                            DateTime.now().add(Duration(hours: -10)).difference(DateTime.parse(request.requestedTimeHawaii)).toString().substring(0, 7),
+
+                                                    Expanded(
+                                                      flex: 12,
+                                                      child: SizedBox.expand(
+                                                        child: RaisedButton(
+                                                          color: Universals.transparentColorWhite,
+                                                          child: ListView(
+                                                            children: [
+                                                              Padding(
+                                                                padding: const EdgeInsets.all(5.0),
+                                                                child: Center(child: Text(request.name),),
+                                                              ),
+                                                              Padding(
+                                                                padding: const EdgeInsets.all(5.0),
+                                                                child:  Center(child: Text(request.email),),
+                                                              ),
+                                                              Padding(
+                                                                padding: const EdgeInsets.all(5.0),
+                                                                child: Center(child: Text(request.course),),
+                                                              ),
+                                                              Padding(
+                                                                padding: const EdgeInsets.all(5.0),
+                                                                child: Center(child: Text("requested at " + request.requestedTimeHawaii.toString().substring(0, 16)),),
+                                                              ),
+                                                              Padding(
+                                                                padding: const EdgeInsets.all(5.0),
+                                                                child: Center(child:
+                                                                Text(
+                                                                  "Question:",
+                                                                  style: TextStyle(
+                                                                    fontSize: 20,
+                                                                    color: Colors.grey[300],
+                                                                  ),
+                                                                ),
+                                                                ),
+                                                              ),
+                                                              Center(child: Text(request.question),),
+                                                            ],
+                                                          ),
+                                                          textColor: Colors.white,
+                                                          onPressed: () {
+                                                            // Navigator.pop(context);
+                                                          },
+                                                        ),
                                                       ),
-                                                    );
-                                                },
-                                              ),
-                                              textColor: Colors.white,
-                                              onPressed: () {
-                                              },
-                                            ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          flex: 3,
-                                          child: SizedBox.expand(
-                                            child: RaisedButton(
-                                              color: Universals.buttonColor,
-                                              child: Text(
-                                                "OK",
-                                                style: TextStyle(fontSize: 40),
-                                              ),
-                                              textColor: Colors.white,
-                                              onPressed: () {
-                                                // print("done helping");
-                                                Navigator.pop(context);
-                                              },
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+                                                    ),
+                                                    Expanded(
+                                                      flex: 3,
+                                                      child: SizedBox.expand(
+                                                        child: RaisedButton(
+                                                          color: Universals.transparentColorWhite,
+                                                          child:
+                                                          StreamBuilder<DateTime>(
+                                                            stream: Stream.periodic(const Duration(seconds: 1)),
+                                                            builder: (context, snapshot) {
+                                                              return
+                                                                Center(
+                                                                  child:
+                                                                  Text(
+                                                                    "Time Waited: " +
+                                                                        DateTime.now().add(Duration(hours: -10)).difference(DateTime.parse(request.requestedTimeHawaii)).toString().substring(0, 7),
+                                                                  ),
+                                                                );
+                                                            },
+                                                          ),
+                                                          textColor: Colors.white,
+                                                          onPressed: () {
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 3,
+                                                      child: SizedBox.expand(
+                                                        child: RaisedButton(
+                                                          color: Universals.buttonColor,
+                                                          child: Text(
+                                                            "OK",
+                                                            style: TextStyle(fontSize: 40),
+                                                          ),
+                                                          textColor: Colors.white,
+                                                          onPressed: () {
+                                                            // print("done helping");
+                                                            Navigator.pop(context);
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                );
+                                          }
+
+
+
+                                          return requestInfo;
+
+                                        }
                                     ),
+
+
                                   );
                                 },
                               );

@@ -70,7 +70,10 @@ class _TutorHomePageState extends State<TutorHomePage> {
                               request.takenBy = FirebaseAuth.instance.currentUser.uid;
                               request.takerEmail = FirebaseAuth.instance.currentUser.email;
                               // delete request once it's taken.
-                              DatabaseInteractions.deleteRequest(request);
+                              // DatabaseInteractions.deleteRequest(request);
+                              request.status = "taken";
+
+                              DatabaseInteractions.updateNewRequest(request);
 
                               showGeneralDialog(
                                 context: context,
@@ -201,8 +204,9 @@ class _TutorHomePageState extends State<TutorHomePage> {
                                 request.timeSpent = DateTime.now().difference(requestTakenTime).toString();
                                 request.status = "done";
                                 print(request.show());
-                                // save request to done requests collections
+                                // save request to done requests collections and delete from new requests collection
                                 DatabaseInteractions.saveRequest(request);
+                                DatabaseInteractions.deleteRequest(request);
                               });
 
                             },

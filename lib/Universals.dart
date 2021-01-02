@@ -196,7 +196,7 @@ class Universals {
                                           request.takenBy == "" ?
                                           Text(
                                             "Time Waited: "
-                                                + DateTime.now().add(Duration(hours: -10)).difference(DateTime.parse(request.requestedAt)).toString().substring(0, 7),
+                                                + DateTime.now().add(Duration(hours: 0)).difference(DateTime.parse(request.requestedAt)).toString().substring(0, 7),
                                           ) : Text(
                                             "Your request is taken by " + request.takerEmail,
                                           ),

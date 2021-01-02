@@ -222,12 +222,13 @@ class _RequestPageState extends State<RequestPage> {
                                 Universals.showToast(requestMessageBack, Universals.toastMessageTypeGood);
                                 Request request = new Request(name: name, email: email, course: course, question: question);
                                 var now = new DateTime.now();
-                                print(now.add(Duration(hours: -10)));
-                                var nowHawaii = now.add(Duration(hours: -10)).toString();
+                                print(now.add(Duration(hours: 0))); // do we need to use -10 to convert to hawaii time?
+                                var nowHawaii = now.add(Duration(hours: 0)).toString();
                                 request.requestedAt = nowHawaii;
                                 request.status = "new";
                                 DatabaseInteractions.saveRequest(request);
                               }
+
                               Universals.showRequestInfoToStudentInRealTime(email, context);
 
                             }).then((value) {

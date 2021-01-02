@@ -56,7 +56,7 @@ class _TutorHomePageState extends State<TutorHomePage> {
                             textColor: Colors.white,
                             onPressed: () {
 
-                              // i don't know why i don't need to do that time zone conversion here...
+                              // i don't know why i don't need to do that time zone conversion here...  sometimes...
                               var requestTakenTime = new DateTime.now();
                               print(requestTakenTime.add(Duration(hours: 0)));
                               var requestTakenTimeHawaii = requestTakenTime.add(Duration(hours: 0)).toString();
@@ -66,7 +66,7 @@ class _TutorHomePageState extends State<TutorHomePage> {
                               // delete request once it's taken.
                               // DatabaseInteractions.deleteRequest(request);
                               request.status = "taken";
-
+                              request.waitedTime = DateTime.now().add(Duration(hours: 0)).difference(DateTime.parse(request.requestedAt)).toString();
                               DatabaseInteractions.updateNewRequest(request);
 
                               showGeneralDialog(
@@ -192,8 +192,8 @@ class _TutorHomePageState extends State<TutorHomePage> {
                               ).then((val){
                                 print("done helping");
                                 var requestDoneTime = new DateTime.now();
-                                print(requestDoneTime.add(Duration(hours: -10)));
-                                var requestDoneTimeHawaii = requestDoneTime.add(Duration(hours: -10)).toString();
+                                print(requestDoneTime.add(Duration(hours: 0)));
+                                var requestDoneTimeHawaii = requestDoneTime.add(Duration(hours: 0)).toString();
                                 request.requestFinishedAt = requestDoneTimeHawaii;
                                 request.timeSpent = DateTime.now().difference(requestTakenTime).toString();
                                 request.status = "done";

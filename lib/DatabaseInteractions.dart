@@ -47,6 +47,7 @@ class DatabaseInteractions {
       "time spent": request.timeSpent,
       "taken by": request.takenBy,
       "taker email": request.takerEmail,
+      "waited time": request.waitedTime,
     })
         .then((value) => print("New Request Added"))
         .catchError((error) => print("Failed to save new request: $error"));
@@ -67,6 +68,7 @@ class DatabaseInteractions {
       "time spent": request.timeSpent,
       "taken by": request.takenBy,
       "taker email": request.takerEmail,
+      "waited time": request.waitedTime,
     })
         .then((value) => print("Request Updated"))
         .catchError((error) => print("Failed to update request: $error"));

@@ -16,6 +16,8 @@ class Request {
   var takenBy = "";
   var takerEmail = "";
 
+  var waitedTime = "";
+
   Request({
     var email,
     var name,
@@ -44,6 +46,7 @@ class Request {
     timeSpent = requestDocumentSnapshot["time spent"];
     takenBy = requestDocumentSnapshot["taken by"];
     takerEmail = requestDocumentSnapshot["taker email"];
+    waitedTime = requestDocumentSnapshot["waited time"];
   }
 
   List show() {
@@ -58,8 +61,10 @@ class Request {
       timeSpent,
       takenBy,
       takerEmail,
+      waitedTime,
     ];
   }
+
 
 
 }

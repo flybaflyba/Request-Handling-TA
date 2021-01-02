@@ -26,7 +26,8 @@ A cross platform application that helps with schools tutoring communication.
 
 A few resources:
 
-- [App's web version](https://byuhtutoring.litianzhang.com/#MyHomePage)
+- [App's web version address 1](https://byuhtutoring.litianzhang.com/#MyHomePage)
+- [App's web version address 2](https://byuhtutoringsystem.litianzhang.com/#MyHomePage)
 - [School](https://www.byuh.edu/)
 - [Author](https://litianzhang.com/)
 

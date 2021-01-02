@@ -14,7 +14,8 @@ Web version: deployed
 - Only one request allowed for one student at one time 
 - Tutor registration with secret code from professor 
 - Tutor login to take request 
-- Real time updates of request for all students and tutors 
+- Real time updates of request of all students and tutors 
+- Real time updates for students: waiting, request taken, and done
 
 ## Future features: 
 

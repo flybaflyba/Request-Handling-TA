@@ -4,9 +4,9 @@ A cross platform application that helps with schools tutoring communication.
 
 ## Versions: 
 
-Andorid version: completed, not deployed
-iOS version: develping 
-Web version: deployed  
+- Andorid version: basic features completed, adding more features, not deployed
+- iOS version: develping 
+- Web version: deployed, adding more features  
 
 ## Features:
 

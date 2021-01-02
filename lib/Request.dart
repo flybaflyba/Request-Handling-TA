@@ -1,14 +1,16 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Request {
   var name = "";
   var email = "";
   var course = "";
   var question = "";
-  var requestedTimeHawaii = "";
+  var requestedAt = "";
   var status = "";
 
-  var requestTakenTimeHawaii = "";
-  var requestDoneTimeHawaii = "";
+  var requestTakenAt = "";
+  var requestFinishedAt = "";
   var timeSpent = "";
 
   var takenBy = "";
@@ -26,8 +28,22 @@ class Request {
     if(name != null){ this.name = name; }
     if(course != null){ this.course = course; }
     if(question != null){ this.question = question; }
-    if(requestedTimeHawaii != null){ this.requestedTimeHawaii = requestedTimeHawaii; }
+    if(requestedTimeHawaii != null){ this.requestedAt = requestedTimeHawaii; }
     if(status != null){ this.status = status; }
+  }
+
+  void setRequestInfoWithDocumentSnapshot(DocumentSnapshot requestDocumentSnapshot) {
+    name = requestDocumentSnapshot["name"];
+    email = requestDocumentSnapshot["email"];
+    course = requestDocumentSnapshot["course"];
+    question = requestDocumentSnapshot["question"];
+    requestedAt = requestDocumentSnapshot["requested at"];
+    status = requestDocumentSnapshot["status"];
+    requestTakenAt = requestDocumentSnapshot["request taken at"];
+    requestFinishedAt = requestDocumentSnapshot["request finished at"];
+    timeSpent = requestDocumentSnapshot["time spent"];
+    takenBy = requestDocumentSnapshot["taken by"];
+    takerEmail = requestDocumentSnapshot["taker email"];
   }
 
   List show() {
@@ -35,10 +51,10 @@ class Request {
       name,
       course,
       question,
-      requestedTimeHawaii,
+      requestedAt,
       status,
-      requestTakenTimeHawaii,
-      requestDoneTimeHawaii,
+      requestTakenAt,
+      requestFinishedAt,
       timeSpent,
       takenBy,
       takerEmail,

@@ -59,14 +59,9 @@ class Universals {
                 if(snapshot.hasData){
                   // final content = snapshot.data.documents[0];
                   print(snapshot.data.docs.length);
-                  final content = snapshot.data.documents[0];
-                  var name = content["name"];
-                  var email = content["email"];
-                  var course = content["course"];
-                  var question = content["question"];
-                  var requestedTimeHawaii = content["requested time hawaii"];
-                  var status = content["status"];
-                  Request request = new Request(name: name, email: email, course: course, question: question, requestedTimeHawaii: requestedTimeHawaii, status: status);
+                  DocumentSnapshot requestDocumentSnapshot = snapshot.data.docs[0];
+                  Request request = new Request();
+                  request.setRequestInfoWithDocumentSnapshot(requestDocumentSnapshot);
 
 
                   requestInfo =
@@ -110,7 +105,7 @@ class Universals {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(5.0),
-                                      child: Center(child: Text("requested at " + request.requestedTimeHawaii.toString().substring(0, 16)),),
+                                      child: Center(child: Text("requested at " + request.requestedAt.toString().substring(0, 16)),), //
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(5.0),
@@ -147,8 +142,8 @@ class Universals {
                                       Center(
                                         child:
                                         Text(
-                                          "Time Waited: " +
-                                              DateTime.now().add(Duration(hours: -10)).difference(DateTime.parse(request.requestedTimeHawaii)).toString().substring(0, 7),
+                                          "Time Waited: "
+                                              + DateTime.now().add(Duration(hours: -10)).difference(DateTime.parse(request.requestedAt)).toString().substring(0, 7),
                                         ),
                                       );
                                   },

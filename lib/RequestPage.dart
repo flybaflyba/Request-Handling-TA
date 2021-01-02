@@ -224,7 +224,7 @@ class _RequestPageState extends State<RequestPage> {
                                 var now = new DateTime.now();
                                 print(now.add(Duration(hours: -10)));
                                 var nowHawaii = now.add(Duration(hours: -10)).toString();
-                                request.requestedTimeHawaii = nowHawaii;
+                                request.requestedAt = nowHawaii;
                                 request.status = "new";
                                 DatabaseInteractions.saveRequest(request);
                               }

@@ -34,16 +34,16 @@ class DatabaseInteractions {
 
   static void saveRequest(Request request) {
     FirebaseFirestore.instance.collection(request.status + " requests")
-        .doc(request.requestedTimeHawaii)
+        .doc(request.requestedAt)
         .set({
       'name': request.name,
       'email': request.email,
       'course': request.course,
       'question': request.question,
-      'requested time hawaii': request.requestedTimeHawaii,
+      'requested at': request.requestedAt,
       'status': request.status,
-      "request taken timeHawaii": request.requestTakenTimeHawaii,
-      "request done timeHawaii": request.requestDoneTimeHawaii,
+      "request taken at": request.requestTakenAt,
+      "request finished at": request.requestFinishedAt,
       "time spent": request.timeSpent,
       "taken by": request.takenBy,
       "taker email": request.takerEmail,
@@ -54,16 +54,16 @@ class DatabaseInteractions {
 
   static void updateNewRequest(Request request) {
     FirebaseFirestore.instance.collection("new requests")
-        .doc(request.requestedTimeHawaii)
+        .doc(request.requestedAt)
         .update({
       'name': request.name,
       'email': request.email,
       'course': request.course,
       'question': request.question,
-      'requested time hawaii': request.requestedTimeHawaii,
+      'requested at': request.requestedAt,
       'status': request.status,
-      "request taken timeHawaii": request.requestTakenTimeHawaii,
-      "request done timeHawaii": request.requestDoneTimeHawaii,
+      "request taken at": request.requestTakenAt,
+      "request finished at": request.requestFinishedAt,
       "time spent": request.timeSpent,
       "taken by": request.takenBy,
       "taker email": request.takerEmail,
@@ -74,7 +74,7 @@ class DatabaseInteractions {
 
   static void deleteRequest(Request request) {
     FirebaseFirestore.instance.collection("new requests")
-        .doc(request.requestedTimeHawaii)
+        .doc(request.requestedAt)
         .delete()
         .then((value) => print("Request Deleted"))
         .catchError((error) => print("Failed to delete request: $error"));

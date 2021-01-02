@@ -66,7 +66,7 @@ class _TutorHomePageState extends State<TutorHomePage> {
                               var requestTakenTime = new DateTime.now();
                               print(requestTakenTime.add(Duration(hours: -10)));
                               var requestTakenTimeHawaii = requestTakenTime.add(Duration(hours: -10)).toString();
-                              request.requestTakenTimeHawaii = requestTakenTimeHawaii;
+                              request.requestTakenAt = requestTakenTimeHawaii;
                               request.takenBy = FirebaseAuth.instance.currentUser.uid;
                               request.takerEmail = FirebaseAuth.instance.currentUser.email;
                               // delete request once it's taken.
@@ -123,11 +123,11 @@ class _TutorHomePageState extends State<TutorHomePage> {
                                                   ),
                                                   Padding(
                                                     padding: const EdgeInsets.all(5.0),
-                                                    child: Center(child: Text("requested at " + request.requestedTimeHawaii.toString().substring(0, 16)),),
+                                                    child: Center(child: Text("requested at " + request.requestedAt.toString().substring(0, 16)),),
                                                   ),
                                                   Padding(
                                                     padding: const EdgeInsets.all(5.0),
-                                                    child: Center(child: Text("request is taken at " + request.requestTakenTimeHawaii.toString().substring(0, 16)),),
+                                                    child: Center(child: Text("request is taken at " + request.requestTakenAt.toString().substring(0, 16)),),
                                                   ),
                                                   Padding(
                                                     padding: const EdgeInsets.all(5.0),
@@ -200,7 +200,7 @@ class _TutorHomePageState extends State<TutorHomePage> {
                                 var requestDoneTime = new DateTime.now();
                                 print(requestDoneTime.add(Duration(hours: -10)));
                                 var requestDoneTimeHawaii = requestDoneTime.add(Duration(hours: -10)).toString();
-                                request.requestDoneTimeHawaii = requestDoneTimeHawaii;
+                                request.requestFinishedAt = requestDoneTimeHawaii;
                                 request.timeSpent = DateTime.now().difference(requestTakenTime).toString();
                                 request.status = "done";
                                 print(request.show());
@@ -216,7 +216,7 @@ class _TutorHomePageState extends State<TutorHomePage> {
                               children: [
                                 Center(
                                   child: Text(
-                                    request.requestedTimeHawaii.toString().substring(0, 16),
+                                    request.requestedAt.toString().substring(0, 16),
                                   ),
                                 ),
                                 Row(

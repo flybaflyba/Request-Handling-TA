@@ -44,16 +44,9 @@ class _TutorHomePageState extends State<TutorHomePage> {
                     if(snapshot.hasData){
                       final content = snapshot.data.documents;
 
-                      for(var c in content){
-                        final name = c.get('name');
-                        final course = c.get('course');
-                        final email = c.get('email');
-                        final question = c.get('question');
-                        final requestedTimeHawaii = c.get('requested time hawaii');
-                        final status = c.get('status');
-
-                        Request request = new Request(name: name, course: course, email: email, question: question,
-                            requestedTimeHawaii: requestedTimeHawaii, status: status);
+                      for(var requestDocumentSnapshot in content){
+                        Request request = new Request();
+                        request.setRequestInfoWithDocumentSnapshot(requestDocumentSnapshot);
 
                         final contentToDisplay =
                         Column(
@@ -63,9 +56,10 @@ class _TutorHomePageState extends State<TutorHomePage> {
                             textColor: Colors.white,
                             onPressed: () {
 
+                              // i don't know why i don't need to do that time zone conversion here...
                               var requestTakenTime = new DateTime.now();
-                              print(requestTakenTime.add(Duration(hours: -10)));
-                              var requestTakenTimeHawaii = requestTakenTime.add(Duration(hours: -10)).toString();
+                              print(requestTakenTime.add(Duration(hours: 0)));
+                              var requestTakenTimeHawaii = requestTakenTime.add(Duration(hours: 0)).toString();
                               request.requestTakenAt = requestTakenTimeHawaii;
                               request.takenBy = FirebaseAuth.instance.currentUser.uid;
                               request.takerEmail = FirebaseAuth.instance.currentUser.email;

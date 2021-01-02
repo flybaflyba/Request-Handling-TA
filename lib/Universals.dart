@@ -10,6 +10,7 @@ class Universals {
   static Color buttonColor = Color(0xff0077d7);
   static Color backgroundColor = Color(0xffffffff);
   static Color transparentColorWhite = Color(0x55000000);
+  static Color transparentColorRed = Color(0x55ff0000);
   static Color toastMessageTypeGood = Colors.blue;
   static Color toastMessageTypeWarning = Colors.red;
 
@@ -59,120 +60,178 @@ class Universals {
                 if(snapshot.hasData){
                   // final content = snapshot.data.documents[0];
                   print(snapshot.data.docs.length);
-                  DocumentSnapshot requestDocumentSnapshot = snapshot.data.docs[0];
-                  Request request = new Request();
-                  request.setRequestInfoWithDocumentSnapshot(requestDocumentSnapshot);
 
-
-                  requestInfo =
-                      Column(
-                        children: <Widget>[
-                          Expanded(
-                            flex: 3,
-                            child: SizedBox.expand(
-                              child: RaisedButton(
-                                color: Universals.transparentColorWhite,
-                                child: Text(
-                                  "Waiting",
-                                  style: TextStyle(fontSize: 40),
-                                ),
-                                textColor: Colors.white,
-                                onPressed: () {
-                                  // Navigator.pop(context);
-                                },
-                              ),
+                  if (snapshot.data.docs.length == 0) {
+                    // help finished
+                    print("help finished");
+                    requestInfo = Column(children: [
+                      Expanded(
+                        flex: 18,
+                        child: SizedBox.expand(
+                          child: RaisedButton(
+                            color: Universals.transparentColorWhite,
+                            child: Text(
+                              "Help Done",
+                              style: TextStyle(fontSize: 40),
                             ),
+                            textColor: Colors.white,
+                            onPressed: () {
+                              // Navigator.pop(context);
+                            },
                           ),
+                        ),
+                      ),
 
-                          Expanded(
-                            flex: 12,
-                            child: SizedBox.expand(
-                              child: RaisedButton(
-                                color: Universals.transparentColorWhite,
-                                child: ListView(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Center(child: Text(request.name),),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child:  Center(child: Text(request.email),),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Center(child: Text(request.course),),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Center(child: Text("requested at " + request.requestedAt.toString().substring(0, 16)),), //
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Center(child:
-                                      Text(
-                                        "Question:",
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.grey[300],
-                                        ),
-                                      ),
-                                      ),
-                                    ),
-                                    Center(child: Text(request.question),),
-                                  ],
-                                ),
-                                textColor: Colors.white,
-                                onPressed: () {
-                                  // Navigator.pop(context);
-                                },
-                              ),
+                      Expanded(
+                        flex: 3,
+                        child: SizedBox.expand(
+                          child: RaisedButton(
+                            color: Universals.buttonColor,
+                            child: Text(
+                              "OK",
+                              style: TextStyle(fontSize: 40),
                             ),
+                            textColor: Colors.white,
+                            onPressed: () {
+                              // print("done helping");
+                              Navigator.pop(context);
+                            },
                           ),
-                          Expanded(
-                            flex: 3,
-                            child: SizedBox.expand(
-                              child: RaisedButton(
-                                color: Universals.transparentColorWhite,
-                                child:
-                                StreamBuilder<DateTime>(
-                                  stream: Stream.periodic(const Duration(seconds: 1)),
-                                  builder: (context, snapshot) {
-                                    return
-                                      Center(
-                                        child:
-                                        Text(
-                                          "Time Waited: "
-                                              + DateTime.now().add(Duration(hours: -10)).difference(DateTime.parse(request.requestedAt)).toString().substring(0, 7),
-                                        ),
-                                      );
+                        ),
+                      ),
+                    ]);
+
+                  } else {
+                    print("helping");
+                    DocumentSnapshot requestDocumentSnapshot = snapshot.data.docs[0];
+                    Request request = new Request();
+                    request.setRequestInfoWithDocumentSnapshot(requestDocumentSnapshot);
+
+                    requestInfo =
+                        Column(
+                          children: <Widget>[
+                            Expanded(
+                              flex: 3,
+                              child: SizedBox.expand(
+                                child: RaisedButton(
+                                  color: Universals.transparentColorWhite,
+                                  child: Text(
+                                    request.takenBy == "" ?
+                                    "Waiting" : "Coming!",
+                                    style: TextStyle(fontSize: 40),
+                                  ),
+                                  textColor:
+                                  request.takenBy == "" ?
+                                  Colors.white : Colors.red,
+                                  onPressed: () {
+                                    // Navigator.pop(context);
                                   },
                                 ),
-                                textColor: Colors.white,
-                                onPressed: () {
-                                },
                               ),
                             ),
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: SizedBox.expand(
-                              child: RaisedButton(
-                                color: Universals.buttonColor,
-                                child: Text(
-                                  "OK",
-                                  style: TextStyle(fontSize: 40),
+
+                            Expanded(
+                              flex: 12,
+                              child: SizedBox.expand(
+                                child: RaisedButton(
+                                  color:request.status == "taken" ?  Universals.transparentColorRed : Universals.transparentColorWhite,
+                                  child: ListView(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Center(child: Text(request.name),),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child:  Center(child: Text(request.email),),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Center(child: Text(request.course),),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Center(child: Text("Requested at " + request.requestedAt.toString()),), //.substring(0, 16)
+                                      ),
+                                      request.takenBy != "" ?
+                                      Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Center(child: Text("Request is taken at " + request.requestTakenAt.toString()),), //
+                                      ) :
+                                      SizedBox(height: 0,),
+                                      Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Center(child:
+                                        Text(
+                                          "Question:",
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.grey[300],
+                                          ),
+                                        ),
+                                        ),
+                                      ),
+                                      Center(child: Text(request.question),),
+                                    ],
+                                  ),
+                                  textColor: Colors.white,
+                                  onPressed: () {
+                                    // Navigator.pop(context);
+                                  },
                                 ),
-                                textColor: Colors.white,
-                                onPressed: () {
-                                  // print("done helping");
-                                  Navigator.pop(context);
-                                },
                               ),
                             ),
-                          ),
-                        ],
-                      );
+                            Expanded(
+                              flex: 3,
+                              child: SizedBox.expand(
+                                child: RaisedButton(
+                                  color: request.status == "taken" ?  Universals.transparentColorRed : Universals.transparentColorWhite,
+                                  child:
+                                  StreamBuilder<DateTime>(
+                                    stream: Stream.periodic(const Duration(seconds: 1)),
+                                    builder: (context, snapshot) {
+                                      return
+                                        Center(
+                                          child:
+                                          request.takenBy == "" ?
+                                          Text(
+                                            "Time Waited: "
+                                                + DateTime.now().add(Duration(hours: -10)).difference(DateTime.parse(request.requestedAt)).toString().substring(0, 7),
+                                          ) : Text(
+                                            "Your request is taken by " + request.takerEmail,
+                                          ),
+                                        );
+                                    },
+                                  ),
+                                  textColor: Colors.white,
+                                  onPressed: () {
+                                  },
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 3,
+                              child: SizedBox.expand(
+                                child: RaisedButton(
+                                  color: Universals.buttonColor,
+                                  child: Text(
+                                    "OK",
+                                    style: TextStyle(fontSize: 40),
+                                  ),
+                                  textColor: Colors.white,
+                                  onPressed: () {
+                                    // print("done helping");
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                  }
+
+                } else {
+                  print("no data");
                 }
 
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>720199662006-p8v7747k322rm2cnvt4kfh3rvcicr1ev.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.720199662006-p8v7747k322rm2cnvt4kfh3rvcicr1ev</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAdo4a4clOLdu8apnfW1tQdAz9ENuhRzi4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>720199662006</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.litianzhang.virtualApprovalFlutter</string>
+	<key>PROJECT_ID</key>
+	<string>virtual-approval-flutter</string>
+	<key>STORAGE_BUCKET</key>
+	<string>virtual-approval-flutter.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:720199662006:ios:2ee0b50c7cc041b7cea917</string>
+	<key>DATABASE_URL</key>
+	<string>https://virtual-approval-flutter-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

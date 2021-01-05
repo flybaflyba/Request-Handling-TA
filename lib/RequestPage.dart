@@ -49,28 +49,27 @@ class _RequestPageState extends State<RequestPage> {
     // than having to individually change instances of widgets.
     return Scaffold(
         key: _scaffoldKey,
-      //   appBar: AppBar(
-      //   // Here we take the value from the MyHomePage object that was created by
-      //   // the App.build method, and use it to set our appbar title.
-      //   backgroundColor: Universals.appBarColor,
-      //   title: Text(widget.title),
-      // ),
+        appBar: AppBar(
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        backgroundColor: Universals.appBarColor,
+        title: Text("Send Request"),
+      ),
       body: ListView(
         children: [
-          Container(
-            height: 60,
-            color: Universals.appBarColor,
-            child: Center(
-              child: Text(
-                "BYUH Tutoring",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 25,),
-              ),
-            )
-
-          ),
+          // Container(
+          //   height: 60,
+          //   color: Universals.appBarColor,
+          //   child: Center(
+          //     child: Text(
+          //       "BYUH Tutoring",
+          //       textAlign: TextAlign.center,
+          //       style: TextStyle(
+          //         fontWeight: FontWeight.w600,
+          //         fontSize: 25,),
+          //     ),
+          //   )
+          // ),
           SizedBox(height: 20,),
           Padding(
             padding: const EdgeInsets.all(20.0),

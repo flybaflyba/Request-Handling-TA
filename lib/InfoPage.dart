@@ -13,7 +13,7 @@ class InfoPage extends StatefulWidget {
 
 class _InfoPageState extends State<InfoPage> {
 
-  List tabs = ["CIS", "MATH", "ACCT", "CIS", "MATH", "ACCT", "CIS", "MATH", "ACCT", "CIS", "MATH", "ACCT"];
+  List tabs = ["CIS", "MATH", "ACCT", "PHYS", "ENGL", "REL", "ENTR", "ART", "BIOL", "BUSM", "HIST", "TESOL", "EIL"];
 
   @override
   Widget build(BuildContext context) {

@@ -65,15 +65,15 @@ class _HomePageState extends State<HomePage> {
         items: <BottomNavyBarItem>[
           BottomNavyBarItem(
               title: Text('Request'),
-              icon: Icon(Icons.home)
+              icon: Icon(Icons.question_answer)
           ),
           BottomNavyBarItem(
               title: Text('Instructions'),
-              icon: Icon(Icons.apps)
+              icon: Icon(Icons.info)
           ),
           BottomNavyBarItem(
               title: Text('TA Login'),
-              icon: Icon(Icons.chat_bubble)
+              icon: Icon(Icons.person)
           ),
         ],
       ),

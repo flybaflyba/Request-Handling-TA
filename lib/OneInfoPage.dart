@@ -6,14 +6,19 @@ import 'package:virtual_approval_flutter/TutorRequestsPage.dart';
 import 'package:virtual_approval_flutter/Universals.dart';
 
 
-class InfoPage extends StatefulWidget {
+class OneInfoPage extends StatefulWidget {
+
+  OneInfoPage({Key key, this.subject}) : super(key: key);
+
+  final String subject;
+
   @override
-  _InfoPageState createState() => _InfoPageState();
+  _OneInfoPageState createState() => _OneInfoPageState();
 }
 
-class _InfoPageState extends State<InfoPage> {
+class _OneInfoPageState extends State<OneInfoPage> {
 
-  List tabs = ["CIS", "MATH", "ACCT", "PHYS", "ENGL", "REL", "ENTR", "ART", "BIOL", "BUSM", "HIST", "TESOL", "EIL"];
+  List tabs = ["Hours", "Info", "Help"];
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +30,7 @@ class _InfoPageState extends State<InfoPage> {
           appBar: AppBar(
             toolbarHeight: 50,
             bottom: TabBar(   //生成Tab菜单
-              isScrollable: true,
+              // isScrollable: true,
               tabs: tabs.map((e) => Tab(text: e)).toList(),
               // labelColor: Colors.red,
               // indicatorColor: Colors.amber,
@@ -36,7 +41,10 @@ class _InfoPageState extends State<InfoPage> {
             children: tabs.map((e) { //分别创建对应的Tab页面
               return Container(
                 alignment: Alignment.center,
-                child: Text(e, textScaleFactor: 5),
+                child:
+                 Text(widget.subject + " " + e, textScaleFactor: 5),
+
+
               );
             }).toList(),
           ),

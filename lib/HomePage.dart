@@ -1,7 +1,7 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:virtual_approval_flutter/InfoPage.dart';
+import 'package:virtual_approval_flutter/InfosPage.dart';
 import 'package:virtual_approval_flutter/SendRequestPage.dart';
 import 'package:virtual_approval_flutter/SignIn.dart';
 import 'package:virtual_approval_flutter/SignUp.dart';
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
             // Container(color: Colors.green,),
             // Container(color: Colors.blue,),
             new RequestPage(),
-            new InfoPage(),
+            new InfosPage(),
             new SignIn(),
           ],
         ),

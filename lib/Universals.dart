@@ -27,6 +27,9 @@ class Universals {
     {"Other": ["Other"]}
     ]''';
 
+  static const departments = ["Arts & Letters", "Business & Government", "Culture, Language & Performing Arts", "Education & Social Work",
+  "Math & Computing", "Religious Education", "Sciences"];
+
   static void showToast(String msg, Color toastMessageType) {
     Fluttertoast.showToast(
         msg: msg,

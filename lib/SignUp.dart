@@ -1,6 +1,9 @@
 
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_picker/flutter_picker.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/Universals.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,10 +20,17 @@ class _SignUpState extends State<SignUp> {
   var email = "";
   var password = "";
   var taSecretCode = "";
+  var department = "";
+
+  TextEditingController departmentTextEditingController = new TextEditingController();
+  bool departmentTextEditingEnable = true;
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
@@ -89,6 +99,54 @@ class _SignUpState extends State<SignUp> {
                 ],
               ),
             ),
+
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Row(
+                children: <Widget>[
+                  IconButton(icon: Icon(Icons.menu_book), onPressed: null),
+                  Expanded(
+                    child: Container(
+                      margin: EdgeInsets.only(right: 20, left: 10),
+                      child:
+                      TextField(
+                        enabled: departmentTextEditingEnable,
+                        controller: departmentTextEditingController,
+                        onTap: () {
+                          departmentTextEditingEnable = false;
+                          FocusScope.of(context).requestFocus(new FocusNode()); // do not show keyboard
+                          // show department picker
+                          Picker picker = Picker(
+                            adapter: PickerDataAdapter<String>(pickerdata: Universals.departments),
+                            changeToFirst: false,
+                            textAlign: TextAlign.left,
+                            textStyle: const TextStyle(color: Colors.blue),
+                            selectedTextStyle: TextStyle(color: Colors.red),
+                            columnPadding: const EdgeInsets.all(8.0),
+                            onConfirm: (Picker picker, List value) {
+                              print(value.toString()); // index
+                              print(picker.getSelectedValues()); // value
+                              department = picker.getSelectedValues()[0];
+                              print(department);
+                              departmentTextEditingController.text = department;
+                              departmentTextEditingEnable = true;
+                            },
+                            onCancel: () {
+                              departmentTextEditingEnable = true;
+                            },
+                          );
+                          picker.show(_scaffoldKey.currentState);
+                        },
+                        decoration: InputDecoration(hintText: 'Department'),
+                      ),
+
+
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Row(
@@ -128,7 +186,7 @@ class _SignUpState extends State<SignUp> {
                       print(taSecretCode);
                       print(Universals.taSecretCode);
 
-                      if (name == "" || email == null || password == null || taSecretCode == null) {
+                      if (name == "" || email == "" || password == "" || taSecretCode == "" || department == "") {
                         Universals.showToast('Please complete all fields', Universals.toastMessageTypeWarning);
                       } else {
                         if (taSecretCode != Universals.taSecretCode) {
@@ -139,7 +197,7 @@ class _SignUpState extends State<SignUp> {
                               email: email,
                               password: password,
                             );
-                            DatabaseInteractions.saveUserProfile(name, email);
+                            DatabaseInteractions.saveUserProfile(name, email, department);
 
                             // FirebaseAuth.instance.signOut();
                             print(userCredential);

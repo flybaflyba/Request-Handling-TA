@@ -21,12 +21,13 @@ class DatabaseInteractions {
     });
   }
 
-  static void saveUserProfile(String name, String email) {
+  static void saveUserProfile(String name, String email, String department) {
     FirebaseFirestore.instance.collection('users')
         .doc(email)
         .set({
       "name": name,
       'email': email,
+      "department": department,
     })
         .then((value) => print("User Profile Added"))
         .catchError((error) => print("Failed to add user profile: $error"));

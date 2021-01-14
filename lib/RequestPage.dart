@@ -53,7 +53,7 @@ class _RequestPageState extends State<RequestPage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         backgroundColor: Universals.appBarColor,
-        title: Text("BYUH Tutoring"),
+        title: Text("BYUH Tutoring"),  
       ),
       body: ListView(
         children: [

@@ -1,6 +1,7 @@
 
 import 'dart:convert';
 
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
@@ -31,12 +32,12 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
-        appBar: AppBar(
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: Text("Sign Up"),
-          backgroundColor: Universals.appBarColor,
-        ),
+        // appBar: AppBar(
+        //   // Here we take the value from the MyHomePage object that was created by
+        //   // the App.build method, and use it to set our appbar title.
+        //   title: Text("Sign Up"),
+        //   backgroundColor: Universals.appBarColor,
+        // ),
       backgroundColor: Universals.backgroundColor,
       body:
         ListView(
@@ -236,8 +237,7 @@ class _SignUpState extends State<SignUp> {
             ),
           ],
 
-        )
-
+        ),
 
 
     );

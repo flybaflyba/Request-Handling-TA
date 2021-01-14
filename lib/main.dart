@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:virtual_approval_flutter/RequestPage.dart';
+import 'package:virtual_approval_flutter/HomePage.dart';
+import 'package:virtual_approval_flutter/SendRequestPage.dart';
 import 'package:virtual_approval_flutter/SignIn.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -31,7 +32,8 @@ class MyApp extends StatelessWidget {
       // home: MyHomePage(title: 'Flutter Demo Home Page'),
       initialRoute: "MyHomePage",
       routes: {
-        "MyHomePage" : (context) => RequestPage(title: 'Request Help'),
+        // "MyHomePage" : (context) => RequestPage(),
+        "MyHomePage" : (context) => HomePage(),
       },
     );
   }

@@ -11,23 +11,23 @@ import 'package:virtual_approval_flutter/Request.dart';
 import 'package:virtual_approval_flutter/Universals.dart';
 import 'package:intl/intl.dart';
 
-class TutorHomePage extends StatefulWidget {
+class TutorRequestsPage extends StatefulWidget {
   @override
-  _TutorHomePageState createState() => _TutorHomePageState();
+  _TutorRequestsPageState createState() => _TutorRequestsPageState();
 }
 
 
-class _TutorHomePageState extends State<TutorHomePage> {
+class _TutorRequestsPageState extends State<TutorRequestsPage> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: Text("New Requests List"),
-          backgroundColor: Universals.appBarColor,
-        ),
+        // appBar: AppBar(
+        //   // Here we take the value from the MyHomePage object that was created by
+        //   // the App.build method, and use it to set our appbar title.
+        //   title: Text("New Requests List"),
+        //   backgroundColor: Universals.appBarColor,
+        // ),
         backgroundColor: Universals.backgroundColor,
         body:
             ListView(

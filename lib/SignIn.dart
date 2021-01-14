@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/SignUp.dart';
-import 'package:virtual_approval_flutter/TutorHomePage.dart';
+import 'package:virtual_approval_flutter/TutorRequestsPage.dart';
 import 'package:virtual_approval_flutter/Universals.dart';
 
 
@@ -19,12 +19,12 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: Text("Sign In"),
-          backgroundColor: Universals.appBarColor,
-        ),
+        // appBar: AppBar(
+        //   // Here we take the value from the MyHomePage object that was created by
+        //   // the App.build method, and use it to set our appbar title.
+        //   title: Text("Sign In"),
+        //   backgroundColor: Universals.appBarColor,
+        // ),
       backgroundColor: Universals.backgroundColor,
       body:
         ListView(
@@ -94,7 +94,7 @@ class _SignInState extends State<SignIn> {
 
                           if(userCredential != null) {
                             // sign in
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => TutorHomePage(),));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => TutorRequestsPage(),));
                           }
 
                         } on FirebaseAuthException catch (e) {

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
@@ -39,7 +40,34 @@ class _InfosPageState extends State<InfosPage> {
                 alignment: Alignment.center,
                 child:
                 // Text(e, textScaleFactor: 5),
-                new OneInfoPage(subject: e,),
+                // new OneInfoPage(subject: e,),
+
+
+                StreamBuilder<DocumentSnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('subjects information')
+                      .doc(e.toLowerCase())
+                      // .doc("cis")
+                      .snapshots(),
+                  builder: (context, snapshot){
+                    // print("------------------");
+                    // print(snapshot.data.data());
+                    // print(snapshot.hasData);
+                    if(snapshot.data != null && snapshot.data.exists){
+                      final DocumentSnapshot subjectDocument = snapshot.data;
+                      // tempTest = subjectDocument["hours"];
+                      // print("document id is " + subjectDocument.id);
+
+                      // print(snapshot.data.exists);
+                      return new OneInfoPage(subject: e, subjectDocument: subjectDocument,);
+                    } else {
+                      print("document not found");
+                      return new OneInfoPage(subject: e,);
+                    }
+                    return CircularProgressIndicator();
+                  },
+
+                ),
 
 
               );

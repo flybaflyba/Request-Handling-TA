@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
@@ -8,9 +9,10 @@ import 'package:virtual_approval_flutter/Universals.dart';
 
 class OneInfoPage extends StatefulWidget {
 
-  OneInfoPage({Key key, this.subject}) : super(key: key);
+  OneInfoPage({Key key, this.subject, this.subjectDocument}) : super(key: key);
 
   final String subject;
+  final DocumentSnapshot subjectDocument;
 
   @override
   _OneInfoPageState createState() => _OneInfoPageState();
@@ -42,7 +44,8 @@ class _OneInfoPageState extends State<OneInfoPage> {
               return Container(
                 alignment: Alignment.center,
                 child:
-                 Text(widget.subject + " " + e, textScaleFactor: 5),
+                    widget.subjectDocument == null ? Text(widget.subject + " " + e, textScaleFactor: 5) :
+                 Text(widget.subject + " " + e + widget.subjectDocument[e.toLowerCase()], textScaleFactor: 5),
 
 
               );

@@ -64,18 +64,46 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBar(title: const Text('Navigation Bar Demo')),
+    return
+      Scaffold(
       appBar: AppBar(
-        title:
-        new Center(child: new Text(
-          "BYUH Tutoring",
-          textAlign: TextAlign.center,
-          // style: TextStyle(fontSize: 30),
-        )),
-
-        // toolbarHeight: 50,
+        title: const Text('BYUH Tutoring'),
+        automaticallyImplyLeading: true,
+        leading: BackButton(),
+        actions: [
+          IconButton(icon: Icon(Icons.wb_sunny), onPressed: () {
+            AwesomeDialog(
+              context: context,
+              headerAnimationLoop: false,
+              dialogType: DialogType.NO_HEADER,
+              title: 'About',
+              desc:
+              'Something about the app.',
+              btnOkOnPress: () {
+                debugPrint('OnClcik');
+              },
+              btnOkIcon: Icons.check_circle,
+            )..show();
+          }),
+          Text("     ")
+        ],
       ),
+      //
+      // appBar: AppBar(
+      //   title:
+      //   new Center(child: new Text(
+      //     "BYUH Tutoring",
+      //     textAlign: TextAlign.center,
+      //     // style: TextStyle(fontSize: 30),
+      //   )),
+      //   // toolbarHeight: 50,
+      //   leading:
+      //   BackButton(),
+      //   actions: [
+      //     Icon(Icons.add),
+      //   ],
+      // ),
+
       body: PersistentTabView(
         context,
         controller: _controller,

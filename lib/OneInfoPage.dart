@@ -98,9 +98,6 @@ class _OneInfoPageState extends State<OneInfoPage> {
                       ),
                     ),
 
-
-
-
                   ],
                 )
 

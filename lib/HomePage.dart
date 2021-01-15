@@ -1,10 +1,15 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:virtual_approval_flutter/InfosPage.dart';
-import 'package:virtual_approval_flutter/SendRequestPage.dart';
+import 'package:virtual_approval_flutter/RequestPage.dart';
 import 'package:virtual_approval_flutter/SignIn.dart';
 import 'package:virtual_approval_flutter/SignUp.dart';
+
+
+// We are not using this page as this page's bottom nav bar is not persistent
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,18 +18,21 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  int _currentIndex = 0;
-  PageController _pageController;
+  int currentIndex = 0;
+
+
+  PageController pageController;
+
 
   @override
   void initState() {
     super.initState();
-    _pageController = PageController();
+    pageController = PageController();
   }
 
   @override
   void dispose() {
-    _pageController.dispose();
+    pageController.dispose();
     super.dispose();
   }
 
@@ -41,9 +49,9 @@ class _HomePageState extends State<HomePage> {
       ),
       body: SizedBox.expand(
         child: PageView(
-          controller: _pageController,
+          controller: pageController,
           onPageChanged: (index) {
-            setState(() => _currentIndex = index);
+            setState(() => currentIndex = index);
           },
           children: <Widget>[
             // Container(color: Colors.blueGrey,),
@@ -56,11 +64,13 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+
       bottomNavigationBar: BottomNavyBar(
-        selectedIndex: _currentIndex,
+        selectedIndex: currentIndex,
         onItemSelected: (index) {
-          setState(() => _currentIndex = index);
-          _pageController.jumpToPage(index);
+          setState(() => currentIndex = index);
+          pageController.jumpToPage(index);
+          print(FirebaseAuth.instance.currentUser);
         },
         items: <BottomNavyBarItem>[
           BottomNavyBarItem(
@@ -75,9 +85,11 @@ class _HomePageState extends State<HomePage> {
               title: Text('TA'),
               icon: Icon(Icons.person)
           ),
-     
+
         ],
       ),
+
+
     );
   }
 }

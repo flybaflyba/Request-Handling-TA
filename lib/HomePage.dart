@@ -64,17 +64,18 @@ class _HomePageState extends State<HomePage> {
         },
         items: <BottomNavyBarItem>[
           BottomNavyBarItem(
-              title: Text('Request'),
+              title: Text('Help'),
               icon: Icon(Icons.question_answer)
           ),
           BottomNavyBarItem(
-              title: Text('Instructions'),
+              title: Text('Info'),
               icon: Icon(Icons.info)
           ),
           BottomNavyBarItem(
-              title: Text('TA Login'),
+              title: Text('TA'),
               icon: Icon(Icons.person)
           ),
+     
         ],
       ),
     );

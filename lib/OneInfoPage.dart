@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/SignUp.dart';
 import 'package:virtual_approval_flutter/TutorRequestsPage.dart';
@@ -41,14 +42,71 @@ class _OneInfoPageState extends State<OneInfoPage> {
 
           body: new TabBarView(
             children: tabs.map((e) { //分别创建对应的Tab页面
-              return Container(
-                alignment: Alignment.center,
-                child:
-                    widget.subjectDocument == null ? Text(widget.subject + " " + e, textScaleFactor: 5) :
-                 Text(widget.subject + " " + e + widget.subjectDocument[e.toLowerCase()], textScaleFactor: 5),
+              return
+              //   Container(
+              //   alignment: Alignment.center,
+              //   child:
+              //
+              // )
+
+                ListView(
+                  children: [
+                    widget.subjectDocument == null ?
+
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child:
+                        Column(
+                          children: [
+                            SizedBox(height: 110,),
+                            Text(
+                              "No" + " " + widget.subject + " " + e + " " + "Information",
+                              textAlign: TextAlign.center,
+                              textScaleFactor: 3,),
+                          ],
+                        )
+                    )
+
+                        :
+                    // Text(widget.subjectDocument[e.toLowerCase()]),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child:
+                      HtmlWidget(
+                        // the first parameter (`html`) is required
+                        widget.subjectDocument[e.toLowerCase()],
+
+                        // all other parameters are optional, a few notable params:
+
+                        // specify custom styling for an element
+                        // see supported inline styling below
+                        // customStylesBuilder: (element) {
+                        //   if (element.classes.contains('foo')) {
+                        //     return {'color': 'red'};
+                        //   }
+                        //   return null;
+                        // },
+
+                        // set the default styling for text
+                        // textStyle: TextStyle(fontSize: 14),
+
+                        // By default, `webView` is turned off because additional config
+                        // must be done for `PlatformView` to work on iOS.
+                        // https://pub.dev/packages/webview_flutter#ios
+                        // Make sure you have it configured before using.
+                        webView: true,
+                      ),
+                    ),
 
 
-              );
+
+
+                  ],
+                )
+
+
+
+              ;
             }).toList(),
           ),
         ),

@@ -5,7 +5,7 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/SignUp.dart';
 import 'package:virtual_approval_flutter/TutorRequestsPage.dart';
-import 'package:virtual_approval_flutter/Universals.dart';
+import 'package:virtual_approval_flutter/UniversalValues.dart';
 
 
 class OneInfoPage extends StatefulWidget {

@@ -8,7 +8,8 @@ import 'package:virtual_approval_flutter/MainPage.dart';
 import 'package:virtual_approval_flutter/SendRequestPage.dart';
 import 'package:virtual_approval_flutter/SignUp.dart';
 import 'package:virtual_approval_flutter/TutorRequestsPage.dart';
-import 'package:virtual_approval_flutter/Universals.dart';
+import 'package:virtual_approval_flutter/UniversalMethods.dart';
+import 'package:virtual_approval_flutter/UniversalValues.dart';
 
 
 class SignIn extends StatefulWidget {
@@ -30,7 +31,7 @@ class _SignInState extends State<SignIn> {
         //   title: Text("Sign In"),
         //   backgroundColor: Universals.appBarColor,
         // ),
-      backgroundColor: Universals.backgroundColor,
+      backgroundColor: UniversalValues.backgroundColor,
       body:
         ListView(
           children: [
@@ -86,7 +87,7 @@ class _SignInState extends State<SignIn> {
                       print(password);
 
                       if(email == "" || password == "") {
-                        Universals.showToast("Please complete all fields", Universals.toastMessageTypeWarning);
+                        UniversalMethods.showToast("Please complete all fields", UniversalValues.toastMessageTypeWarning);
                       } else {
                         try {
                           UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -139,15 +140,15 @@ class _SignInState extends State<SignIn> {
                           print(e);
                           if (e.code == 'user-not-found') {
                             print('No user found for that email.');
-                            Universals.showToast('No user found for that email', Universals.toastMessageTypeWarning);
+                            UniversalMethods.showToast('No user found for that email', UniversalValues.toastMessageTypeWarning);
                           } else if (e.code == 'wrong-password') {
                             print('Wrong password provided for that user.');
-                            Universals.showToast('Wrong password provided for that user', Universals.toastMessageTypeWarning);
+                            UniversalMethods.showToast('Wrong password provided for that user', UniversalValues.toastMessageTypeWarning);
                           } else if (e.code == 'invalid-email') {
                             print('invalid-email');
-                            Universals.showToast('Invalid email', Universals.toastMessageTypeWarning);
+                            UniversalMethods.showToast('Invalid email', UniversalValues.toastMessageTypeWarning);
                           } else {
-                            Universals.showToast("Something went wrong", Universals.toastMessageTypeWarning);
+                            UniversalMethods.showToast("Something went wrong", UniversalValues.toastMessageTypeWarning);
                           }
                         }
                       }
@@ -157,7 +158,7 @@ class _SignInState extends State<SignIn> {
 
 
                     },
-                    color: Universals.buttonColor,
+                    color: UniversalValues.buttonColor,
                     child: Text(
                       'SIGN IN',
                       style: TextStyle(

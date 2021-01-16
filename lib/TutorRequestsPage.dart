@@ -8,7 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/Request.dart';
-import 'package:virtual_approval_flutter/Universals.dart';
+import 'package:virtual_approval_flutter/UniversalValues.dart';
 import 'package:intl/intl.dart';
 import 'package:virtual_approval_flutter/ViewRequestPage.dart';
 
@@ -121,7 +121,7 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> {
         //   title: Text("New Requests List"),
         //   backgroundColor: Universals.appBarColor,
         // ),
-        backgroundColor: Universals.backgroundColor,
+        backgroundColor: UniversalValues.backgroundColor,
         body:
             ListView(
               children: [

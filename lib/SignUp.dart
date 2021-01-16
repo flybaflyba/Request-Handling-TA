@@ -6,7 +6,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
-import 'package:virtual_approval_flutter/Universals.dart';
+import 'package:virtual_approval_flutter/UniversalMethods.dart';
+import 'package:virtual_approval_flutter/UniversalValues.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:virtual_approval_flutter/UserInformation.dart';
 
@@ -39,7 +40,7 @@ class _SignUpState extends State<SignUp> {
         //   title: Text("Sign Up"),
         //   backgroundColor: Universals.appBarColor,
         // ),
-      backgroundColor: Universals.backgroundColor,
+      backgroundColor: UniversalValues.backgroundColor,
       body:
         ListView(
           children: [
@@ -119,7 +120,7 @@ class _SignUpState extends State<SignUp> {
                           FocusScope.of(context).requestFocus(new FocusNode()); // do not show keyboard
                           // show department picker
                           Picker picker = Picker(
-                            adapter: PickerDataAdapter<String>(pickerdata: Universals.departments),
+                            adapter: PickerDataAdapter<String>(pickerdata: UniversalValues.departments),
                             changeToFirst: false,
                             textAlign: TextAlign.left,
                             height: 200,
@@ -190,13 +191,13 @@ class _SignUpState extends State<SignUp> {
                       print(email);
                       print(password);
                       print(taSecretCode);
-                      print(Universals.taSecretCode);
+                      print(UniversalValues.taSecretCode);
 
                       if (name == "" || email == "" || password == "" || taSecretCode == "" || department == "") {
-                        Universals.showToast('Please complete all fields', Universals.toastMessageTypeWarning);
+                        UniversalMethods.showToast('Please complete all fields', UniversalValues.toastMessageTypeWarning);
                       } else {
-                        if (taSecretCode != Universals.taSecretCode) {
-                          Universals.showToast('Wrong TA secret code ', Universals.toastMessageTypeWarning);
+                        if (taSecretCode != UniversalValues.taSecretCode) {
+                          UniversalMethods.showToast('Wrong TA secret code ', UniversalValues.toastMessageTypeWarning);
                         } else {
                           try {
                             UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -208,7 +209,7 @@ class _SignUpState extends State<SignUp> {
 
                             DatabaseInteractions.saveUserProfile(userInformation);
 
-                            Universals.loggedInUserInformation = userInformation;
+                            UniversalValues.loggedInUserInformation = userInformation;
 
                             // FirebaseAuth.instance.signOut();
                             print(userCredential);
@@ -217,14 +218,14 @@ class _SignUpState extends State<SignUp> {
                           on FirebaseAuthException catch (e) {
                             if (e.code == 'weak-password') {
                               print('The password provided is too weak');
-                              Universals.showToast('The password provided is too weak', Universals.toastMessageTypeWarning);
+                              UniversalMethods.showToast('The password provided is too weak', UniversalValues.toastMessageTypeWarning);
                             } else if (e.code == 'email-already-in-use') {
                               print('The account already exists for that email');
-                              Universals.showToast("The account already exists for that email", Universals.toastMessageTypeWarning);
+                              UniversalMethods.showToast("The account already exists for that email", UniversalValues.toastMessageTypeWarning);
                             }
                             else if (e.code == 'invalid-email') {
                               print('Invalid email');
-                              Universals.showToast("Invalid email", Universals.toastMessageTypeWarning);
+                              UniversalMethods.showToast("Invalid email", UniversalValues.toastMessageTypeWarning);
                             }
                           }
                           catch (e) {
@@ -233,7 +234,7 @@ class _SignUpState extends State<SignUp> {
                         }
                       }
                     },
-                    color: Universals.buttonColor,
+                    color: UniversalValues.buttonColor,
                     child: Text(
                       'SIGN UP',
                       style: TextStyle(

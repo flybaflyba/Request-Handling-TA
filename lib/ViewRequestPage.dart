@@ -3,7 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
-import 'package:virtual_approval_flutter/Universals.dart';
+import 'package:virtual_approval_flutter/UniversalValues.dart';
 
 class ViewRequestPage extends StatefulWidget {
 
@@ -28,7 +28,7 @@ class _ViewRequestPagState extends State<ViewRequestPage> {
               flex: 1,
               child: SizedBox.expand(
                 child: RaisedButton(
-                  color: Universals.transparentColorWhite,
+                  color: UniversalValues.transparentColorWhite,
                   child: Text(
                     "Helping",
                     style: TextStyle(fontSize: 40),
@@ -45,7 +45,7 @@ class _ViewRequestPagState extends State<ViewRequestPage> {
               flex: 4,
               child: SizedBox.expand(
                 child: RaisedButton(
-                  color: Universals.transparentColorWhite,
+                  color: UniversalValues.transparentColorWhite,
                   child: ListView(
                     children: [
                       Padding(
@@ -94,7 +94,7 @@ class _ViewRequestPagState extends State<ViewRequestPage> {
               flex: 1,
               child: SizedBox.expand(
                 child: RaisedButton(
-                  color: Universals.transparentColorWhite,
+                  color: UniversalValues.transparentColorWhite,
                   child:
                   StreamBuilder<DateTime>(
                     stream: Stream.periodic(const Duration(seconds: 1)),
@@ -117,7 +117,7 @@ class _ViewRequestPagState extends State<ViewRequestPage> {
               flex: 1,
               child: SizedBox.expand(
                 child: RaisedButton(
-                  color: Universals.buttonColor,
+                  color: UniversalValues.buttonColor,
                   child: Text(
                     "Finish",
                     style: TextStyle(fontSize: 40),

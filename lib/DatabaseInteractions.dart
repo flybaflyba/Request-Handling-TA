@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:virtual_approval_flutter/Request.dart';
-import 'package:virtual_approval_flutter/Universals.dart';
+import 'package:virtual_approval_flutter/UniversalValues.dart';
 import 'package:virtual_approval_flutter/UserInformation.dart';
 
 class DatabaseInteractions {
@@ -14,10 +14,10 @@ class DatabaseInteractions {
         .then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
         print('Document data: ${documentSnapshot.data()}');
-        Universals.taSecretCode = documentSnapshot.data()["ta secret code"];
+        UniversalValues.taSecretCode = documentSnapshot.data()["ta secret code"];
       } else {
         print('Document does not exist on the database');
-        Universals.taSecretCode = "";
+        UniversalValues.taSecretCode = "";
       }
     });
   }
@@ -30,14 +30,14 @@ class DatabaseInteractions {
         .then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
         print('Document data: ${documentSnapshot.data()}');
-        Universals.loggedInUserInformation = new UserInformation(
+        UniversalValues.loggedInUserInformation = new UserInformation(
             name: documentSnapshot.data()["name"],
             email: documentSnapshot.data()["email"],
             department: documentSnapshot.data()["department"]);
-        print(Universals.loggedInUserInformation);
+        print(UniversalValues.loggedInUserInformation);
       } else {
         print('Document does not exist on the database');
-        Universals.loggedInUserInformation = null;
+        UniversalValues.loggedInUserInformation = null;
       }
     });
   }

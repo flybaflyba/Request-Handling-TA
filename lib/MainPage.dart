@@ -12,7 +12,7 @@ import 'package:virtual_approval_flutter/SendRequestPage.dart';
 import 'package:virtual_approval_flutter/SignIn.dart';
 import 'package:virtual_approval_flutter/SignUp.dart';
 import 'package:virtual_approval_flutter/TutorRequestsPage.dart';
-import 'package:virtual_approval_flutter/Universals.dart';
+import 'package:virtual_approval_flutter/UniversalValues.dart';
 
 BuildContext testContext;
 
@@ -45,7 +45,7 @@ class _MainPageState extends State<MainPage> {
       // print(loggedInNow);
       // print("Universals.loggedInLast");
       // print(Universals.loggedInLast);
-      if (loggedInNow != Universals.loggedInLast) {
+      if (loggedInNow != UniversalValues.loggedInLast) {
         setState(() {
           buildScreens = [
             SendRequestPage(),
@@ -54,7 +54,7 @@ class _MainPageState extends State<MainPage> {
             SignIn() : TutorRequestsPage(),
           ];
         });
-        Universals.loggedInLast = loggedInNow;
+        UniversalValues.loggedInLast = loggedInNow;
       } else {
 
       }
@@ -87,7 +87,7 @@ class _MainPageState extends State<MainPage> {
       ),
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.person),
-        title: (Universals.loggedInUserInformation == null ? "TA" : Universals.loggedInUserInformation.name),
+        title: (UniversalValues.loggedInUserInformation == null ? "TA" : UniversalValues.loggedInUserInformation.name),
         activeColor: CupertinoColors.activeBlue,
         inactiveColor: CupertinoColors.systemGrey,
       ),
@@ -143,7 +143,7 @@ class _MainPageState extends State<MainPage> {
                     (_) => false,
               );
 
-              Universals.loggedInUserInformation = null;
+              UniversalValues.loggedInUserInformation = null;
 
               AwesomeDialog(
                 context: context,

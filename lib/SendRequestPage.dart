@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/Request.dart';
 import 'package:virtual_approval_flutter/SignIn.dart';
-import 'package:virtual_approval_flutter/Universals.dart';
+import 'package:virtual_approval_flutter/UniversalMethods.dart';
+import 'package:virtual_approval_flutter/UniversalValues.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:email_validator/email_validator.dart';
 
@@ -123,7 +124,7 @@ class _SendRequestPageState extends State<SendRequestPage> {
                         FocusScope.of(context).requestFocus(new FocusNode()); // do not show keyboard
                         // show course picker
                         Picker picker = Picker(
-                          adapter: PickerDataAdapter<String>(pickerdata: JsonDecoder().convert(Universals.courses)),
+                          adapter: PickerDataAdapter<String>(pickerdata: JsonDecoder().convert(UniversalValues.courses)),
                           changeToFirst: false,
                           textAlign: TextAlign.left,
                           height: 200,
@@ -196,13 +197,13 @@ class _SendRequestPageState extends State<SendRequestPage> {
                     print(question);
 
                     if(name == "" || email == "" || course == "" || question == ""){
-                      Universals.showToast("Please complete all fields", Universals.toastMessageTypeWarning);
+                      UniversalMethods.showToast("Please complete all fields", UniversalValues.toastMessageTypeWarning);
                     } else {
                       if (!EmailValidator.validate(email)) {
-                        Universals.showToast("Invalid email", Universals.toastMessageTypeWarning);
+                        UniversalMethods.showToast("Invalid email", UniversalValues.toastMessageTypeWarning);
                       } else {
                         if(!email.contains("byuh")){
-                          Universals.showToast("Please use your BYUH email", Universals.toastMessageTypeWarning);
+                          UniversalMethods.showToast("Please use your BYUH email", UniversalValues.toastMessageTypeWarning);
                         } else {
                           // check if this person has submitted a request
                           try {
@@ -214,11 +215,11 @@ class _SendRequestPageState extends State<SendRequestPage> {
                               if (querySnapshot.docs.isNotEmpty) {
                                 String requestMessageBack = "You already submitted a request";
                                 print(requestMessageBack);
-                                Universals.showToast(requestMessageBack, Universals.toastMessageTypeWarning);
+                                UniversalMethods.showToast(requestMessageBack, UniversalValues.toastMessageTypeWarning);
                               } else {
                                 String requestMessageBack = "Your Requested is submitted successfully";
                                 print(requestMessageBack);
-                                Universals.showToast(requestMessageBack, Universals.toastMessageTypeGood);
+                                UniversalMethods.showToast(requestMessageBack, UniversalValues.toastMessageTypeGood);
                                 Request request = new Request(name: name, email: email, course: course, question: question);
                                 var now = new DateTime.now();
                                 print(now.add(Duration(hours: 0))); // do we need to use -10 to convert to hawaii time?
@@ -228,7 +229,7 @@ class _SendRequestPageState extends State<SendRequestPage> {
                                 DatabaseInteractions.saveRequest(request);
                               }
 
-                              Universals.showRequestInfoToStudentInRealTime(email, context);
+                              UniversalMethods.showRequestInfoToStudentInRealTime(email, context);
 
                             }).then((value) {
                               FocusScope.of(context).requestFocus(new FocusNode()); // do not show keyboard
@@ -244,7 +245,7 @@ class _SendRequestPageState extends State<SendRequestPage> {
 
 
                   },
-                  color: Universals.buttonColor,
+                  color: UniversalValues.buttonColor,
                   child: Text(
                     'Request Help',
                     style: TextStyle(

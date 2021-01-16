@@ -18,7 +18,8 @@ BuildContext testContext;
 
 class MainPage extends StatefulWidget {
   final BuildContext menuScreenContext;
-  MainPage({Key key, this.menuScreenContext}) : super(key: key);
+  MainPage({Key key, this.menuScreenContext, this.initialIndex}) : super(key: key);
+  var initialIndex;
 
   @override
   _MainPageState createState() => _MainPageState();
@@ -28,18 +29,19 @@ class _MainPageState extends State<MainPage> {
   PersistentTabController _controller;
   bool _hideNavBar;
 
+
   var taScreen;
 
   @override
   void initState() {
     super.initState();
-    _controller = PersistentTabController(initialIndex: 0);
+    _controller = PersistentTabController(initialIndex: widget.initialIndex);
     _hideNavBar = false;
 
     new Timer.periodic(Duration(seconds:1), (Timer t) {
       print('hi!');
       setState(() {
-        Universals.buildScreens = [
+        buildScreens = [
           SendRequestPage(),
           InfosPage(),
           FirebaseAuth.instance.currentUser == null ?
@@ -50,12 +52,12 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
-  // static List<Widget> buildScreens = [
-  //     SendRequestPage(),
-  //     InfosPage(),
-  //     FirebaseAuth.instance.currentUser == null ?
-  //     SignIn() : TutorRequestsPage(),
-  //   ];
+  static List<Widget> buildScreens = [
+      SendRequestPage(),
+      InfosPage(),
+      FirebaseAuth.instance.currentUser == null ?
+      SignIn() : TutorRequestsPage(),
+    ];
 
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
@@ -107,22 +109,15 @@ class _MainPageState extends State<MainPage> {
           )
               :
           IconButton(icon: Icon(Icons.logout), onPressed: () {
-            print(Universals.buildScreens);
+            print(buildScreens);
 
             FirebaseAuth.instance.signOut().then((value) => setState(() {
               print(FirebaseAuth.instance.currentUser);
 
-              Universals.buildScreens = [
-                SendRequestPage(),
-                InfosPage(),
-                FirebaseAuth.instance.currentUser == null ?
-                SignIn() : TutorRequestsPage(),
-              ];
-
               Navigator.of(context).pushAndRemoveUntil(
                 CupertinoPageRoute(
                   builder: (BuildContext context) {
-                    return MainPage();
+                    return MainPage(initialIndex: 2,);
                   },
                 ),
                     (_) => false,
@@ -177,7 +172,7 @@ class _MainPageState extends State<MainPage> {
       body: PersistentTabView(
         context,
         controller: _controller,
-        screens: Universals.buildScreens,
+        screens: buildScreens,
         items: _navBarsItems(),
         confineInSafeArea: true,
         backgroundColor: Colors.white,

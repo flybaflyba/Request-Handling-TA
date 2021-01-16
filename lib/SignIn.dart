@@ -124,16 +124,7 @@ class _SignInState extends State<SignIn> {
                             // );
 
                             print("I'm signing in!!!");
-                            setState(() {
-                              Universals.buildScreens = [
-                                SendRequestPage(),
-                                InfosPage(),
-                                // FirebaseAuth.instance.currentUser == null ?
-                                // SignIn() :
-                                TutorRequestsPage(),
-                              ];
-                            });
-                            print(Universals.buildScreens);
+
 
                             // FocusScope.of(context).requestFocus(new FocusNode());
 

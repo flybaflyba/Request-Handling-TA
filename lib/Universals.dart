@@ -47,12 +47,6 @@ class Universals {
     );
   }
 
-  static List<Widget> buildScreens = [
-    SendRequestPage(),
-    InfosPage(),
-    FirebaseAuth.instance.currentUser == null ?
-    SignIn() : TutorRequestsPage(),
-  ];
 
   static showRequestInfoToStudentInRealTime(String email, BuildContext context) {
 

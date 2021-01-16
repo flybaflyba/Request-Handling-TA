@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "SendRequestPage" : (context) => SendRequestPage(),
         // "MyHomePage" : (context) => HomePage(),
-        "MyHomePage" : (context) => MainPage(menuScreenContext: context,),
+        "MyHomePage" : (context) => MainPage(menuScreenContext: context, initialIndex: 0,),
         "TutorRequestsPage" : (context) => TutorRequestsPage(),
 
       },

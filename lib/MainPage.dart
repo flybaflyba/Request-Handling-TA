@@ -40,14 +40,25 @@ class _MainPageState extends State<MainPage> {
 
     new Timer.periodic(Duration(seconds:1), (Timer t) {
       print('hi!');
-      setState(() {
-        buildScreens = [
-          SendRequestPage(),
-          InfosPage(),
-          FirebaseAuth.instance.currentUser == null ?
-          SignIn() : TutorRequestsPage(),
-        ];
-      });
+      var loggedInNow = FirebaseAuth.instance.currentUser == null ? false : true;
+      print("loggedInNow");
+      print(loggedInNow);
+      print("Universals.loggedInLast");
+      print(Universals.loggedInLast);
+      if (loggedInNow != Universals.loggedInLast) {
+        setState(() {
+          buildScreens = [
+            SendRequestPage(),
+            InfosPage(),
+            FirebaseAuth.instance.currentUser == null ?
+            SignIn() : TutorRequestsPage(),
+          ];
+        });
+        Universals.loggedInLast = loggedInNow;
+      } else {
+
+      }
+
 
     });
   }
@@ -114,6 +125,15 @@ class _MainPageState extends State<MainPage> {
             FirebaseAuth.instance.signOut().then((value) => setState(() {
               print(FirebaseAuth.instance.currentUser);
 
+              setState(() {
+                buildScreens = [
+                  SendRequestPage(),
+                  InfosPage(),
+                  FirebaseAuth.instance.currentUser == null ?
+                  SignIn() : TutorRequestsPage(),
+                ];
+              });
+              
               Navigator.of(context).pushAndRemoveUntil(
                 CupertinoPageRoute(
                   builder: (BuildContext context) {

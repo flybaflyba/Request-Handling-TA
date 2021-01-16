@@ -30,6 +30,7 @@ class Universals {
     {"IS": [350]},
     {"MATH": ["107","110","111","119","121","212","213","301","421"]},
     {"PHYS": ["115","115L","121","121L"]},
+    {"FILM": ["102"]},
     {"Other": ["Other"]}
     ]''';
 
@@ -37,6 +38,7 @@ class Universals {
   "Math & Computing", "Religious Education", "Sciences"];
 
   static UserInformation loggedInUserInformation;
+  static var loggedInLast = FirebaseAuth.instance.currentUser == null ? false : true;
 
   static void showToast(String msg, Color toastMessageType) {
     Fluttertoast.showToast(

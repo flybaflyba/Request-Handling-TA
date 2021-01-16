@@ -30,8 +30,8 @@ class Universals {
     {"IS": [350]},
     {"MATH": ["107","110","111","119","121","212","213","301","421"]},
     {"PHYS": ["115","115L","121","121L"]},
-    {"FILM": ["102"]},
-    {"Other": ["Other"]}
+    {"FILM": ["102", "218", "318", "300", "365R"]},
+    {"ENTR": ["180", "283", "275", "285", "373", "380", "383", "375R", "390R", "401R", "483", "485", "499",]},
     ]''';
 
   static const departments = ["Arts & Letters", "Business & Government", "Culture, Language & Performing Arts", "Education & Social Work",

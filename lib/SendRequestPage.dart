@@ -119,26 +119,30 @@ class _SendRequestPageState extends State<SendRequestPage> {
                       enabled: courseTextEditingEnable,
                       controller: courseTextEditingController,
                       onTap: () {
-                        courseTextEditingEnable = false;
+                        // courseTextEditingEnable = false;
                         FocusScope.of(context).requestFocus(new FocusNode()); // do not show keyboard
                         // show course picker
                         Picker picker = Picker(
                           adapter: PickerDataAdapter<String>(pickerdata: JsonDecoder().convert(Universals.courses)),
                           changeToFirst: false,
                           textAlign: TextAlign.left,
+                          height: 200,
+                          magnification: 1,
+                          looping: false,
                           textStyle: const TextStyle(color: Colors.blue),
                           selectedTextStyle: TextStyle(color: Colors.red),
                           columnPadding: const EdgeInsets.all(8.0),
+                          footer: SizedBox(height: 50,),
                           onConfirm: (Picker picker, List value) {
                             print(value.toString()); // index
                             print(picker.getSelectedValues()); // value
                             course = picker.getSelectedValues()[0] + " " + picker.getSelectedValues()[1];
                             print(course);
                             courseTextEditingController.text = course;
-                            courseTextEditingEnable = true;
+                            // courseTextEditingEnable = true;
                           },
                           onCancel: () {
-                            courseTextEditingEnable = true;
+                            // courseTextEditingEnable = true;
                           },
                         );
                         picker.show(_scaffoldKey.currentState);

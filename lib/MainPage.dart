@@ -39,12 +39,12 @@ class _MainPageState extends State<MainPage> {
     _hideNavBar = false;
 
     new Timer.periodic(Duration(seconds:1), (Timer t) {
-      print('hi!');
+      // print('checking login in/out');
       var loggedInNow = FirebaseAuth.instance.currentUser == null ? false : true;
-      print("loggedInNow");
-      print(loggedInNow);
-      print("Universals.loggedInLast");
-      print(Universals.loggedInLast);
+      // print("loggedInNow");
+      // print(loggedInNow);
+      // print("Universals.loggedInLast");
+      // print(Universals.loggedInLast);
       if (loggedInNow != Universals.loggedInLast) {
         setState(() {
           buildScreens = [
@@ -133,7 +133,7 @@ class _MainPageState extends State<MainPage> {
                   SignIn() : TutorRequestsPage(),
                 ];
               });
-              
+
               Navigator.of(context).pushAndRemoveUntil(
                 CupertinoPageRoute(
                   builder: (BuildContext context) {

@@ -10,6 +10,7 @@ import 'package:virtual_approval_flutter/SendRequestPage.dart';
 import 'package:virtual_approval_flutter/SignIn.dart';
 import 'package:virtual_approval_flutter/SignUp.dart';
 import 'package:virtual_approval_flutter/TutorRequestsPage.dart';
+import 'package:virtual_approval_flutter/Universals.dart';
 
 BuildContext testContext;
 
@@ -34,14 +35,13 @@ class _MainPageState extends State<MainPage> {
     _hideNavBar = false;
   }
 
-  List<Widget> _buildScreens() {
-    return [
-      SendRequestPage(),
-      InfosPage(),
-      FirebaseAuth.instance.currentUser == null ?
-      SignIn() : TutorRequestsPage(),
-    ];
-  }
+  // static List<Widget> buildScreens = [
+  //     SendRequestPage(),
+  //     InfosPage(),
+  //     FirebaseAuth.instance.currentUser == null ?
+  //     SignIn() : TutorRequestsPage(),
+  //   ];
+
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
@@ -75,24 +75,56 @@ class _MainPageState extends State<MainPage> {
         automaticallyImplyLeading: true,
         leading: BackButton(),
         actions: [
+          FirebaseAuth.instance.currentUser == null ?
           IconButton(icon: Icon(Icons.wb_sunny), onPressed: () {
-            if (FirebaseAuth.instance.currentUser == null) {
+            AwesomeDialog(
+              context: context,
+              headerAnimationLoop: false,
+              dialogType: DialogType.NO_HEADER,
+              title: 'Welcome',
+              desc:
+              'Thanks for using the app!',
+              btnOkOnPress: () {
+                debugPrint('OnClcik');
+              },
+              btnOkIcon: Icons.check_circle,
+            )..show();}
+          )
+              :
+          IconButton(icon: Icon(Icons.logout), onPressed: () {
+            print(Universals.buildScreens);
+
+            FirebaseAuth.instance.signOut().then((value) => setState(() {
+              print(FirebaseAuth.instance.currentUser);
+              Universals.buildScreens = [
+                SendRequestPage(),
+                InfosPage(),
+                FirebaseAuth.instance.currentUser == null ?
+                SignIn() : TutorRequestsPage(),
+              ];
+
+              Navigator.of(context).pushAndRemoveUntil(
+                CupertinoPageRoute(
+                  builder: (BuildContext context) {
+                    return MainPage();
+                  },
+                ),
+                    (_) => false,
+              );
+
               AwesomeDialog(
                 context: context,
                 headerAnimationLoop: false,
                 dialogType: DialogType.NO_HEADER,
-                title: 'About',
+                title: 'Bye',
                 desc:
-                'Something about the app.',
-                btnOkOnPress: () {
-                  debugPrint('OnClcik');
-                },
-                btnOkIcon: Icons.check_circle,
-              )..show();
-            } else {
-              FirebaseAuth.instance.signOut();
-            }
+                'You signed out',
+                // btnOkOnPress: () {
+                // },
+                // btnOkIcon: Icons.check_circle,
 
+              )..show();
+            }));
 
           }),
           Text("     ")
@@ -129,7 +161,7 @@ class _MainPageState extends State<MainPage> {
       body: PersistentTabView(
         context,
         controller: _controller,
-        screens: _buildScreens(),
+        screens: Universals.buildScreens,
         items: _navBarsItems(),
         confineInSafeArea: true,
         backgroundColor: Colors.white,

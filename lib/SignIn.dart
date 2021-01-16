@@ -90,7 +90,20 @@ class _SignInState extends State<SignIn> {
                           UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
                               email: email,
                               password: password
-                          );
+                          ).then((value) {
+                            // print("I'm signing in!!!");
+                            // setState(() {
+                            //   Universals.buildScreens = [
+                            //     SendRequestPage(),
+                            //     InfosPage(),
+                            //     FirebaseAuth.instance.currentUser == null ?
+                            //     SignIn() : TutorRequestsPage(),
+                            //   ];
+                            // });
+                            return value;
+                          });
+
+
                           print(userCredential);
                           //Navigator.popUntil(context, (route) => false); // pop all past screens
                           //Navigator.pop(context); // pop current screen
@@ -98,15 +111,30 @@ class _SignInState extends State<SignIn> {
                           if(userCredential != null) {
                             // sign in
                             // Navigator.push(context, MaterialPageRoute(builder: (context) => TutorRequestsPage(),));
-                            // Navigator.popAndPushNamed(context, 'TutorRequestsPage');
-                            // Navigator.pushReplacementNamed(context, 'SendRequestPage');
-                            Navigator.pop(context);
+                            // // Navigator.popAndPushNamed(context, 'TutorRequestsPage');
+                            // // Navigator.pushReplacementNamed(context, 'SendRequestPage');
+                            // Navigator.pop(context);
                             // pushNewScreen(
                             //   context,
                             //   screen: TutorRequestsPage(),
                             //   withNavBar: true, // OPTIONAL VALUE. True by default.
                             //   pageTransitionAnimation: PageTransitionAnimation.cupertino,
                             // );
+
+                            print("I'm signing in!!!");
+                            setState(() {
+                              Universals.buildScreens = [
+                                SendRequestPage(),
+                                InfosPage(),
+                                FirebaseAuth.instance.currentUser == null ?
+                                SignIn() : TutorRequestsPage(),
+                              ];
+                            });
+                            print(Universals.buildScreens);
+                            // FocusScope.of(context).requestFocus(new FocusNode());
+
+                            (context as Element).reassemble();
+
                           }
 
                         } on FirebaseAuthException catch (e) {

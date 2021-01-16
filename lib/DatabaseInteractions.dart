@@ -75,7 +75,7 @@ class DatabaseInteractions {
         .catchError((error) => print("Failed to update request: $error"));
   }
 
-  static void deleteRequest(Request request) {
+  static void deleteNewRequest(Request request) {
     FirebaseFirestore.instance.collection("new requests")
         .doc(request.requestedAt)
         .delete()

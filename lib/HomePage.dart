@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:virtual_approval_flutter/InfosPage.dart';
-import 'package:virtual_approval_flutter/RequestPage.dart';
+import 'package:virtual_approval_flutter/SendRequestPage.dart';
 import 'package:virtual_approval_flutter/SignIn.dart';
 import 'package:virtual_approval_flutter/SignUp.dart';
 
@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
             // Container(color: Colors.red,),
             // Container(color: Colors.green,),
             // Container(color: Colors.blue,),
-            new RequestPage(),
+            new SendRequestPage(),
             new InfosPage(),
             new SignIn(),
           ],

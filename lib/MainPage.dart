@@ -1,12 +1,11 @@
 
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:virtual_approval_flutter/InfosPage.dart';
-import 'package:virtual_approval_flutter/RequestPage.dart';
+import 'package:virtual_approval_flutter/SendRequestPage.dart';
 import 'package:virtual_approval_flutter/SignIn.dart';
 import 'package:virtual_approval_flutter/SignUp.dart';
 
@@ -33,7 +32,7 @@ class _MainPageState extends State<MainPage> {
 
   List<Widget> _buildScreens() {
     return [
-      RequestPage(),
+      SendRequestPage(),
       InfosPage(),
       SignIn(),
     ];

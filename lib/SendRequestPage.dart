@@ -9,7 +9,7 @@ import 'package:virtual_approval_flutter/Universals.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:email_validator/email_validator.dart';
 
-class RequestPage extends StatefulWidget {
+class SendRequestPage extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
   // how it looks.
@@ -20,10 +20,10 @@ class RequestPage extends StatefulWidget {
   // always marked "final".
 
   @override
-  _RequestPageState createState() => _RequestPageState();
+  _SendRequestPageState createState() => _SendRequestPageState();
 }
 
-class _RequestPageState extends State<RequestPage> {
+class _SendRequestPageState extends State<SendRequestPage> {
 
   var name = "";
   var email = "";

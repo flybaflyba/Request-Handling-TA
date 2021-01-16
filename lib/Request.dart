@@ -23,14 +23,14 @@ class Request {
     var name,
     var course,
     var question,
-    var requestedTimeHawaii,
+    var requestedAt,
     var status,
   }){
     if(email != null){ this.email = email; }
     if(name != null){ this.name = name; }
     if(course != null){ this.course = course; }
     if(question != null){ this.question = question; }
-    if(requestedTimeHawaii != null){ this.requestedAt = requestedTimeHawaii; }
+    if(requestedAt != null){ this.requestedAt = requestedAt; }
     if(status != null){ this.status = status; }
   }
 

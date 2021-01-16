@@ -1,4 +1,6 @@
 
+import 'dart:async';
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,6 +35,19 @@ class _MainPageState extends State<MainPage> {
     super.initState();
     _controller = PersistentTabController(initialIndex: 0);
     _hideNavBar = false;
+
+    new Timer.periodic(Duration(seconds:1), (Timer t) {
+      print('hi!');
+      setState(() {
+        Universals.buildScreens = [
+          SendRequestPage(),
+          InfosPage(),
+          FirebaseAuth.instance.currentUser == null ?
+          SignIn() : TutorRequestsPage(),
+        ];
+      });
+
+    });
   }
 
   // static List<Widget> buildScreens = [
@@ -96,6 +111,7 @@ class _MainPageState extends State<MainPage> {
 
             FirebaseAuth.instance.signOut().then((value) => setState(() {
               print(FirebaseAuth.instance.currentUser);
+
               Universals.buildScreens = [
                 SendRequestPage(),
                 InfosPage(),

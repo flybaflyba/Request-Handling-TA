@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/InfosPage.dart';
+import 'package:virtual_approval_flutter/MainPage.dart';
 import 'package:virtual_approval_flutter/SendRequestPage.dart';
 import 'package:virtual_approval_flutter/SignUp.dart';
 import 'package:virtual_approval_flutter/TutorRequestsPage.dart';
@@ -126,14 +128,17 @@ class _SignInState extends State<SignIn> {
                               Universals.buildScreens = [
                                 SendRequestPage(),
                                 InfosPage(),
-                                FirebaseAuth.instance.currentUser == null ?
-                                SignIn() : TutorRequestsPage(),
+                                // FirebaseAuth.instance.currentUser == null ?
+                                // SignIn() :
+                                TutorRequestsPage(),
                               ];
                             });
                             print(Universals.buildScreens);
+
                             // FocusScope.of(context).requestFocus(new FocusNode());
 
-                            (context as Element).reassemble();
+
+
 
                           }
 

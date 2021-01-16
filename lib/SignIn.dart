@@ -126,6 +126,8 @@ class _SignInState extends State<SignIn> {
                             print("I'm signing in!!!");
 
 
+                            DatabaseInteractions.getLoggedInUserInformation(email);
+
                             // FocusScope.of(context).requestFocus(new FocusNode());
 
 

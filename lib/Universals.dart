@@ -9,6 +9,7 @@ import 'package:virtual_approval_flutter/Request.dart';
 import 'package:virtual_approval_flutter/SendRequestPage.dart';
 import 'package:virtual_approval_flutter/SignIn.dart';
 import 'package:virtual_approval_flutter/TutorRequestsPage.dart';
+import 'package:virtual_approval_flutter/UserInformation.dart';
 
 class Universals {
   static Color appBarColor = Color(0xff2b9ed4);
@@ -34,6 +35,8 @@ class Universals {
 
   static const departments = ["Arts & Letters", "Business & Government", "Culture, Language & Performing Arts", "Education & Social Work",
   "Math & Computing", "Religious Education", "Sciences"];
+
+  static UserInformation loggedInUserInformation;
 
   static void showToast(String msg, Color toastMessageType) {
     Fluttertoast.showToast(

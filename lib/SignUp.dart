@@ -8,6 +8,7 @@ import 'package:flutter_picker/flutter_picker.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/Universals.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:virtual_approval_flutter/UserInformation.dart';
 
 
 class SignUp extends StatefulWidget {
@@ -198,7 +199,12 @@ class _SignUpState extends State<SignUp> {
                               email: email,
                               password: password,
                             );
-                            DatabaseInteractions.saveUserProfile(name, email, department);
+
+                            UserInformation userInformation = new UserInformation(name: name, email: email, department: department);
+
+                            DatabaseInteractions.saveUserProfile(userInformation);
+
+                            Universals.loggedInUserInformation = userInformation;
 
                             // FirebaseAuth.instance.signOut();
                             print(userCredential);

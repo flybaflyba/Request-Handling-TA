@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "SendRequestPage" : (context) => SendRequestPage(),
         // "MyHomePage" : (context) => HomePage(),
+        // Set app launch screen, if user is signed in, show ta page, if not, show send request page
         "MyHomePage" : (context) => MainPage(menuScreenContext: context, initialIndex: FirebaseAuth.instance.currentUser == null ? 0 : 2,),
         "TutorRequestsPage" : (context) => TutorRequestsPage(),
 

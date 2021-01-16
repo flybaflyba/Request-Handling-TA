@@ -76,7 +76,7 @@ class _MainPageState extends State<MainPage> {
       ),
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.person),
-        title: ("TA"),
+        title: (Universals.loggedInUserInformation == null ? "TA" : Universals.loggedInUserInformation.name),
         activeColor: CupertinoColors.activeBlue,
         inactiveColor: CupertinoColors.systemGrey,
       ),
@@ -122,6 +122,8 @@ class _MainPageState extends State<MainPage> {
                 ),
                     (_) => false,
               );
+
+              Universals.loggedInUserInformation = null;
 
               AwesomeDialog(
                 context: context,

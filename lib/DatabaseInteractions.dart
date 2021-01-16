@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:virtual_approval_flutter/Request.dart';
 import 'package:virtual_approval_flutter/Universals.dart';
+import 'package:virtual_approval_flutter/UserInformation.dart';
 
 class DatabaseInteractions {
 
@@ -21,13 +22,32 @@ class DatabaseInteractions {
     });
   }
 
-  static void saveUserProfile(String name, String email, String department) {
-    FirebaseFirestore.instance.collection('users')
+  static void getLoggedInUserInformation(String email) {
+    FirebaseFirestore.instance
+        .collection('users')
         .doc(email)
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        print('Document data: ${documentSnapshot.data()}');
+        Universals.loggedInUserInformation = new UserInformation(
+            name: documentSnapshot.data()["name"],
+            email: documentSnapshot.data()["email"],
+            department: documentSnapshot.data()["department"]);
+      } else {
+        print('Document does not exist on the database');
+        Universals.loggedInUserInformation = null;
+      }
+    });
+  }
+
+  static void saveUserProfile(UserInformation userInformation) {
+    FirebaseFirestore.instance.collection('users')
+        .doc(userInformation.email)
         .set({
-      "name": name,
-      'email': email,
-      "department": department,
+      "name": userInformation.name,
+      'email': userInformation.email,
+      "department": userInformation.department,
     })
         .then((value) => print("User Profile Added"))
         .catchError((error) => print("Failed to add user profile: $error"));

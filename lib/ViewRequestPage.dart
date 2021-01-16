@@ -2,6 +2,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/Universals.dart';
 
 class ViewRequestPage extends StatefulWidget {
@@ -20,8 +21,6 @@ class _ViewRequestPagState extends State<ViewRequestPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body:
-
-
       SizedBox.expand( // makes widget fullscreen
         child: Column(
           children: <Widget>[
@@ -126,8 +125,21 @@ class _ViewRequestPagState extends State<ViewRequestPage> {
                   textColor: Colors.white,
                   onPressed: () {
                     // print("done helping");
-                    // Navigator.of(context).pop();
-                    dispose();
+                    Navigator.of(context).pop();
+
+                    print("done helping");
+                    var requestDoneTime = new DateTime.now();
+                    print(requestDoneTime.add(Duration(hours: 0)));
+                    var requestDoneTimeHawaii = requestDoneTime.add(Duration(hours: 0)).toString();
+                    widget.request.requestFinishedAt = requestDoneTimeHawaii;
+                    widget.request.timeSpent = DateTime.now().difference(DateTime.parse(widget.request.requestTakenAt)).toString();
+                    widget.request.status = "done";
+                    print(widget.request.show());
+                    // save request to done requests collections and delete from new requests collection
+                    DatabaseInteractions.saveRequest(widget.request);
+                    DatabaseInteractions.deleteNewRequest(widget.request);
+
+
                   },
                 ),
               ),

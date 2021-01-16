@@ -34,6 +34,7 @@ class DatabaseInteractions {
             name: documentSnapshot.data()["name"],
             email: documentSnapshot.data()["email"],
             department: documentSnapshot.data()["department"]);
+        print(Universals.loggedInUserInformation);
       } else {
         print('Document does not exist on the database');
         Universals.loggedInUserInformation = null;

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "SendRequestPage" : (context) => SendRequestPage(),
         // "MyHomePage" : (context) => HomePage(),
-        "MyHomePage" : (context) => MainPage(menuScreenContext: context, initialIndex: 0,),
+        "MyHomePage" : (context) => MainPage(menuScreenContext: context, initialIndex: FirebaseAuth.instance.currentUser == null ? 0 : 2,),
         "TutorRequestsPage" : (context) => TutorRequestsPage(),
 
       },

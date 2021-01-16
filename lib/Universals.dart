@@ -1,9 +1,14 @@
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:virtual_approval_flutter/InfosPage.dart';
 import 'package:virtual_approval_flutter/Request.dart';
+import 'package:virtual_approval_flutter/SendRequestPage.dart';
+import 'package:virtual_approval_flutter/SignIn.dart';
+import 'package:virtual_approval_flutter/TutorRequestsPage.dart';
 
 class Universals {
   static Color appBarColor = Color(0xff2b9ed4);

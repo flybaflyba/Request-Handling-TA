@@ -1,5 +1,6 @@
 
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +9,7 @@ import 'package:virtual_approval_flutter/InfosPage.dart';
 import 'package:virtual_approval_flutter/SendRequestPage.dart';
 import 'package:virtual_approval_flutter/SignIn.dart';
 import 'package:virtual_approval_flutter/SignUp.dart';
+import 'package:virtual_approval_flutter/TutorRequestsPage.dart';
 
 BuildContext testContext;
 
@@ -23,6 +25,8 @@ class _MainPageState extends State<MainPage> {
   PersistentTabController _controller;
   bool _hideNavBar;
 
+  var taScreen;
+
   @override
   void initState() {
     super.initState();
@@ -34,7 +38,8 @@ class _MainPageState extends State<MainPage> {
     return [
       SendRequestPage(),
       InfosPage(),
-      SignIn(),
+      FirebaseAuth.instance.currentUser == null ?
+      SignIn() : TutorRequestsPage(),
     ];
   }
 
@@ -71,18 +76,24 @@ class _MainPageState extends State<MainPage> {
         leading: BackButton(),
         actions: [
           IconButton(icon: Icon(Icons.wb_sunny), onPressed: () {
-            AwesomeDialog(
-              context: context,
-              headerAnimationLoop: false,
-              dialogType: DialogType.NO_HEADER,
-              title: 'About',
-              desc:
-              'Something about the app.',
-              btnOkOnPress: () {
-                debugPrint('OnClcik');
-              },
-              btnOkIcon: Icons.check_circle,
-            )..show();
+            if (FirebaseAuth.instance.currentUser == null) {
+              AwesomeDialog(
+                context: context,
+                headerAnimationLoop: false,
+                dialogType: DialogType.NO_HEADER,
+                title: 'About',
+                desc:
+                'Something about the app.',
+                btnOkOnPress: () {
+                  debugPrint('OnClcik');
+                },
+                btnOkIcon: Icons.check_circle,
+              )..show();
+            } else {
+              FirebaseAuth.instance.signOut();
+            }
+
+
           }),
           Text("     ")
         ],
@@ -102,6 +113,18 @@ class _MainPageState extends State<MainPage> {
       //     Icon(Icons.add),
       //   ],
       // ),
+
+        // drawer: Drawer(
+        //   child: Center(
+        //     child: IconButton(
+        //       icon: Icon(Icons.android),
+        //       color: Colors.red,
+        //       onPressed: () {
+        //         FirebaseAuth.instance.signOut();
+        //       },
+        //     ),
+        //   ),
+        // ),
 
       body: PersistentTabView(
         context,

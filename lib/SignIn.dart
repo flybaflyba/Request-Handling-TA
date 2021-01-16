@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
+import 'package:virtual_approval_flutter/InfosPage.dart';
+import 'package:virtual_approval_flutter/SendRequestPage.dart';
 import 'package:virtual_approval_flutter/SignUp.dart';
 import 'package:virtual_approval_flutter/TutorRequestsPage.dart';
 import 'package:virtual_approval_flutter/Universals.dart';
@@ -98,14 +100,13 @@ class _SignInState extends State<SignIn> {
                             // Navigator.push(context, MaterialPageRoute(builder: (context) => TutorRequestsPage(),));
                             // Navigator.popAndPushNamed(context, 'TutorRequestsPage');
                             // Navigator.pushReplacementNamed(context, 'SendRequestPage');
-                            // Navigator.pop(context);
-                            pushNewScreen(
-                              context,
-                              screen: TutorRequestsPage(),
-                              withNavBar: true, // OPTIONAL VALUE. True by default.
-                              pageTransitionAnimation: PageTransitionAnimation.cupertino,
-                            );
-
+                            Navigator.pop(context);
+                            // pushNewScreen(
+                            //   context,
+                            //   screen: TutorRequestsPage(),
+                            //   withNavBar: true, // OPTIONAL VALUE. True by default.
+                            //   pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                            // );
                           }
 
                         } on FirebaseAuthException catch (e) {

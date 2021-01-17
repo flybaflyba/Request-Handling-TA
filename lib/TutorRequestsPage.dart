@@ -78,17 +78,21 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> {
                       color: Colors.blueAccent,
                       textColor: Colors.white,
                       onPressed: () {
-                        // i don't know why i don't need to do that time zone conversion here...  sometimes...
-                        var requestTakenTime = new DateTime.now();
-                        print(requestTakenTime.add(Duration(hours: 0)));
-                        var requestTakenTimeHawaii = requestTakenTime.add(Duration(hours: 0)).toString();
-                        request.requestTakenAt = requestTakenTimeHawaii;
-                        request.takenBy = FirebaseAuth.instance.currentUser.uid;
-                        request.takerEmail = FirebaseAuth.instance.currentUser.email;
-                        // delete request once it's taken.
-                        // DatabaseInteractions.deleteRequest(request);
-                        request.status = "taken";
-                        request.waitedTime = DateTime.now().add(Duration(hours: 0)).difference(DateTime.parse(request.requestedAt)).toString();
+                        if(request.status == "new") {
+                          // i don't know why i don't need to do that time zone conversion here...  sometimes...
+                          var requestTakenTime = new DateTime.now();
+                          print(requestTakenTime.add(Duration(hours: 0)));
+                          var requestTakenTimeHawaii = requestTakenTime.add(Duration(hours: 0)).toString();
+                          request.requestTakenAt = requestTakenTimeHawaii;
+                          request.takenBy = FirebaseAuth.instance.currentUser.uid;
+                          request.takerEmail = FirebaseAuth.instance.currentUser.email;
+                          // delete request once it's taken.
+                          // DatabaseInteractions.deleteRequest(request);
+                          request.status = "taken";
+                          request.waitedTime = DateTime.now().add(Duration(hours: 0)).difference(DateTime.parse(request.requestedAt)).toString();
+                        }
+
+
                         DatabaseInteractions.updateNewRequest(request);
 
                         // Navigator.push(context, MaterialPageRoute(builder: (context) => ViewRequestPage(request: request,),));

@@ -40,6 +40,7 @@ class _SignUpState extends State<SignUp> {
         //   title: Text("Sign Up"),
         //   backgroundColor: Universals.appBarColor,
         // ),
+
       backgroundColor: UniversalValues.backgroundColor,
       body:
         ListView(

@@ -212,9 +212,11 @@ class _MainPageState extends State<MainPage> {
             ? 0.0
             : kBottomNavigationBarHeight,
         hideNavigationBarWhenKeyboardShows: true,
-        margin: EdgeInsets.all(10.0),
+        margin: EdgeInsets.all(0.0),
         popActionScreens: PopActionScreensType.once,
-        bottomScreenMargin: 0.0,
+        bottomScreenMargin: MediaQuery.of(context).viewInsets.bottom > 0
+            ? 0.0
+            : kBottomNavigationBarHeight + 0,
         onWillPop: () async {
           AwesomeDialog(
             context: context,
@@ -253,7 +255,7 @@ class _MainPageState extends State<MainPage> {
         hideNavigationBar: _hideNavBar,
         decoration: NavBarDecoration(
             colorBehindNavBar: Colors.indigo,
-            borderRadius: BorderRadius.circular(20.0)),
+            borderRadius: BorderRadius.circular(0.0)),
         popAllScreensOnTapOfSelectedTab: true,
         itemAnimationProperties: ItemAnimationProperties(
           duration: Duration(milliseconds: 400),

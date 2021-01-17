@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_login/flutter_login.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/InfosPage.dart';
@@ -19,8 +20,63 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
 
-  var email = "";
-  var password = "";
+  Duration get loginTime => Duration(milliseconds: 2250);
+
+  Future<String> _authUser(LoginData data) {
+    print('Name: ${data.name}, Password: ${data.password}');
+    return Future.delayed(loginTime).then((_) async {
+
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: data.name,
+            password: data.password
+        ).then((value) {
+          return value;
+        });
+
+        print(userCredential);
+        if(userCredential != null) {
+          print("I'm signing in!!!");
+          DatabaseInteractions.getLoggedInUserInformation(data.name);
+        }
+
+      } on FirebaseAuthException catch (e) {
+        print(e);
+        if (e.code == 'user-not-found') {
+          print('No user found for that email.');
+          // UniversalMethods.showToast('No user found for that email', UniversalValues.toastMessageTypeWarning);
+          return 'No user found for that email';
+        } else if (e.code == 'wrong-password') {
+          print('Wrong password provided for that user.');
+          // UniversalMethods.showToast('Wrong password provided for that user', UniversalValues.toastMessageTypeWarning);
+          return 'Password does not match';
+        } else if (e.code == 'invalid-email') {
+          print('invalid-email');
+          // UniversalMethods.showToast('Invalid email', UniversalValues.toastMessageTypeWarning);
+          return 'Invalid email';
+        } else {
+          // UniversalMethods.showToast("Something went wrong", UniversalValues.toastMessageTypeWarning);
+          return 'Something went wrong';
+        }
+      }
+      return null;
+    });
+  }
+
+  Future<String> _recoverPassword(String name) {
+    print('Name: $name');
+    return Future.delayed(loginTime).then((_) {
+      // if (!users.containsKey(name)) {
+      //   return 'Username not exists';
+      // }
+      return null;
+    });
+  }
+
+  final inputBorder = BorderRadius.vertical(
+    bottom: Radius.circular(10.0),
+    top: Radius.circular(20.0),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -33,159 +89,22 @@ class _SignInState extends State<SignIn> {
         // ),
       backgroundColor: UniversalValues.backgroundColor,
       body:
-        ListView(
-          children: [
-            SizedBox(height: 20,),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                children: <Widget>[
-                  IconButton(icon: Icon(Icons.email), onPressed: null),
-                  Expanded(
-                    child: Container(
-                      margin: EdgeInsets.only(right: 20, left: 10),
-                      child: TextField(
-                        onChanged: (value){
-                          email = value;
-                        },
-                        decoration: InputDecoration(hintText: "Email"),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                children: <Widget>[
-                  IconButton(icon: Icon(Icons.lock), onPressed: null),
-                  Expanded(
-                    child: Container(
-                      margin: EdgeInsets.only(right: 20, left: 10),
-                      child: TextField(
-                        onChanged: (value){
-                          password = value;
-                        },
-                        decoration: InputDecoration(hintText: "Password"),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+       Container (
+         // margin: const EdgeInsets.only(bottom: 20.0),
+          child: FlutterLogin(
+            title: 'BYUH',
+            // logo: 'assets/images/ecorp-lightblue.png',
+            onLogin: _authUser,
+            onSignup: _authUser,
+            onSubmitAnimationCompleted: () {
+              // Navigator.push(context, MaterialPageRoute(builder: (context) => TutorRequestsPage(),));
+            },
+            onRecoverPassword: _recoverPassword,
 
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: Container(
-                  height: 60,
-                  child: RaisedButton(
-                    onPressed: () async {
-                      print(email);
-                      print(password);
+          ),
 
-                      if(email == "" || password == "") {
-                        UniversalMethods.showToast("Please complete all fields", UniversalValues.toastMessageTypeWarning);
-                      } else {
-                        try {
-                          UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-                              email: email,
-                              password: password
-                          ).then((value) {
-                            // print("I'm signing in!!!");
-                            // setState(() {
-                            //   Universals.buildScreens = [
-                            //     SendRequestPage(),
-                            //     InfosPage(),
-                            //     FirebaseAuth.instance.currentUser == null ?
-                            //     SignIn() : TutorRequestsPage(),
-                            //   ];
-                            // });
-                            return value;
-                          });
+        )
 
-
-                          print(userCredential);
-                          //Navigator.popUntil(context, (route) => false); // pop all past screens
-                          //Navigator.pop(context); // pop current screen
-
-                          if(userCredential != null) {
-                            // sign in
-                            // Navigator.push(context, MaterialPageRoute(builder: (context) => TutorRequestsPage(),));
-                            // // Navigator.popAndPushNamed(context, 'TutorRequestsPage');
-                            // // Navigator.pushReplacementNamed(context, 'SendRequestPage');
-                            // Navigator.pop(context);
-                            // pushNewScreen(
-                            //   context,
-                            //   screen: TutorRequestsPage(),
-                            //   withNavBar: true, // OPTIONAL VALUE. True by default.
-                            //   pageTransitionAnimation: PageTransitionAnimation.cupertino,
-                            // );
-
-                            print("I'm signing in!!!");
-
-                            DatabaseInteractions.getLoggedInUserInformation(email);
-
-                            // FocusScope.of(context).requestFocus(new FocusNode());
-
-
-
-
-                          }
-
-                        } on FirebaseAuthException catch (e) {
-                          print(e);
-                          if (e.code == 'user-not-found') {
-                            print('No user found for that email.');
-                            UniversalMethods.showToast('No user found for that email', UniversalValues.toastMessageTypeWarning);
-                          } else if (e.code == 'wrong-password') {
-                            print('Wrong password provided for that user.');
-                            UniversalMethods.showToast('Wrong password provided for that user', UniversalValues.toastMessageTypeWarning);
-                          } else if (e.code == 'invalid-email') {
-                            print('invalid-email');
-                            UniversalMethods.showToast('Invalid email', UniversalValues.toastMessageTypeWarning);
-                          } else {
-                            UniversalMethods.showToast("Something went wrong", UniversalValues.toastMessageTypeWarning);
-                          }
-                        }
-                      }
-
-
-
-
-
-                    },
-                    color: UniversalValues.buttonColor,
-                    child: Text(
-                      'SIGN IN',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
-            Padding(
-                padding: const EdgeInsets.all(5.0),
-                child:
-                TextButton(
-                  onPressed: () {
-                    // Respond to button press
-                    DatabaseInteractions.getTaSecretCode();
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp(),));
-                  },
-                  child: Text("Register"),
-                )
-            ),
-
-            SizedBox(height: 100,)
-          ],
-        ),
 
     );
   }

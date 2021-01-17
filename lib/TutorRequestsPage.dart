@@ -252,7 +252,7 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> with SingleTicker
 
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
 
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           pushNewScreen(
             context,
@@ -261,10 +261,10 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> with SingleTicker
             pageTransitionAnimation: PageTransitionAnimation.cupertino,
           );
         },
-        child: Text("History"),
+        label: Text('History'),
+        icon: Icon(Icons.history),
         backgroundColor: Colors.blue,
       ),
-
 
     );
   }

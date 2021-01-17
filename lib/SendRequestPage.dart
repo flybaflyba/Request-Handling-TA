@@ -247,7 +247,7 @@ class _SendRequestPageState extends State<SendRequestPage> {
                             request.status = "new";
                             DatabaseInteractions.saveRequest(request);
 
-                            UniversalMethods.showRequestInfoToStudentInRealTime(email, context);
+                            // UniversalMethods.showRequestInfoToStudentInRealTime(email, context);
                             FocusScope.of(context).requestFocus(new FocusNode()); // do not show keyboard
 
                           } catch(e) {

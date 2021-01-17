@@ -62,7 +62,7 @@ class _StudentRequestsPageState extends State<StudentRequestsPage> {
                         children: [
                           Center(
                             child: Text(
-                              request.requestedAt.toString().substring(0, 16),
+                              "Requested at " + request.requestedAt.toString().substring(0, 16),
                             ),
                           ),
                           Row(
@@ -70,7 +70,7 @@ class _StudentRequestsPageState extends State<StudentRequestsPage> {
                             children: [
                               Center(
                                 child: Text(
-                                  request.name,
+                                  request.status,
                                 ),
                               ),
                               Center(
@@ -79,7 +79,12 @@ class _StudentRequestsPageState extends State<StudentRequestsPage> {
                                 ),
                               ),
                             ],
-                          )
+                          ),
+                          Center(
+                            child: Text(
+                              request.question,
+                            ),
+                          ),
 
                         ],
                       )

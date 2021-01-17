@@ -14,6 +14,8 @@ import 'package:virtual_approval_flutter/SignUp.dart';
 import 'package:virtual_approval_flutter/TutorRequestsPage.dart';
 import 'package:virtual_approval_flutter/UniversalValues.dart';
 
+import 'package:virtual_approval_flutter/RequestsHistoryPage.dart';
+
 BuildContext testContext;
 
 class MainPage extends StatefulWidget {
@@ -119,47 +121,52 @@ class _MainPageState extends State<MainPage> {
             )..show();}
           )
               :
-          IconButton(icon: Icon(Icons.logout), onPressed: () {
-            print(buildScreens);
+              Row(children: [
 
-            FirebaseAuth.instance.signOut().then((value) => setState(() {
-              print(FirebaseAuth.instance.currentUser);
 
-              setState(() {
-                buildScreens = [
-                  SendRequestPage(),
-                  InfosPage(),
-                  FirebaseAuth.instance.currentUser == null ?
-                  SignIn() : TutorRequestsPage(),
-                ];
-              });
+                IconButton(icon: Icon(Icons.logout), onPressed: () {
+                  print(buildScreens);
 
-              Navigator.of(context).pushAndRemoveUntil(
-                CupertinoPageRoute(
-                  builder: (BuildContext context) {
-                    return MainPage(initialIndex: 2,);
-                  },
-                ),
-                    (_) => false,
-              );
+                  FirebaseAuth.instance.signOut().then((value) => setState(() {
+                    print(FirebaseAuth.instance.currentUser);
 
-              UniversalValues.loggedInUserInformation = null;
+                    setState(() {
+                      buildScreens = [
+                        SendRequestPage(),
+                        InfosPage(),
+                        FirebaseAuth.instance.currentUser == null ?
+                        SignIn() : TutorRequestsPage(),
+                      ];
+                    });
 
-              AwesomeDialog(
-                context: context,
-                headerAnimationLoop: false,
-                dialogType: DialogType.NO_HEADER,
-                title: 'Bye',
-                desc:
-                'You signed out',
-                // btnOkOnPress: () {
-                // },
-                // btnOkIcon: Icons.check_circle,
+                    Navigator.of(context).pushAndRemoveUntil(
+                      CupertinoPageRoute(
+                        builder: (BuildContext context) {
+                          return MainPage(initialIndex: 2,);
+                        },
+                      ),
+                          (_) => false,
+                    );
 
-              )..show();
-            }));
+                    UniversalValues.loggedInUserInformation = null;
 
-          }),
+                    AwesomeDialog(
+                      context: context,
+                      headerAnimationLoop: false,
+                      dialogType: DialogType.NO_HEADER,
+                      title: 'Bye',
+                      desc:
+                      'You signed out',
+                      // btnOkOnPress: () {
+                      // },
+                      // btnOkIcon: Icons.check_circle,
+
+                    )..show();
+                  }));
+                }),
+              ],),
+
+
           Text("     ")
         ],
       ),

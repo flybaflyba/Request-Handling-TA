@@ -12,6 +12,8 @@ import 'package:virtual_approval_flutter/Request.dart';
 import 'package:virtual_approval_flutter/UniversalValues.dart';
 import 'package:intl/intl.dart';
 import 'package:virtual_approval_flutter/ViewRequestPage.dart';
+import 'package:virtual_approval_flutter/RequestsHistoryPage.dart';
+
 
 class TutorRequestsPage extends StatefulWidget {
   @override
@@ -28,7 +30,7 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> {
     super.initState();
 
     // it might take some time to get user info from database once app launches
-    var timer = new Timer.periodic(Duration(seconds:1), (Timer t) {
+    new Timer.periodic(Duration(seconds:1), (Timer t) {
 
       print("hihihi");
       setState(() {
@@ -37,7 +39,6 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> {
 
       if (UniversalValues.loggedInUserInformation != null) {
         t.cancel();
-
       }
 
     });
@@ -164,6 +165,41 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> {
               children: [
 
                 SizedBox(height: 20,),
+
+                Center(
+                  child:
+
+                  RaisedButton(
+                    onPressed: () {
+                      pushNewScreen(
+                        context,
+                        screen: RequestsHistoryPage(),
+                        withNavBar: true, // OPTIONAL VALUE. True by default.
+                        pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                      );
+                    },
+                    textColor: Colors.white,
+                    padding: const EdgeInsets.all(0.0),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: <Color>[
+                            Color(0xFF0D47A1),
+                            Color(0xFF1976D2),
+                            Color(0xFF42A5F5),
+                          ],
+                        ),
+                      ),
+                      padding: const EdgeInsets.all(10.0),
+                      child:
+                        Text("Past Requests"),
+                    ),
+                  ),
+                ),
+
+
+                SizedBox(height: 20,),
+
 
                 Center(
                   child: Text(

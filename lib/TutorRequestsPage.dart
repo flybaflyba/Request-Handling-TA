@@ -246,6 +246,8 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> with SingleTicker
 
                 requestsList('status', "new", 'There is no New Request'),
 
+                SizedBox(height: 200,)
+
 
               ],
             ),

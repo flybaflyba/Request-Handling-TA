@@ -134,7 +134,7 @@ class _RequestsHistoryPageState extends State<RequestsHistoryPage> {
             ),
 
             requestsList('taker email', FirebaseAuth.instance.currentUser.email, 'There is no Request'),
-
+            SizedBox(height: 100,)
 
           ],
         )

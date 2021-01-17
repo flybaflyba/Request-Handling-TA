@@ -1,11 +1,17 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/OneInfoPage.dart';
 import 'package:virtual_approval_flutter/SignUp.dart';
 import 'package:virtual_approval_flutter/TutorRequestsPage.dart';
 import 'package:virtual_approval_flutter/UniversalValues.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 
 class InfosPage extends StatefulWidget {
@@ -41,6 +47,40 @@ class _InfosPageState extends State<InfosPage> {
                 child:
                 // Text(e, textScaleFactor: 5),
                 // new OneInfoPage(subject: e,),
+
+                // !kIsWeb ?
+                // // WebView(
+                // //   initialUrl: "https://docs.google.com/document/d/1D4GOGP2NS1PmC6NUbEtkAPdRRXwBAB9MrbIrhlbihog/edit?usp=sharing",
+                // //
+                // // )
+                // WebviewScaffold(
+                //   url: "https://docs.google.com/document/d/1D4GOGP2NS1PmC6NUbEtkAPdRRXwBAB9MrbIrhlbihog/edit?usp=sharing",
+                //
+                //   withZoom: true,
+                //   withLocalStorage: true,
+                //   hidden: true,
+                //   initialChild: Container(
+                //     color: Colors.blueAccent,
+                //     child: const Center(
+                //       child: Text('Waiting.....'),
+                //     ),
+                //   ),
+                // )
+                //     :
+                //     Center(
+                //       child: RaisedButton(
+                //         child: Icon(Icons.open_in_browser),
+                //         onPressed: () async {
+                //           const url = "https://docs.google.com/document/d/1D4GOGP2NS1PmC6NUbEtkAPdRRXwBAB9MrbIrhlbihog/edit?usp=sharing";
+                //           if (await canLaunch(url)) {
+                //           await launch(url);
+                //           } else {
+                //           throw 'Could not launch $url';
+                //           }
+                //         },
+                //       ),
+                //     ),
+
 
 
                 StreamBuilder<DocumentSnapshot>(

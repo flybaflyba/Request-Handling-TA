@@ -313,6 +313,8 @@ class _SendRequestPageState extends State<SendRequestPage> {
               )
 
           ),
+          SizedBox(height: 100,)
+
         ],
 
       )

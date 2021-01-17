@@ -155,6 +155,8 @@ class _StudentRequestsPageState extends State<StudentRequestsPage> {
 
             requestsList('email', email, !EmailValidator.validate(email) ? "Enter your email address" : 'You Haven\'t Sent Any Request'),
 
+            SizedBox(height: 100,)
+
           ],
         )
     );

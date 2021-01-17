@@ -11,19 +11,19 @@ A cross platform application that helps with schools tutoring communication.
 ## Features:
 
 - Students send request without registration, but data validation 
-- Only one request allowed for one student at one time 
-- Tutor registration with secret code from professor 
-- Tutor login to take request 
-- Tutor logout
-- Real time updates of request of all students and tutors 
-- Real time updates for students: waiting, request taken, and done
-- Tutoring info for subjects 
-- Tutors are classified by departments, each Tutor can only see requests from certain departments. 
+- Students can lookup a list of their submitted requests with email address (not including pasT requests)
+- TA registration with secret code from professor 
+- TA login
+- TA logout
+- TAs are classified by departments, each TA can only see requests from that department
+- TA's view on requests on in two sections: taken requests and new requests
+- TA can view request detail  
+- Instruction for subjects (html) 
+
 
 ## Future features: 
 
-- Tutors select subjects they are tutoring for upon sign up
-- Requests history 
+- TA view Requests history 
 - etc
 
 A few resources:

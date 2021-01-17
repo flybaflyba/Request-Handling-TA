@@ -21,12 +21,25 @@ class TutorRequestsPage extends StatefulWidget {
 }
 
 
-class _TutorRequestsPageState extends State<TutorRequestsPage> {
+class _TutorRequestsPageState extends State<TutorRequestsPage> with SingleTickerProviderStateMixin {
 
   var department = "";
 
+  Animation<double> _animation;
+  AnimationController _animationController;
+
+
   @override
   void initState() {
+
+    _animationController = AnimationController(
+     vsync: this,
+      duration: Duration(milliseconds: 300),
+    );
+
+    final curvedAnimation = CurvedAnimation(curve: Curves.easeInOut, parent: _animationController);
+    _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
+
     super.initState();
 
     // it might take some time to get user info from database once app launches
@@ -149,6 +162,7 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> {
       );
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -159,46 +173,53 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> {
         //   title: Text("New Requests List"),
         //   backgroundColor: Universals.appBarColor,
         // ),
+
         backgroundColor: UniversalValues.backgroundColor,
         body:
             ListView(
               children: [
+                SizedBox(height: 20,),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //
+                //     Padding(
+                //       padding: const EdgeInsets.all(5.0),
+                //       child:
+                //       RaisedButton(
+                //         onPressed: () {
+                //           pushNewScreen(
+                //             context,
+                //             screen: RequestsHistoryPage(),
+                //             withNavBar: true, // OPTIONAL VALUE. True by default.
+                //             pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                //           );
+                //         },
+                //         textColor: Colors.white,
+                //         padding: const EdgeInsets.all(0.0),
+                //         child: Container(
+                //           decoration: const BoxDecoration(
+                //             gradient: LinearGradient(
+                //               colors: <Color>[
+                //                 Color(0xFF0D47A1),
+                //                 Color(0xFF1976D2),
+                //                 Color(0xFF42A5F5),
+                //               ],
+                //             ),
+                //           ),
+                //           padding: const EdgeInsets.all(10.0),
+                //           child:
+                //           Text("Past Requests"),
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                //
+                // ),
+
 
                 SizedBox(height: 20,),
 
-                Center(
-                  child:
-
-                  RaisedButton(
-                    onPressed: () {
-                      pushNewScreen(
-                        context,
-                        screen: RequestsHistoryPage(),
-                        withNavBar: true, // OPTIONAL VALUE. True by default.
-                        pageTransitionAnimation: PageTransitionAnimation.cupertino,
-                      );
-                    },
-                    textColor: Colors.white,
-                    padding: const EdgeInsets.all(0.0),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF0D47A1),
-                            Color(0xFF1976D2),
-                            Color(0xFF42A5F5),
-                          ],
-                        ),
-                      ),
-                      padding: const EdgeInsets.all(10.0),
-                      child:
-                        Text("Past Requests"),
-                    ),
-                  ),
-                ),
-
-
-                SizedBox(height: 20,),
 
 
                 Center(
@@ -227,7 +248,24 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> {
 
 
               ],
-            )
+            ),
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          pushNewScreen(
+            context,
+            screen: RequestsHistoryPage(),
+            withNavBar: true, // OPTIONAL VALUE. True by default.
+            pageTransitionAnimation: PageTransitionAnimation.cupertino,
+          );
+        },
+        child: Text("History"),
+        backgroundColor: Colors.blue,
+      ),
+
+
     );
   }
 }

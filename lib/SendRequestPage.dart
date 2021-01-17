@@ -208,33 +208,48 @@ class _SendRequestPageState extends State<SendRequestPage> {
                         } else {
                           // check if this person has submitted a request
                           try {
-                            FirebaseFirestore.instance
-                                .collection('new requests')
-                                .where('email', isEqualTo: email)
-                                .get()
-                                .then((QuerySnapshot querySnapshot) {
-                              if (querySnapshot.docs.isNotEmpty) {
-                                String requestMessageBack = "You already submitted a request";
-                                print(requestMessageBack);
-                                UniversalMethods.showToast(requestMessageBack, UniversalValues.toastMessageTypeWarning);
-                              } else {
-                                String requestMessageBack = "Your Requested is submitted successfully";
-                                print(requestMessageBack);
-                                UniversalMethods.showToast(requestMessageBack, UniversalValues.toastMessageTypeGood);
-                                Request request = new Request(name: name, email: email, course: course, question: question);
-                                var now = new DateTime.now();
-                                print(now.add(Duration(hours: 0))); // do we need to use -10 to convert to hawaii time?
-                                var nowHawaii = now.add(Duration(hours: 0)).toString();
-                                request.requestedAt = nowHawaii;
-                                request.status = "new";
-                                DatabaseInteractions.saveRequest(request);
-                              }
+                            // FirebaseFirestore.instance
+                            //     .collection('new requests')
+                            //     .where('email', isEqualTo: email)
+                            //     .get()
+                            //     .then((QuerySnapshot querySnapshot) {
+                            //   if (querySnapshot.docs.isNotEmpty) {
+                            //     String requestMessageBack = "You already submitted a request";
+                            //     print(requestMessageBack);
+                            //     UniversalMethods.showToast(requestMessageBack, UniversalValues.toastMessageTypeWarning);
+                            //   } else {
+                            //     String requestMessageBack = "Your Requested is submitted successfully";
+                            //     print(requestMessageBack);
+                            //     UniversalMethods.showToast(requestMessageBack, UniversalValues.toastMessageTypeGood);
+                            //     Request request = new Request(name: name, email: email, course: course, question: question);
+                            //     var now = new DateTime.now();
+                            //     print(now.add(Duration(hours: 0))); // do we need to use -10 to convert to hawaii time?
+                            //     var nowHawaii = now.add(Duration(hours: 0)).toString();
+                            //     request.requestedAt = nowHawaii;
+                            //     request.status = "new";
+                            //     DatabaseInteractions.saveRequest(request);
+                            //   }
+                            //
+                            //   UniversalMethods.showRequestInfoToStudentInRealTime(email, context);
+                            //
+                            // }).then((value) {
+                            //   FocusScope.of(context).requestFocus(new FocusNode()); // do not show keyboard
+                            // });
 
-                              UniversalMethods.showRequestInfoToStudentInRealTime(email, context);
+                            String requestMessageBack = "Your Requested is submitted successfully";
+                            print(requestMessageBack);
+                            UniversalMethods.showToast(requestMessageBack, UniversalValues.toastMessageTypeGood);
+                            Request request = new Request(name: name, email: email, course: course, question: question);
+                            var now = new DateTime.now();
+                            print(now.add(Duration(hours: 0))); // do we need to use -10 to convert to hawaii time?
+                            var nowHawaii = now.add(Duration(hours: 0)).toString();
+                            request.requestedAt = nowHawaii;
+                            request.status = "new";
+                            DatabaseInteractions.saveRequest(request);
 
-                            }).then((value) {
-                              FocusScope.of(context).requestFocus(new FocusNode()); // do not show keyboard
-                            });
+                            UniversalMethods.showRequestInfoToStudentInRealTime(email, context);
+                            FocusScope.of(context).requestFocus(new FocusNode()); // do not show keyboard
+
                           } catch(e) {
                             print("something went wrong");
                           }

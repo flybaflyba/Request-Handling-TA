@@ -12,7 +12,12 @@ import 'package:virtual_approval_flutter/UniversalValues.dart';
 import 'package:intl/intl.dart';
 import 'package:virtual_approval_flutter/ViewRequestPage.dart';
 
+// ignore: must_be_immutable
 class StudentRequestsPage extends StatefulWidget {
+
+  StudentRequestsPage({Key key, this.emailPassedIn}) : super(key: key);
+
+  var emailPassedIn;
 
   @override
   _StudentRequestsPageState createState() => _StudentRequestsPageState();
@@ -22,6 +27,8 @@ class StudentRequestsPage extends StatefulWidget {
 class _StudentRequestsPageState extends State<StudentRequestsPage> {
 
   var email = "";
+
+  TextEditingController textEditingController = new TextEditingController();
 
   StreamBuilder<QuerySnapshot> requestsList(String filterBy, String filterByValue, String showIfNoResult) {
 
@@ -104,8 +111,9 @@ class _StudentRequestsPageState extends State<StudentRequestsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
 
+
+    return Scaffold(
         backgroundColor: UniversalValues.backgroundColor,
         body:
         ListView(
@@ -122,9 +130,11 @@ class _StudentRequestsPageState extends State<StudentRequestsPage> {
                     child: Container(
                       margin: EdgeInsets.only(right: 20, left: 10),
                       child: TextField(
+                        controller: textEditingController,
                         onChanged: (value){
                           setState(() {
                             email = value;
+                            print(email);
                           });
 
                         },

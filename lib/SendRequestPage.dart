@@ -31,6 +31,7 @@ class _SendRequestPageState extends State<SendRequestPage> {
   var email = "";
   var course = "";
   var question = "";
+  var department = "";
 
   TextEditingController courseTextEditingController = new TextEditingController();
   bool courseTextEditingEnable = true;
@@ -137,7 +138,14 @@ class _SendRequestPageState extends State<SendRequestPage> {
                           footer: SizedBox(height: 50,),
                           onConfirm: (Picker picker, List value) {
                             print(value.toString()); // index
-                            print(picker.getSelectedValues()); // value
+                            print(picker.getSelectedValues());
+
+                            UniversalValues.departmentsAndCoursesMatch.forEach((key, value) {
+                              if (value.contains(picker.getSelectedValues()[0])) {
+                                department = key;
+                              }
+                            });
+                            // value
                             course = picker.getSelectedValues()[0] + " " + picker.getSelectedValues()[1];
                             print(course);
                             courseTextEditingController.text = course;
@@ -236,10 +244,7 @@ class _SendRequestPageState extends State<SendRequestPage> {
                             //   FocusScope.of(context).requestFocus(new FocusNode()); // do not show keyboard
                             // });
 
-                            String requestMessageBack = "Your Requested is submitted successfully";
-                            print(requestMessageBack);
-                            UniversalMethods.showToast(requestMessageBack, UniversalValues.toastMessageTypeGood);
-                            Request request = new Request(name: name, email: email, course: course, question: question);
+                            Request request = new Request(name: name, email: email, course: course, question: question, department: department);
                             var now = new DateTime.now();
                             print(now.add(Duration(hours: 0))); // do we need to use -10 to convert to hawaii time?
                             var nowHawaii = now.add(Duration(hours: 0)).toString();
@@ -247,8 +252,14 @@ class _SendRequestPageState extends State<SendRequestPage> {
                             request.status = "new";
                             DatabaseInteractions.saveRequest(request);
 
+                            String requestMessageBack = "Your Requested is submitted successfully";
+                            print(requestMessageBack);
+                            UniversalMethods.showToast(requestMessageBack, UniversalValues.toastMessageTypeGood);
+
                             // UniversalMethods.showRequestInfoToStudentInRealTime(email, context);
                             FocusScope.of(context).requestFocus(new FocusNode()); // do not show keyboard
+
+                            print(department);
 
                           } catch(e) {
                             print("something went wrong");
@@ -282,7 +293,7 @@ class _SendRequestPageState extends State<SendRequestPage> {
               child:
               TextButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => StudentRequestsPage(),));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => StudentRequestsPage(emailPassedIn: email,),));
                 },
                 child: Text("Check My Requests"),
               )

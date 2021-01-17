@@ -34,14 +34,22 @@ class UniversalValues {
     {"ENTR": ["180", "283", "275", "285", "373", "380", "383", "375R", "390R", "401R", "483", "485", "499"]}
     ]''';
 
-  // {"FILM": ["102", "218", "318", "300", "365R"]},
-  // {"ENTR": ["180", "283", "275", "285", "373", "380", "383", "375R", "390R", "401R", "483", "485", "499"]},
-
   static const departments = ["Arts & Letters", "Business & Government", "Culture, Language & Performing Arts", "Education & Social Work",
-  "Math & Computing", "Religious Education", "Sciences"];
+    "Math & Computing", "Religious Education", "Sciences"];
+
+  static const Map<String, List<String>> departmentsAndCoursesMatch = {
+    'Arts & Letters': ["FILM"],
+    'Business & Government':  ["ENTR"],
+    'Culture, Language & Performing Arts':  [],
+    'Education & Social Work':  [],
+    'Math & Computing':  ["CIS", "CS", "IT", "IS", "MATH"],
+    'Religious Education':  [],
+    'Sciences':  ["PHYS",],
+  };
 
   static UserInformation loggedInUserInformation;
   static var loggedInLast = FirebaseAuth.instance.currentUser == null ? false : true;
+
 
 
 

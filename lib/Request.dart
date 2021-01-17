@@ -18,20 +18,20 @@ class Request {
 
   var waitedTime = "";
 
+  var department = "";
+
   Request({
     var email,
     var name,
     var course,
     var question,
-    var requestedAt,
-    var status,
+    var department,
   }){
     if(email != null){ this.email = email; }
     if(name != null){ this.name = name; }
     if(course != null){ this.course = course; }
     if(question != null){ this.question = question; }
-    if(requestedAt != null){ this.requestedAt = requestedAt; }
-    if(status != null){ this.status = status; }
+    if(department != null){ this.department = department; }
   }
 
   void setRequestInfoWithDocumentSnapshot(DocumentSnapshot requestDocumentSnapshot) {
@@ -47,6 +47,7 @@ class Request {
     takenBy = requestDocumentSnapshot["taken by"];
     takerEmail = requestDocumentSnapshot["taker email"];
     waitedTime = requestDocumentSnapshot["waited time"];
+    department = requestDocumentSnapshot["department"];
   }
 
   List show() {
@@ -62,6 +63,7 @@ class Request {
       takenBy,
       takerEmail,
       waitedTime,
+      department,
     ];
   }
 

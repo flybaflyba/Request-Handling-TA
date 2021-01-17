@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:virtual_approval_flutter/Request.dart';
 import 'package:virtual_approval_flutter/UniversalValues.dart';
 import 'package:virtual_approval_flutter/UserInformation.dart';
@@ -27,14 +28,20 @@ class DatabaseInteractions {
         .collection('users')
         .doc(email)
         .get()
-        .then((DocumentSnapshot documentSnapshot) {
+        .then((DocumentSnapshot documentSnapshot) async {
       if (documentSnapshot.exists) {
         print('Document data: ${documentSnapshot.data()}');
         UniversalValues.loggedInUserInformation = new UserInformation(
             name: documentSnapshot.data()["name"],
             email: documentSnapshot.data()["email"],
             department: documentSnapshot.data()["department"]);
-        print(UniversalValues.loggedInUserInformation);
+        // print(UniversalValues.loggedInUserInformation);
+
+        // SharedPreferences prefs = await SharedPreferences.getInstance();
+        // await prefs.setString('userName', documentSnapshot.data()["name"]);
+        // await prefs.setString('userEmail', documentSnapshot.data()["email"]);
+        // await prefs.setString('userDepartment',  documentSnapshot.data()["department"]);
+        
       } else {
         print('Document does not exist on the database');
         UniversalValues.loggedInUserInformation = null;
@@ -71,6 +78,7 @@ class DatabaseInteractions {
       "taken by": request.takenBy,
       "taker email": request.takerEmail,
       "waited time": request.waitedTime,
+      "department": request.department,
     })
         .then((value) => print("New Request Added"))
         .catchError((error) => print("Failed to save new request: $error"));
@@ -92,6 +100,7 @@ class DatabaseInteractions {
       "taken by": request.takenBy,
       "taker email": request.takerEmail,
       "waited time": request.waitedTime,
+      "department": request.department,
     })
         .then((value) => print("Request Updated"))
         .catchError((error) => print("Failed to update request: $error"));

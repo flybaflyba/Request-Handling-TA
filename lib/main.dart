@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/HomePage.dart';
 import 'package:virtual_approval_flutter/InfosPage.dart';
 import 'package:virtual_approval_flutter/MainPage.dart';
@@ -10,6 +11,8 @@ import 'package:virtual_approval_flutter/SignIn.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:virtual_approval_flutter/SignUp.dart';
 import 'package:virtual_approval_flutter/TutorRequestsPage.dart';
+import 'package:virtual_approval_flutter/UniversalMethods.dart';
+import 'package:virtual_approval_flutter/UniversalValues.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +24,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+    if (FirebaseAuth.instance.currentUser != null) {
+      DatabaseInteractions.getLoggedInUserInformation(FirebaseAuth.instance.currentUser.email);
+    }
+
     return MaterialApp(
       // title: 'Flutter Demo',
       theme: ThemeData(

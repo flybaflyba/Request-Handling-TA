@@ -20,12 +20,31 @@ class TutorRequestsPage extends StatefulWidget {
 
 class _TutorRequestsPageState extends State<TutorRequestsPage> {
 
-  StreamBuilder<QuerySnapshot> requestsList(String filterBy, String filterByValue, String showIfNoResult) {
+  var department = "";
 
+  @override
+  void initState() {
+    super.initState();
+
+    // it might take some time to get user info from database once app launches
+    new Timer.periodic(Duration(seconds:1), (Timer t) {
+      setState(() {
+        department = UniversalValues.loggedInUserInformation == null ? "" : UniversalValues.loggedInUserInformation.department;
+      });
+
+
+    });
+
+
+  }
+
+
+  StreamBuilder<QuerySnapshot> requestsList(String filterBy, String filterByValue, String showIfNoResult) {
     return
       StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection('new requests')
+            .where('department', isEqualTo: department)
             .where(filterBy, isEqualTo: filterByValue)
             .snapshots(),
         builder: (context, snapshot){

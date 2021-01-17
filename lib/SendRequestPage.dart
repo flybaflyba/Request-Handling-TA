@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/Request.dart';
 import 'package:virtual_approval_flutter/SignIn.dart';
+import 'package:virtual_approval_flutter/StudentRequestsPage.dart';
 import 'package:virtual_approval_flutter/UniversalMethods.dart';
 import 'package:virtual_approval_flutter/UniversalValues.dart';
 import 'package:flutter_picker/flutter_picker.dart';
@@ -257,6 +258,23 @@ class _SendRequestPageState extends State<SendRequestPage> {
               ),
             ),
           ),
+
+
+
+
+          Padding(
+              padding: const EdgeInsets.all(5.0),
+              child:
+              TextButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => StudentRequestsPage(),));
+                },
+                child: Text("Check My Requests"),
+              )
+
+          ),
+
+
 
           Padding(
               padding: const EdgeInsets.all(5.0),

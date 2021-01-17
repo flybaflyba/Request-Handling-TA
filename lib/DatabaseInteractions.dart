@@ -42,6 +42,7 @@ class DatabaseInteractions {
     });
   }
 
+
   static void saveUserProfile(UserInformation userInformation) {
     FirebaseFirestore.instance.collection('users')
         .doc(userInformation.email)
@@ -103,6 +104,5 @@ class DatabaseInteractions {
         .then((value) => print("Request Deleted"))
         .catchError((error) => print("Failed to delete request: $error"));
   }
-
 
 }

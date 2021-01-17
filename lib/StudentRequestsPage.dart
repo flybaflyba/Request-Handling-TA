@@ -4,6 +4,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
@@ -152,7 +153,7 @@ class _StudentRequestsPageState extends State<StudentRequestsPage> {
               ),
             ),
 
-            requestsList('email', email, 'You Haven\'t Sent Any Request'),
+            requestsList('email', email, !EmailValidator.validate(email) ? "Enter your email address" : 'You Haven\'t Sent Any Request'),
 
           ],
         )

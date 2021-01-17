@@ -27,11 +27,17 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> {
     super.initState();
 
     // it might take some time to get user info from database once app launches
-    new Timer.periodic(Duration(seconds:1), (Timer t) {
+    var timer = new Timer.periodic(Duration(seconds:1), (Timer t) {
+
+      print("hihihi");
       setState(() {
         department = UniversalValues.loggedInUserInformation == null ? "" : UniversalValues.loggedInUserInformation.department;
       });
 
+      if (UniversalValues.loggedInUserInformation != null) {
+        t.cancel();
+
+      }
 
     });
 

@@ -6,6 +6,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/Request.dart';
 import 'package:virtual_approval_flutter/UniversalValues.dart';
@@ -90,7 +91,14 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> {
                         request.waitedTime = DateTime.now().add(Duration(hours: 0)).difference(DateTime.parse(request.requestedAt)).toString();
                         DatabaseInteractions.updateNewRequest(request);
 
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ViewRequestPage(request: request,),));
+                        // Navigator.push(context, MaterialPageRoute(builder: (context) => ViewRequestPage(request: request,),));
+                        pushNewScreen(
+                          context,
+                          screen: ViewRequestPage(request: request,),
+                          withNavBar: false, // OPTIONAL VALUE. True by default.
+                          pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                        );
+
 
                       },
                       child:

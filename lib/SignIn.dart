@@ -108,7 +108,7 @@ class _SignInState extends State<SignIn> {
       //
       // )..show();
 
-      var boxConstraints = BoxConstraints(maxWidth: 250);
+      var boxConstraints = BoxConstraints(minWidth: 100, maxWidth: 250);
       var boxColor = Colors.white;
       Future.delayed(Duration(milliseconds: 1)).then((_) async {
 
@@ -131,7 +131,7 @@ class _SignInState extends State<SignIn> {
                           children: [
                             SizedBox(height: 20,),
                             Padding(
-                                padding: const EdgeInsets.all(20.0),
+                                padding: const EdgeInsets.only(top: 20, bottom: 20),
                                 child: Center(
                                   child: Text(
                                     "A Couple More Things",
@@ -141,7 +141,7 @@ class _SignInState extends State<SignIn> {
                             ),
 
                             Padding(
-                              padding: const EdgeInsets.all(20.0),
+                              padding: const EdgeInsets.only(top: 20, bottom: 20),
                               child:
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -150,7 +150,7 @@ class _SignInState extends State<SignIn> {
                                     Container(
                                       color: boxColor,
                                       constraints: boxConstraints,
-                                      margin: EdgeInsets.only(right: 20, left: 10),
+                                      margin: EdgeInsets.only(left: 10),
                                       child:
                                       DropdownSearch<String>(
                                           hint: "Department",
@@ -180,7 +180,7 @@ class _SignInState extends State<SignIn> {
 
 
                             Padding(
-                              padding: const EdgeInsets.all(20.0),
+                              padding: const EdgeInsets.only(top: 20, bottom: 20),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
@@ -188,7 +188,7 @@ class _SignInState extends State<SignIn> {
                                   Container(
                                     color: boxColor,
                                     constraints: boxConstraints,
-                                    margin: EdgeInsets.only(right: 20, left: 10),
+                                    margin: EdgeInsets.only(left: 10),
                                     child: TextField(
                                       onChanged: (value){
                                         name = value;
@@ -209,7 +209,7 @@ class _SignInState extends State<SignIn> {
                             ),
 
                             Padding(
-                              padding: const EdgeInsets.all(20.0),
+                              padding: const EdgeInsets.only(top: 20, bottom: 20),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
@@ -217,7 +217,7 @@ class _SignInState extends State<SignIn> {
                                   Container(
                                     color: boxColor,
                                     constraints: boxConstraints,
-                                      margin: EdgeInsets.only(right: 20, left: 10),
+                                      margin: EdgeInsets.only(left: 10),
                                       child: TextField(
                                         onChanged: (value){
                                           taSecretCode = value;
@@ -245,12 +245,12 @@ class _SignInState extends State<SignIn> {
                             //     )
                             // ),
                             Padding(
-                              padding: const EdgeInsets.all(20.0),
+                              padding: const EdgeInsets.only(top: 20, bottom: 20),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(5),
                                 child: Container(
-                                  color: boxColor,
-                                  constraints: boxConstraints,
+                                  // color: boxColor,
+                                  // constraints: boxConstraints,
                                   height: 60,
                                   child: NiceButton(
                                     width: 250,
@@ -330,7 +330,7 @@ class _SignInState extends State<SignIn> {
         //   },
         // );
       });
-      return "Please fill out the info";
+      return "Please fill out more info";
 
 
       // return null;

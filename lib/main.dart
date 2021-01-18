@@ -24,9 +24,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    if (FirebaseAuth.instance.currentUser != null) {
-      DatabaseInteractions.getLoggedInUserInformation(FirebaseAuth.instance.currentUser.email);
-    }
+    // if (FirebaseAuth.instance.currentUser != null) {
+    //   DatabaseInteractions.getLoggedInUserInformation(FirebaseAuth.instance.currentUser.email);
+    // }
 
     return MaterialApp(
       // title: 'Flutter Demo',

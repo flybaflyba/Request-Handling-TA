@@ -45,20 +45,28 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> with SingleTicker
     // it might take some time to get user info from database once app launches
     new Timer.periodic(Duration(seconds:1), (Timer t) {
 
-      print("hihihi");
-      setState(() {
-        department = UniversalValues.loggedInUserInformation == null ? "" : UniversalValues.loggedInUserInformation.department;
-      });
-
+      // print("hihihi");
+      // print(UniversalValues.loggedInUserInformation);
+      
       if (UniversalValues.loggedInUserInformation != null) {
+        setState(() {
+          department = UniversalValues.loggedInUserInformation == null ? "" : UniversalValues.loggedInUserInformation.department;
+        });
         t.cancel();
+      } else {
+        if (FirebaseAuth.instance.currentUser != null) {
+          // when web refresh, loggedInUserInformation gets lost, so we get them again here
+          DatabaseInteractions.getLoggedInUserInformation(FirebaseAuth.instance.currentUser.email);
+        }
+
       }
+
+
 
     });
 
 
   }
-
 
   StreamBuilder<QuerySnapshot> requestsList(String filterBy, String filterByValue, String showIfNoResult) {
     return

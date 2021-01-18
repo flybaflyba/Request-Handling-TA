@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/InfosPage.dart';
 import 'package:virtual_approval_flutter/SendRequestPage.dart';
 import 'package:virtual_approval_flutter/SignIn.dart';
@@ -41,27 +42,63 @@ class _MainPageState extends State<MainPage> {
 
     new Timer.periodic(Duration(seconds:1), (Timer t) {
       // print('checking login in/out');
-      var loggedInNow = FirebaseAuth.instance.currentUser == null ? false : true;
-      // print("loggedInNow");
-      // print(loggedInNow);
-      // print("Universals.loggedInLast");
-      // print(Universals.loggedInLast);
-      if (loggedInNow != UniversalValues.loggedInLast) {
-        setState(() {
-          buildScreens = [
-            SendRequestPage(),
-            InfosPage(),
-            FirebaseAuth.instance.currentUser == null ?
-            SignIn() : TutorRequestsPage(),
-          ];
-        });
-        UniversalValues.loggedInLast = loggedInNow;
-      } else {
+      // var loggedInNow = FirebaseAuth.instance.currentUser == null ? false : true;
+      // // print("loggedInNow");
+      // // print(loggedInNow);
+      // // print("Universals.loggedInLast");
+      // // print(Universals.loggedInLast);
+      // if (loggedInNow != UniversalValues.loggedInLast) {
+      //   setState(() {
+      //     buildScreens = [
+      //       SendRequestPage(),
+      //       InfosPage(),
+      //       FirebaseAuth.instance.currentUser == null ?
+      //       SignIn() : TutorRequestsPage(),
+      //     ];
+      //   });
+      //   UniversalValues.loggedInLast = loggedInNow;
+      // } else {
+      //
+      // }
 
-      }
+      // FirebaseAuth.instance.idTokenChanges().listen((event) {
+      //   print("On Data: $event");
+      // });
 
+
+      // this has to be in the timer so that web version works
+      // this can be outside of the timer, and mobile version will work
+      FirebaseAuth.instance
+          .authStateChanges()
+          .listen((User user) {
+        if (user == null) {
+          // print('User is currently signed out!');
+          if (buildScreens[2].toString() != "SignIn\$") {
+            setState(() {
+              buildScreens = [
+                SendRequestPage(),
+                InfosPage(),
+                SignIn(),
+              ];
+            });
+          }
+        } else {
+          // print('User is signed in!');
+          if (buildScreens[2].toString() != "TutorRequestsPage\$") {
+            setState(() {
+              buildScreens = [
+                SendRequestPage(),
+                InfosPage(),
+                TutorRequestsPage()
+              ];
+            });
+          }
+        }
+      });
 
     });
+
+
   }
 
   static List<Widget> buildScreens = [

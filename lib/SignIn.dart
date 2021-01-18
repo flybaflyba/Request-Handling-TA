@@ -84,12 +84,14 @@ class _SignInState extends State<SignIn> {
       DatabaseInteractions.getTaSecretCode();
 
       AwesomeDialog(
+        // width: 500,
         context: buildContext,
         headerAnimationLoop: true,
         dialogType: DialogType.QUESTION,
         onDissmissCallback: () {
           if (FirebaseAuth.instance.currentUser == null) {
-            Navigator.push(buildContext, MaterialPageRoute(builder: (context) => SignIn(),));
+            // Navigator.pop(context);
+            // Navigator.push(buildContext, MaterialPageRoute(builder: (context) => SignIn(),));
           }
 
         },
@@ -274,8 +276,8 @@ class _SignInState extends State<SignIn> {
 
       )..show();
 
+      return "Please fill out the info";
       // return null;
-      return null;
 
     });
   }
@@ -319,7 +321,8 @@ class _SignInState extends State<SignIn> {
             onLogin: signIn,
             onSignup: signUp,
             onSubmitAnimationCompleted: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => TutorRequestsPage(),));
+              //Navigator.push(context, MaterialPageRoute(builder: (context) => TutorRequestsPage(),));
+
             },
             onRecoverPassword: recoverPassword,
 

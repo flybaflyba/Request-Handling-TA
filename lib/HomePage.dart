@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:virtual_approval_flutter/InfosPage.dart';
 import 'package:virtual_approval_flutter/SendRequestPage.dart';
 import 'package:virtual_approval_flutter/SignIn.dart';
-import 'package:virtual_approval_flutter/SignUp.dart';
 
 
 // We are not using this page as this page's bottom nav bar is not persistent

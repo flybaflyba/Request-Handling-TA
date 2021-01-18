@@ -11,7 +11,6 @@ import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/InfosPage.dart';
 import 'package:virtual_approval_flutter/MainPage.dart';
 import 'package:virtual_approval_flutter/SendRequestPage.dart';
-import 'package:virtual_approval_flutter/SignUp.dart';
 import 'package:virtual_approval_flutter/TutorRequestsPage.dart';
 import 'package:virtual_approval_flutter/UniversalMethods.dart';
 import 'package:virtual_approval_flutter/UniversalValues.dart';

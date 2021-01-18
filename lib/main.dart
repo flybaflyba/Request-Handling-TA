@@ -9,7 +9,6 @@ import 'package:virtual_approval_flutter/MainPage.dart';
 import 'package:virtual_approval_flutter/SendRequestPage.dart';
 import 'package:virtual_approval_flutter/SignIn.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:virtual_approval_flutter/SignUp.dart';
 import 'package:virtual_approval_flutter/TutorRequestsPage.dart';
 import 'package:virtual_approval_flutter/UniversalMethods.dart';
 import 'package:virtual_approval_flutter/UniversalValues.dart';

@@ -10,7 +10,6 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:virtual_approval_flutter/InfosPage.dart';
 import 'package:virtual_approval_flutter/SendRequestPage.dart';
 import 'package:virtual_approval_flutter/SignIn.dart';
-import 'package:virtual_approval_flutter/SignUp.dart';
 import 'package:virtual_approval_flutter/TutorRequestsPage.dart';
 import 'package:virtual_approval_flutter/UniversalValues.dart';
 

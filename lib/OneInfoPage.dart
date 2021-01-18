@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
-import 'package:virtual_approval_flutter/SignUp.dart';
 import 'package:virtual_approval_flutter/TutorRequestsPage.dart';
 import 'package:virtual_approval_flutter/UniversalValues.dart';
 

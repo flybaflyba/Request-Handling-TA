@@ -76,7 +76,9 @@ class _SignInState extends State<SignIn> {
     });
   }
 
+  final _formKey = GlobalKey<FormState>();
   BuildContext buildContext;
+
   Future<String> signUp(LoginData data) {
     print('Name: ${data.name}, Password: ${data.password}');
     return Future.delayed(loginTime).then((_) async {
@@ -121,36 +123,78 @@ class _SignInState extends State<SignIn> {
                   // color: Colors.redAccent,
                   child:
                   Center(
-                    child: ListView(
-                      // mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(height: 20,),
+                    child:
+                      Material(
+                        child:
+                        ListView(
+                          // mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(height: 20,),
+                            Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Center(
+                                  child: Text(
+                                    "A Couple More Things",
+                                    style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+                                  ),
+                                )
+                            ),
 
-                        Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Center(
-                              child: Text(
-                                "A Couple More Things",
-                                style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+                            Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child:
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  IconButton(icon: Icon(Icons.house), onPressed: null),
+                                    Container(
+                                      color: boxColor,
+                                      constraints: boxConstraints,
+                                      margin: EdgeInsets.only(right: 20, left: 10),
+                                      child:
+                                      DropdownSearch<String>(
+                                          hint: "Department",
+                                          mode: Mode.MENU,
+                                          searchBoxDecoration: InputDecoration(
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                            ),
+                                          ),
+                                          showSelectedItem: true,
+                                          items: UniversalValues.departments,
+                                          // label: "Menu mode",
+                                          // hint: "country in menu mode",
+                                          // popupItemDisabled: (String s) => s.startsWith('I'),
+                                          onChanged: (value) {
+                                            department = value;
+                                          },
+                                          selectedItem: department
+                                      ),
+                                    ),
+                                ],
                               ),
-                            )
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child:
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              IconButton(icon: Icon(Icons.house), onPressed: null),
-                                Container(
-                                  color: boxColor,
-                                  constraints: boxConstraints,
-                                  margin: EdgeInsets.only(right: 20, left: 10),
-                                  child:
-                                  DropdownSearch<String>(
-                                      hint: "Department",
-                                      mode: Mode.MENU,
-                                      searchBoxDecoration: InputDecoration(
+                            ),
+
+
+                            Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  IconButton(icon: Icon(Icons.person), onPressed: null),
+                                  Container(
+                                    color: boxColor,
+                                    constraints: boxConstraints,
+                                    margin: EdgeInsets.only(right: 20, left: 10),
+                                    child: TextField(
+                                      onChanged: (value){
+                                        name = value;
+                                      },
+                                      decoration: InputDecoration(
+                                        hintText: "Name",
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(color: Colors.blue, width: 1.0),
                                         ),
@@ -158,154 +202,117 @@ class _SignInState extends State<SignIn> {
                                           borderSide: BorderSide(color: Colors.grey, width: 1.0),
                                         ),
                                       ),
-                                      showSelectedItem: true,
-                                      items: UniversalValues.departments,
-                                      // label: "Menu mode",
-                                      // hint: "country in menu mode",
-                                      // popupItemDisabled: (String s) => s.startsWith('I'),
-                                      onChanged: (value) {
-                                        department = value;
-                                      },
-                                      selectedItem: department
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ),
-
-
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              IconButton(icon: Icon(Icons.person), onPressed: null),
-                              Container(
-                                color: boxColor,
-                                constraints: boxConstraints,
-                                margin: EdgeInsets.only(right: 20, left: 10),
-                                child: TextField(
-                                  onChanged: (value){
-                                    name = value;
-                                  },
-                                  decoration: InputDecoration(
-                                    hintText: "Name",
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.blue, width: 1.0),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
                                     ),
                                   ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              IconButton(icon: Icon(Icons.code), onPressed: null),
-                              Container(
-                                color: boxColor,
-                                constraints: boxConstraints,
-                                  margin: EdgeInsets.only(right: 20, left: 10),
-                                  child: TextField(
-                                    onChanged: (value){
-                                      taSecretCode = value;
-                                    },
-                                    decoration: InputDecoration(
-                                      hintText: "TA secret code",
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.blue, width: 1.0),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-
-                            ],
-                          ),
-                        ),
-                        // Padding(
-                        //     padding: const EdgeInsets.all(20.0),
-                        //     child: Text(
-                        //       "No TA secret code? Get it from your professor.",
-                        //       textAlign: TextAlign.center,
-                        //     )
-                        // ),
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(5),
-                            child: Container(
-                              color: boxColor,
-                              constraints: boxConstraints,
-                              height: 60,
-                              child: NiceButton(
-                                radius: 40,
-                                padding: const EdgeInsets.all(15),
-                                // icon: Icons.account_box,
-                                gradientColors: [Color(0xff5b86e5), Color(0xff36d1dc)],
-                                text: "Sign Up",
-                                onPressed: () async {
-                                  print(taSecretCode);
-                                  print(UniversalValues.taSecretCode);
-                                  // Navigator.of(context, rootNavigator: true).pop();
-                                  if (name == "" || taSecretCode == "" || department == "") {
-                                    UniversalMethods.showToast('Please complete all fields', UniversalValues.toastMessageTypeWarning);
-                                  } else {
-                                    if (taSecretCode != UniversalValues.taSecretCode) {
-                                      UniversalMethods.showToast('Wrong TA secret code ', UniversalValues.toastMessageTypeWarning);
-                                    } else {
-                                      try {
-                                        UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                                          email: data.name,
-                                          password: data.password,
-                                        );
-
-                                        UserInformation userInformation = new UserInformation(name: name, email: data.name, department: department);
-
-                                        DatabaseInteractions.saveUserProfile(userInformation);
-
-                                        UniversalValues.loggedInUserInformation = userInformation;
-
-                                        // FirebaseAuth.instance.signOut();
-                                        print(userCredential);
-                                        // Navigator.pop(context);
-                                        Navigator.of(context, rootNavigator: true).pop();
-                                      }
-                                      on FirebaseAuthException catch (e) {
-                                        if (e.code == 'weak-password') {
-                                          print('The password provided is too weak');
-                                          UniversalMethods.showToast('The password provided is too weak', UniversalValues.toastMessageTypeWarning);
-                                        } else if (e.code == 'email-already-in-use') {
-                                          print('The account already exists for that email');
-                                          UniversalMethods.showToast("The account already exists for that email", UniversalValues.toastMessageTypeWarning);
-                                        }
-                                        else if (e.code == 'invalid-email') {
-                                          print('Invalid email');
-                                          UniversalMethods.showToast("Invalid email", UniversalValues.toastMessageTypeWarning);
-                                        }
-                                      }
-                                      catch (e) {
-                                        print(e);
-                                      }
-                                    }
-                                  }
-
-                                },
+                                ],
                               ),
                             ),
-                          ),
+
+                            Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  IconButton(icon: Icon(Icons.code), onPressed: null),
+                                  Container(
+                                    color: boxColor,
+                                    constraints: boxConstraints,
+                                      margin: EdgeInsets.only(right: 20, left: 10),
+                                      child: TextField(
+                                        onChanged: (value){
+                                          taSecretCode = value;
+                                        },
+                                        decoration: InputDecoration(
+                                          hintText: "TA secret code",
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+
+                                ],
+                              ),
+                            ),
+                            // Padding(
+                            //     padding: const EdgeInsets.all(20.0),
+                            //     child: Text(
+                            //       "No TA secret code? Get it from your professor.",
+                            //       textAlign: TextAlign.center,
+                            //     )
+                            // ),
+                            Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(5),
+                                child: Container(
+                                  color: boxColor,
+                                  constraints: boxConstraints,
+                                  height: 60,
+                                  child: NiceButton(
+                                    width: 250,
+                                    radius: 40,
+                                    padding: const EdgeInsets.all(15),
+                                    // icon: Icons.account_box,
+                                    gradientColors: [Color(0xff5b86e5), Color(0xff36d1dc)],
+                                    text: "Sign Up",
+                                    onPressed: () async {
+                                      print(taSecretCode);
+                                      print(UniversalValues.taSecretCode);
+                                      // Navigator.of(context, rootNavigator: true).pop();
+                                      if (name == "" || taSecretCode == "" || department == "") {
+                                        UniversalMethods.showToast('Please complete all fields', UniversalValues.toastMessageTypeWarning);
+                                      } else {
+                                        if (taSecretCode != UniversalValues.taSecretCode) {
+                                          UniversalMethods.showToast('Wrong TA secret code ', UniversalValues.toastMessageTypeWarning);
+                                        } else {
+                                          try {
+                                            UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                                              email: data.name,
+                                              password: data.password,
+                                            );
+
+                                            UserInformation userInformation = new UserInformation(name: name, email: data.name, department: department);
+
+                                            DatabaseInteractions.saveUserProfile(userInformation);
+
+                                            UniversalValues.loggedInUserInformation = userInformation;
+
+                                            // FirebaseAuth.instance.signOut();
+                                            print(userCredential);
+                                            // Navigator.pop(context);
+                                            Navigator.of(context, rootNavigator: true).pop();
+                                          }
+                                          on FirebaseAuthException catch (e) {
+                                            if (e.code == 'weak-password') {
+                                              print('The password provided is too weak');
+                                              UniversalMethods.showToast('The password provided is too weak', UniversalValues.toastMessageTypeWarning);
+                                            } else if (e.code == 'email-already-in-use') {
+                                              print('The account already exists for that email');
+                                              UniversalMethods.showToast("The account already exists for that email", UniversalValues.toastMessageTypeWarning);
+                                            }
+                                            else if (e.code == 'invalid-email') {
+                                              print('Invalid email');
+                                              UniversalMethods.showToast("Invalid email", UniversalValues.toastMessageTypeWarning);
+                                            }
+                                          }
+                                          catch (e) {
+                                            print(e);
+                                          }
+                                        }
+                                      }
+
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      )
                   )
 
               )

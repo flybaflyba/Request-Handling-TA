@@ -70,6 +70,16 @@ class _SendRequestPageState extends State<SendRequestPage> {
           //   )
           // ),
           SizedBox(height: 20,),
+
+          Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Center(
+                child: Text(
+                  "Send a Request",
+                  style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+                ),
+              )
+          ),
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Row(

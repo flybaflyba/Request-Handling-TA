@@ -47,7 +47,7 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> with SingleTicker
 
       // print("hihihi");
       // print(UniversalValues.loggedInUserInformation);
-      
+
       if (UniversalValues.loggedInUserInformation != null) {
         setState(() {
           department = UniversalValues.loggedInUserInformation == null ? "" : UniversalValues.loggedInUserInformation.department;

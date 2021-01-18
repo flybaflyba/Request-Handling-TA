@@ -98,8 +98,8 @@ class _MainPageState extends State<MainPage> {
 
     });
 
-
   }
+
 
   static List<Widget> buildScreens = [
       SendRequestPage(),
@@ -158,8 +158,6 @@ class _MainPageState extends State<MainPage> {
           )
               :
               Row(children: [
-
-
                 IconButton(icon: Icon(Icons.logout), onPressed: () {
                   print(buildScreens);
 

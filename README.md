@@ -10,7 +10,7 @@ A cross platform application that helps with schools tutoring communication.
 
 ## Features:
 
-- Students send request without registration, but data validation 
+- Students send request without registration, but data validation (must provide byuh email)
 - Students can lookup a list of their submitted requests with email address (not including pasT requests)
 - TA registration with secret code from professor 
 - TA login

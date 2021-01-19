@@ -19,11 +19,12 @@ A cross platform application that helps with schools tutoring communication.
 - TA's view on requests on in two sections: taken requests and new requests
 - TA can view request detail  
 - Instruction for subjects (html) 
-
+- Tool 1: build-in translator: uses google translator 
+- Tool 2: build-in calculator
+- Tool 3: music player
 
 ## Future features: 
 
-- TA view Requests history 
 - etc
 
 A few resources:

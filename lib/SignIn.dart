@@ -110,6 +110,7 @@ class _SignInState extends State<SignIn> {
 
       var boxConstraints = BoxConstraints(minWidth: 100, maxWidth: 250);
       var boxColor = Colors.white;
+      ScrollController controller = new ScrollController();
       Future.delayed(Duration(milliseconds: 1)).then((_) async {
 
         showCupertinoModalBottomSheet(
@@ -119,25 +120,27 @@ class _SignInState extends State<SignIn> {
           context: context,
           duration: Duration(milliseconds: 700),
           builder: (context) =>
-              Container(
-                  // color: Colors.redAccent,
-                  child:
-                  Center(
-                    child:
-                      Material(
-                        child:
-                        ListView(
+              Scaffold(
+                backgroundColor: Colors.blue,
+                body: Center(
+                  child: SingleChildScrollView(
+                    child: Container(
+                      constraints: BoxConstraints(minWidth: 150, maxWidth: 350),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                        ),
+                        // color: Colors.redAccent,
+                        child: Column(
                           // mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(height: 20,),
-                            Padding(
-                                padding: const EdgeInsets.only(top: 20, bottom: 20),
-                                child: Center(
-                                  child: Text(
-                                    "A Couple More Things",
-                                    style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
-                                  ),
-                                )
+
+                            ListTile(
+                              title: const Text(
+                                'A Couple More Things',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),),
                             ),
 
                             Padding(
@@ -146,34 +149,34 @@ class _SignInState extends State<SignIn> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  IconButton(icon: Icon(Icons.house), onPressed: null),
-                                    Container(
-                                      color: boxColor,
-                                      constraints: boxConstraints,
-                                      margin: EdgeInsets.only(left: 10),
-                                      child:
-                                      DropdownSearch<String>(
-                                          hint: "Department",
-                                          mode: Mode.MENU,
-                                          searchBoxDecoration: InputDecoration(
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(color: Colors.blue, width: 1.0),
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                                            ),
+                                  // IconButton(icon: Icon(Icons.house), onPressed: null),
+                                  Container(
+                                    color: boxColor,
+                                    constraints: boxConstraints,
+                                    margin: EdgeInsets.only(left: 10),
+                                    child:
+                                    DropdownSearch<String>(
+                                        hint: "Department",
+                                        mode: Mode.MENU,
+                                        searchBoxDecoration: InputDecoration(
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(color: Colors.blue, width: 1.0),
                                           ),
-                                          showSelectedItem: true,
-                                          items: UniversalValues.departments,
-                                          // label: "Menu mode",
-                                          // hint: "country in menu mode",
-                                          // popupItemDisabled: (String s) => s.startsWith('I'),
-                                          onChanged: (value) {
-                                            department = value;
-                                          },
-                                          selectedItem: department
-                                      ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                          ),
+                                        ),
+                                        showSelectedItem: true,
+                                        items: UniversalValues.departments,
+                                        // label: "Menu mode",
+                                        // hint: "country in menu mode",
+                                        // popupItemDisabled: (String s) => s.startsWith('I'),
+                                        onChanged: (value) {
+                                          department = value;
+                                        },
+                                        selectedItem: department
                                     ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -184,7 +187,7 @@ class _SignInState extends State<SignIn> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  IconButton(icon: Icon(Icons.person), onPressed: null),
+                                  // IconButton(icon: Icon(Icons.person), onPressed: null),
                                   Container(
                                     color: boxColor,
                                     constraints: boxConstraints,
@@ -213,26 +216,26 @@ class _SignInState extends State<SignIn> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  IconButton(icon: Icon(Icons.code), onPressed: null),
+                                  // IconButton(icon: Icon(Icons.code), onPressed: null),
                                   Container(
                                     color: boxColor,
                                     constraints: boxConstraints,
-                                      margin: EdgeInsets.only(left: 10),
-                                      child: TextField(
-                                        onChanged: (value){
-                                          taSecretCode = value;
-                                        },
-                                        decoration: InputDecoration(
-                                          hintText: "TA secret code",
-                                          focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(color: Colors.blue, width: 1.0),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                                          ),
+                                    margin: EdgeInsets.only(left: 10),
+                                    child: TextField(
+                                      onChanged: (value){
+                                        taSecretCode = value;
+                                      },
+                                      decoration: InputDecoration(
+                                        hintText: "TA secret code",
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(color: Colors.grey, width: 1.0),
                                         ),
                                       ),
                                     ),
+                                  ),
 
                                 ],
                               ),
@@ -312,8 +315,12 @@ class _SignInState extends State<SignIn> {
                             ),
                           ],
                         ),
-                      )
-                  )
+                      ),
+                    ),
+                  ),
+
+                )
+
 
               )
         );

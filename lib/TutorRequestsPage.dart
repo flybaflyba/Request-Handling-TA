@@ -16,7 +16,7 @@ import 'package:virtual_approval_flutter/UniversalValues.dart';
 import 'package:intl/intl.dart';
 import 'package:virtual_approval_flutter/ViewRequestPage.dart';
 import 'package:virtual_approval_flutter/RequestsHistoryPage.dart';
-
+import 'package:just_audio/just_audio.dart';
 
 class TutorRequestsPage extends StatefulWidget {
   @override
@@ -31,9 +31,37 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> with SingleTicker
   Animation<double> _animation;
   AnimationController _animationController;
 
+  var isMusicOn = false;
+  final musicPlayer = AudioPlayer();
+
+  Future<void> loadMusic() async {
+    try {
+      await musicPlayer.setUrl('https://firebasestorage.googleapis.com/v0/b/virtual-approval-flutter.appspot.com/o/i_am_a_child_of_god.mp3?alt=media&token=c128aa53-4c0f-4e5f-82c2-97e6139b647a');
+      musicPlayer.setLoopMode(LoopMode.one);
+    } on PlayerException catch (e) {
+      // iOS/macOS: maps to NSError.code
+      // Android: maps to ExoPlayerException.type
+      // Web: maps to MediaError.code
+      print("Error code: ${e.code}");
+      // iOS/macOS: maps to NSError.localizedDescription
+      // Android: maps to ExoPlaybackException.getMessage()
+      // Web: a generic message
+      print("Error message: ${e.message}");
+    } on PlayerInterruptedException catch (e) {
+      // This call was interrupted since another audio source was loaded or the
+      // player was stopped or disposed before this audio source could complete
+      // loading.
+      print("Connection aborted: ${e.message}");
+    } catch (e) {
+      // Fallback for all errors
+      print(e);
+    }
+  }
 
   @override
-  void initState() {
+  Future<void> initState() {
+
+    loadMusic();
 
     _animationController = AnimationController(
      vsync: this,
@@ -154,9 +182,6 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> with SingleTicker
                               ),
                             ],
                           )
-
-
-
                         ],
                       )
                   ),
@@ -172,7 +197,6 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> with SingleTicker
         },
       );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -236,19 +260,23 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> with SingleTicker
                 child: Icon(Icons.beach_access, color: Colors.blue,),
               ),
               FlatButton(
-                onPressed: () {
-                  AwesomeDialog(
-                      context: context,
-                      useRootNavigator: true,
-                      headerAnimationLoop: true,
-                      dialogType: DialogType.SUCCES,
-                      title: 'Relax!',
-                      desc: "Don't for get the take a break.",
-                      autoHide: Duration(seconds: 5),
-                      width: 500
-                  )..show();
+                onPressed: () async {
+
+                  print(musicPlayer.playerState);
+                  print(isMusicOn);
+
+                  if (isMusicOn) {
+                    await musicPlayer.pause();
+                    isMusicOn = false;
+                  } else {
+                    musicPlayer.play();
+                    isMusicOn = true;
+                  }
+
+
+
                 },
-                child: Icon(Icons.audiotrack, color: Colors.green,),
+                child: Icon(isMusicOn ? Icons.motion_photos_pause : Icons.audiotrack, color: Colors.green,),
               )
             ],
           ),

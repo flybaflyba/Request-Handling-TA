@@ -17,8 +17,10 @@ class UniversalMethods {
         msg: msg,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
+        timeInSecForIosWeb: 2,
         backgroundColor: toastMessageType,
+        webBgColor: toastMessageType == UniversalValues.toastMessageTypeWarning ? "linear-gradient(to right, #cc00ff, #ff0000)" : "	linear-gradient(to right, #00b09b, #96c93d)",
+        webPosition: "center",
         textColor: Colors.white,
         fontSize: 16.0
     );

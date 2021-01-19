@@ -328,13 +328,17 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> with SingleTicker
 
                   if (isMusicOn) {
                     await musicPlayer.pause();
-                    isMusicOn = false;
+                    setState(() {
+                      isMusicOn = false;
+                    });
                   } else {
+                    UniversalMethods.showToast("Enjoy the music!", UniversalValues.toastMessageTypeGood);
                     musicPlayer.play();
-                    isMusicOn = true;
+                    setState(() {
+                      isMusicOn = true;
+                    });
+
                   }
-
-
 
                 },
                 child: Icon(isMusicOn ? Icons.motion_photos_pause : Icons.audiotrack, color: Colors.green,),

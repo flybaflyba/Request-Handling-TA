@@ -40,6 +40,7 @@ dependencies:
   modal_bottom_sheet: ^1.0.0+1
   flutter_sticky_header: ^0.5.0
   just_audio: ^0.6.5
+  flutter_webview_plugin: ^0.3.11
 #  shared_preferences: ^0.5.12+4
 
   # The following adds the Cupertino Icons font to your application.

@@ -8,7 +8,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/Request.dart';
 import 'package:virtual_approval_flutter/UniversalMethods.dart';
@@ -17,6 +20,8 @@ import 'package:intl/intl.dart';
 import 'package:virtual_approval_flutter/ViewRequestPage.dart';
 import 'package:virtual_approval_flutter/RequestsHistoryPage.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class TutorRequestsPage extends StatefulWidget {
   @override
@@ -230,19 +235,44 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> with SingleTicker
                 child: Icon(Icons.history, color: Colors.blueGrey,),
               ),
               FlatButton(
-                onPressed: () {
-                  AwesomeDialog(
-                      context: context,
-                      useRootNavigator: true,
-                      headerAnimationLoop: true,
-                      dialogType: DialogType.SUCCES,
-                      title: 'Thank You!',
-                      desc: "We appreciate your help.",
-                      autoHide: Duration(seconds: 5),
-                      width: 500
-                  )..show();
+                onPressed: () async {
+
+
+                  if (kIsWeb) {
+                    // launch url
+                    const url = 'https://translate.google.com/';
+                    if (await canLaunch(url)) {
+                      await launch(url);
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  } else {
+                    showCupertinoModalBottomSheet(
+                      // expand: false,
+                      // bounce: true,
+                        useRootNavigator: true,
+                        context: context,
+                        duration: Duration(milliseconds: 700),
+                        builder: (context) =>
+                            Scaffold(
+                              appBar: AppBar(title: Text("Translator",),),
+                              body: WebviewScaffold(url: "https://translate.google.com/",),
+                            )
+                    );
+                  }
+                  
+                  // AwesomeDialog(
+                  //     context: context,
+                  //     useRootNavigator: true,
+                  //     headerAnimationLoop: true,
+                  //     dialogType: DialogType.SUCCES,
+                  //     title: 'Thank You!',
+                  //     desc: "We appreciate your help.",
+                  //     autoHide: Duration(seconds: 5),
+                  //     width: 500
+                  // )..show();
                 },
-                child: Icon(Icons.favorite, color: Colors.pink,),
+                child: Icon(Icons.translate, color: Colors.pink,),
               ),
               FlatButton(
                 onPressed: () {

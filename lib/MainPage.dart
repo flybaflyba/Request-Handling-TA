@@ -73,21 +73,21 @@ class _MainPageState extends State<MainPage> {
           .authStateChanges()
           .listen((User user) {
         if (user == null) {
-          print('User is currently signed out!');
-          if (buildScreens[2].toString() != "SignIn\$") {
-            print("Update Main to Tutor");
-            setState(() {
-              buildScreens = [
-                SendRequestPage(),
-                InfosPage(),
-                SignIn(),
-              ];
-            });
-          }
+          // print('User is currently signed out!');
+          // if (buildScreens[2].toString() != "SignIn\$") {
+          //   print("Update Main to Tutor");
+          //   setState(() {
+          //     buildScreens = [
+          //       SendRequestPage(),
+          //       InfosPage(),
+          //       SignIn(),
+          //     ];
+          //   });
+          // }
         } else {
-          print('User is signed in!');
+          // print('User is signed in!');
           if (buildScreens[2].toString() != "TutorRequestsPage\$") {
-            print("Update Main to SignIn");
+            // print("Update Main to SignIn");
             setState(() {
               buildScreens = [
                 SendRequestPage(),
@@ -172,8 +172,7 @@ class _MainPageState extends State<MainPage> {
                       buildScreens = [
                         SendRequestPage(),
                         InfosPage(),
-                        FirebaseAuth.instance.currentUser == null ?
-                        SignIn() : TutorRequestsPage(),
+                        SignIn(),
                       ];
                     });
 

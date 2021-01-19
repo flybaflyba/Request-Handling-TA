@@ -6,9 +6,11 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/Request.dart';
+import 'package:virtual_approval_flutter/UniversalMethods.dart';
 import 'package:virtual_approval_flutter/UniversalValues.dart';
 import 'package:intl/intl.dart';
 import 'package:virtual_approval_flutter/ViewRequestPage.dart';
@@ -184,97 +186,77 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> with SingleTicker
 
         backgroundColor: UniversalValues.backgroundColor,
         body:
-            ListView(
-              children: [
-                SizedBox(height: 20,),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
-                //
-                //     Padding(
-                //       padding: const EdgeInsets.all(5.0),
-                //       child:
-                //       RaisedButton(
-                //         onPressed: () {
-                //           pushNewScreen(
-                //             context,
-                //             screen: RequestsHistoryPage(),
-                //             withNavBar: true, // OPTIONAL VALUE. True by default.
-                //             pageTransitionAnimation: PageTransitionAnimation.cupertino,
-                //           );
-                //         },
-                //         textColor: Colors.white,
-                //         padding: const EdgeInsets.all(0.0),
-                //         child: Container(
-                //           decoration: const BoxDecoration(
-                //             gradient: LinearGradient(
-                //               colors: <Color>[
-                //                 Color(0xFF0D47A1),
-                //                 Color(0xFF1976D2),
-                //                 Color(0xFF42A5F5),
-                //               ],
-                //             ),
-                //           ),
-                //           padding: const EdgeInsets.all(10.0),
-                //           child:
-                //           Text("Past Requests"),
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                //
-                // ),
+      Column(
+        children: [
+
+          UniversalMethods.titleText(department),
+
+          Row(
+            mainAxisAlignment:  MainAxisAlignment.center,
+            children: [
+              FlatButton(
+                onPressed: () {
+                  pushNewScreen(
+                    context,
+                    screen: RequestsHistoryPage(),
+                    withNavBar: true, // OPTIONAL VALUE. True by default.
+                    pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                  );},
+                child: Icon(Icons.history, color: Colors.blueGrey,),
+              ),
+              FlatButton(
+                onPressed: () {},
+                child: Icon(Icons.favorite, color: Colors.pink,),
+              ),
+              FlatButton(
+                onPressed: () {},
+                child: Icon(Icons.beach_access, color: Colors.blue,),
+              ),
+              FlatButton(
+                onPressed: () {},
+                child: Icon(Icons.audiotrack, color: Colors.green,),
+              )
+            ],
+          ),
+
+          Expanded(child:
+          Center(
+              child: Container(
+                constraints: BoxConstraints(minWidth: 150, maxWidth: 800),
+                child: ListView(
+                  children: [
+                    UniversalMethods.titleText("Helping"),
 
 
-                SizedBox(height: 20,),
+                    requestsList('taker email', FirebaseAuth.instance.currentUser.email, 'You Have not Taken any Request'),
+
+                    Divider(
+                      color: Colors.blue,
+                      height: 20,
+                      thickness: 5,
+                      indent: 20,
+                      endIndent: 20,
+                    ),
 
 
 
-                Center(
-                  child: Text(
-                    'Requests You Took',
-                  ),
+                    UniversalMethods.titleText('New Requests'),
+
+                    requestsList('status', "new", 'There is no New Request'),
+
+                    SizedBox(height: 200,)
+
+
+                  ],
                 ),
+              )),
+          )
+        ],
+      ),
 
-                requestsList('taker email', FirebaseAuth.instance.currentUser.email, 'You Have not Taken any Request'),
-
-                Divider(
-                  color: Colors.blue,
-                  height: 20,
-                  thickness: 5,
-                  indent: 20,
-                  endIndent: 20,
-                ),
-
-                Center(
-                  child: Text(
-                    'New Requests',
-                  ),
-                ),
-
-                requestsList('status', "new", 'There is no New Request'),
-
-                SizedBox(height: 200,)
-
-
-              ],
-            ),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
 
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          pushNewScreen(
-            context,
-            screen: RequestsHistoryPage(),
-            withNavBar: true, // OPTIONAL VALUE. True by default.
-            pageTransitionAnimation: PageTransitionAnimation.cupertino,
-          );
-        },
-        label: Text('History'),
-        icon: Icon(Icons.history),
-        backgroundColor: Colors.blue,
-      ),
 
     );
   }

@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/Request.dart';
+import 'package:virtual_approval_flutter/UniversalMethods.dart';
 import 'package:virtual_approval_flutter/UniversalValues.dart';
 import 'package:intl/intl.dart';
 import 'package:virtual_approval_flutter/ViewRequestPage.dart';
@@ -116,49 +117,54 @@ class _StudentRequestsPageState extends State<StudentRequestsPage> {
 
     return Scaffold(
         backgroundColor: UniversalValues.backgroundColor,
-        body:
-        ListView(
-          children: [
+        body: Center(
+          child: Container(
+            constraints: BoxConstraints(minWidth: 150, maxWidth: 800),
+            child: ListView(
+              children: [
 
-            SizedBox(height: 20,),
+                SizedBox(height: 20,),
 
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                children: <Widget>[
-                  IconButton(icon: Icon(Icons.email), onPressed: null),
-                  Expanded(
-                    child: Container(
-                      margin: EdgeInsets.only(right: 20, left: 10),
-                      child: TextField(
-                        controller: textEditingController,
-                        onChanged: (value){
-                          setState(() {
-                            email = value;
-                            print(email);
-                          });
 
-                        },
-                        decoration: InputDecoration(hintText: "Your BYUH Email"),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Row(
+                    children: <Widget>[
+                      IconButton(icon: Icon(Icons.email), onPressed: null),
+                      Expanded(
+                        child: Container(
+                          margin: EdgeInsets.only(right: 20, left: 10),
+                          child: TextField(
+                            controller: textEditingController,
+                            onChanged: (value){
+                              setState(() {
+                                email = value;
+                                print(email);
+                              });
+
+                            },
+                            decoration: InputDecoration(hintText: "Your BYUH Email"),
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+
+                UniversalMethods.titleText("Your Requests"),
+
+                requestsList('email', email, !EmailValidator.validate(email) ? "Enter your email address to see" : 'You Haven\'t Sent Any Request'),
+
+                SizedBox(height: 100,)
+
+              ],
             ),
-
-            Center(
-              child: Text(
-                'Your Requests',
-              ),
-            ),
-
-            requestsList('email', email, !EmailValidator.validate(email) ? "Enter your email address" : 'You Haven\'t Sent Any Request'),
-
-            SizedBox(height: 100,)
-
-          ],
+          ),
         )
+
+
+
+
     );
   }
 }

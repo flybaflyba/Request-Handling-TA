@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:virtual_approval_flutter/DatabaseInteractions.dart';
 import 'package:virtual_approval_flutter/Request.dart';
+import 'package:virtual_approval_flutter/UniversalMethods.dart';
 import 'package:virtual_approval_flutter/UniversalValues.dart';
 import 'package:intl/intl.dart';
 import 'package:virtual_approval_flutter/ViewRequestPage.dart';
@@ -122,22 +123,25 @@ class _RequestsHistoryPageState extends State<RequestsHistoryPage> {
       // ),
         backgroundColor: UniversalValues.backgroundColor,
         body:
-        ListView(
-          children: [
+        Center(
+          child: Container(
+            constraints: BoxConstraints(minWidth: 150, maxWidth: 800),
+            child: ListView(
+              children: [
+                SizedBox(height: 20,),
 
-            SizedBox(height: 20,),
 
-            Center(
-              child: Text(
-                'Your Requests History',
-              ),
+                UniversalMethods.titleText('Your Requests History'),
+
+
+                requestsList('taker email', FirebaseAuth.instance.currentUser.email, 'There is no Request'),
+                SizedBox(height: 100,)
+
+              ],
             ),
-
-            requestsList('taker email', FirebaseAuth.instance.currentUser.email, 'There is no Request'),
-            SizedBox(height: 100,)
-
-          ],
+          ),
         )
+
     );
   }
 }

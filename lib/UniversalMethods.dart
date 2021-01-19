@@ -23,7 +23,19 @@ class UniversalMethods {
         fontSize: 16.0
     );
   }
-  //
+
+  static Padding titleText(String title) {
+    return Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Center(
+          child: Text(
+            title,
+            style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+          ),
+        )
+    );
+  }
+
   // static showRequestInfoToStudentInRealTime(String email, BuildContext context) {
   //   showGeneralDialog(
   //     context: context,

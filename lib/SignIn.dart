@@ -110,7 +110,6 @@ class _SignInState extends State<SignIn> {
 
       var boxConstraints = BoxConstraints(minWidth: 100, maxWidth: 250);
       var boxColor = Colors.white;
-      ScrollController controller = new ScrollController();
       Future.delayed(Duration(milliseconds: 1)).then((_) async {
 
         showCupertinoModalBottomSheet(

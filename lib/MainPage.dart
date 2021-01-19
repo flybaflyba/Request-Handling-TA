@@ -148,6 +148,7 @@ class _MainPageState extends State<MainPage> {
               headerAnimationLoop: false,
               dialogType: DialogType.NO_HEADER,
               title: 'Welcome',
+              width: 500,
               desc:
               'Thanks for using the app!',
               btnOkOnPress: () {
@@ -191,6 +192,9 @@ class _MainPageState extends State<MainPage> {
                       title: 'Bye',
                       desc:
                       'You signed out',
+                      // autoHide: Duration(seconds: 1),
+                      width: 500
+
                       // btnOkOnPress: () {
                       // },
                       // btnOkIcon: Icons.check_circle,

@@ -207,24 +207,47 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> with SingleTicker
               ),
               FlatButton(
                 onPressed: () {
-                  // AwesomeDialog(
-                  //     context: context,
-                  //     headerAnimationLoop: true,
-                  //     dialogType: DialogType.SUCCES,
-                  //     title: 'Thank You for Helping Me!',
-                  //     desc: " ",
-                  //     autoHide: Duration(seconds: 1),
-                  //     width: 500
-                  // )..show();
+                  AwesomeDialog(
+                      context: context,
+                      useRootNavigator: true,
+                      headerAnimationLoop: true,
+                      dialogType: DialogType.SUCCES,
+                      title: 'Thank You!',
+                      desc: "We appreciate your help.",
+                      autoHide: Duration(seconds: 5),
+                      width: 500
+                  )..show();
                 },
                 child: Icon(Icons.favorite, color: Colors.pink,),
               ),
               FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  AwesomeDialog(
+                      context: context,
+                      useRootNavigator: true,
+                      headerAnimationLoop: true,
+                      dialogType: DialogType.SUCCES,
+                      title: 'Good Job!',
+                      desc: "You are such a good TA.",
+                      autoHide: Duration(seconds: 5),
+                      width: 500
+                  )..show();
+                },
                 child: Icon(Icons.beach_access, color: Colors.blue,),
               ),
               FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  AwesomeDialog(
+                      context: context,
+                      useRootNavigator: true,
+                      headerAnimationLoop: true,
+                      dialogType: DialogType.SUCCES,
+                      title: 'Relax!',
+                      desc: "Don't for get the take a break.",
+                      autoHide: Duration(seconds: 5),
+                      width: 500
+                  )..show();
+                },
                 child: Icon(Icons.audiotrack, color: Colors.green,),
               )
             ],
@@ -237,7 +260,6 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> with SingleTicker
                 child: ListView(
                   children: [
                     UniversalMethods.titleText("Helping"),
-
 
                     requestsList('taker email', FirebaseAuth.instance.currentUser.email, 'You Have not Taken any Request'),
 

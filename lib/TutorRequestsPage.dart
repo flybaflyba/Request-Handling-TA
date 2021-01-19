@@ -39,12 +39,12 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> with SingleTicker
   AnimationController _animationController;
 
   var isMusicOn = false;
-  final musicPlayer = AudioPlayer();
+
 
   Future<void> loadMusic() async {
     try {
-      await musicPlayer.setUrl('https://firebasestorage.googleapis.com/v0/b/virtual-approval-flutter.appspot.com/o/i_am_a_child_of_god.mp3?alt=media&token=c128aa53-4c0f-4e5f-82c2-97e6139b647a');
-      musicPlayer.setLoopMode(LoopMode.one);
+      await UniversalValues.musicPlayer.setUrl('https://firebasestorage.googleapis.com/v0/b/virtual-approval-flutter.appspot.com/o/i_am_a_child_of_god.mp3?alt=media&token=c128aa53-4c0f-4e5f-82c2-97e6139b647a');
+      UniversalValues.musicPlayer.setLoopMode(LoopMode.one);
     } on PlayerException catch (e) {
       // iOS/macOS: maps to NSError.code
       // Android: maps to ExoPlayerException.type
@@ -65,6 +65,7 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> with SingleTicker
     }
   }
 
+  
   @override
   Future<void> initState() {
 
@@ -323,17 +324,17 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> with SingleTicker
               FlatButton(
                 onPressed: () async {
 
-                  print(musicPlayer.playerState);
+                  print(UniversalValues.musicPlayer.playerState);
                   print(isMusicOn);
 
                   if (isMusicOn) {
-                    await musicPlayer.pause();
+                    await UniversalValues.musicPlayer.pause();
                     setState(() {
                       isMusicOn = false;
                     });
                   } else {
                     UniversalMethods.showToast("Enjoy the music!", UniversalValues.toastMessageTypeGood);
-                    musicPlayer.play();
+                    UniversalValues.musicPlayer.play();
                     setState(() {
                       isMusicOn = true;
                     });

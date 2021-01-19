@@ -187,6 +187,7 @@ class _MainPageState extends State<MainPage> {
 
                     UniversalValues.loggedInUserInformation = null;
                     t.cancel();
+                    UniversalValues.musicPlayer.pause();
 
                     AwesomeDialog(
                       context: context,

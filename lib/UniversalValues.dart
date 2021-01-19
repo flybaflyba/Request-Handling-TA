@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:virtual_approval_flutter/InfosPage.dart';
 import 'package:virtual_approval_flutter/Request.dart';
 import 'package:virtual_approval_flutter/SendRequestPage.dart';
@@ -50,6 +51,7 @@ class UniversalValues {
   static UserInformation loggedInUserInformation;
   static var loggedInLast = FirebaseAuth.instance.currentUser == null ? false : true;
 
+  static AudioPlayer musicPlayer = AudioPlayer();
 
 
 

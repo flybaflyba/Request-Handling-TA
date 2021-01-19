@@ -41,6 +41,7 @@ dependencies:
   flutter_sticky_header: ^0.5.0
   just_audio: ^0.6.5
   flutter_webview_plugin: ^0.3.11
+  flutter_simple_calculator: ^1.0.4
 #  shared_preferences: ^0.5.12+4
 
   # The following adds the Cupertino Icons font to your application.

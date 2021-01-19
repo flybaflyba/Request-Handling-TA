@@ -29,6 +29,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.11"
+  auto_size_text:
+    dependency: transitive
+    description:
+      name: auto_size_text
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
   awesome_dialog:
     dependency: "direct main"
     description:
@@ -155,6 +162,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.6"
+  expressions:
+    dependency: transitive
+    description:
+      name: expressions
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.5"
   fake_async:
     dependency: transitive
     description:
@@ -258,6 +272,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
+  flutter_grid_button:
+    dependency: transitive
+    description:
+      name: flutter_grid_button
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.8"
   flutter_layout_grid:
     dependency: transitive
     description:
@@ -279,6 +300,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.5"
+  flutter_simple_calculator:
+    dependency: "direct main"
+    description:
+      name: flutter_simple_calculator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.4"
   flutter_sticky_header:
     dependency: "direct main"
     description:

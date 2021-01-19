@@ -6,7 +6,9 @@ import 'dart:async';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_simple_calculator/flutter_simple_calculator.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -260,7 +262,7 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> with SingleTicker
                             )
                     );
                   }
-                  
+
                   // AwesomeDialog(
                   //     context: context,
                   //     useRootNavigator: true,
@@ -276,18 +278,47 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> with SingleTicker
               ),
               FlatButton(
                 onPressed: () {
-                  AwesomeDialog(
-                      context: context,
+                  showCupertinoModalBottomSheet(
+                    // expand: false,
+                    // bounce: true,
                       useRootNavigator: true,
-                      headerAnimationLoop: true,
-                      dialogType: DialogType.SUCCES,
-                      title: 'Good Job!',
-                      desc: "You are such a good TA.",
-                      autoHide: Duration(seconds: 5),
-                      width: 500
-                  )..show();
+                      context: context,
+                      duration: Duration(milliseconds: 700),
+                      builder: (context) =>
+                          Scaffold(
+                            appBar: AppBar(title: Text("Translator",),),
+                            body: Center(
+                              child: Container(
+                                constraints: BoxConstraints(minWidth: 150, maxWidth: 450),
+                                child: SimpleCalculator(
+                                  // value: 123.45,
+                                  // hideExpression: false,
+                                  onChanged: (key, value, expression) {
+                                    /*...*/
+                                  },
+                                  theme: const CalculatorThemeData(
+                                    displayColor: Colors.black,
+                                    displayStyle: const TextStyle(fontSize: 80, color: Colors.yellow),
+                                  ),
+                                ),
+                              ),
+                            )
+                          )
+                  );
+
+
+                  // AwesomeDialog(
+                  //     context: context,
+                  //     useRootNavigator: true,
+                  //     headerAnimationLoop: true,
+                  //     dialogType: DialogType.SUCCES,
+                  //     title: 'Good Job!',
+                  //     desc: "You are such a good TA.",
+                  //     autoHide: Duration(seconds: 5),
+                  //     width: 500
+                  // )..show();
                 },
-                child: Icon(Icons.beach_access, color: Colors.blue,),
+                child: Icon(Icons.calculate, color: Colors.blue,),
               ),
               FlatButton(
                 onPressed: () async {

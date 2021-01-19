@@ -34,13 +34,14 @@ class _MainPageState extends State<MainPage> {
 
   var taScreen;
 
+  Timer t;
   @override
   void initState() {
     super.initState();
     _controller = PersistentTabController(initialIndex: widget.initialIndex);
     _hideNavBar = false;
 
-    new Timer.periodic(Duration(seconds:1), (Timer t) {
+    t = new Timer.periodic(Duration(seconds:1), (Timer t) {
       // print('checking login in/out');
       // var loggedInNow = FirebaseAuth.instance.currentUser == null ? false : true;
       // // print("loggedInNow");
@@ -72,8 +73,9 @@ class _MainPageState extends State<MainPage> {
           .authStateChanges()
           .listen((User user) {
         if (user == null) {
-          // print('User is currently signed out!');
+          print('User is currently signed out!');
           if (buildScreens[2].toString() != "SignIn\$") {
+            print("Update Main to Tutor");
             setState(() {
               buildScreens = [
                 SendRequestPage(),
@@ -83,8 +85,9 @@ class _MainPageState extends State<MainPage> {
             });
           }
         } else {
-          // print('User is signed in!');
+          print('User is signed in!');
           if (buildScreens[2].toString() != "TutorRequestsPage\$") {
+            print("Update Main to SignIn");
             setState(() {
               buildScreens = [
                 SendRequestPage(),
@@ -184,6 +187,7 @@ class _MainPageState extends State<MainPage> {
                     );
 
                     UniversalValues.loggedInUserInformation = null;
+                    t.cancel();
 
                     AwesomeDialog(
                       context: context,

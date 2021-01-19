@@ -3,6 +3,7 @@
 
 import 'dart:async';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -205,7 +206,17 @@ class _TutorRequestsPageState extends State<TutorRequestsPage> with SingleTicker
                 child: Icon(Icons.history, color: Colors.blueGrey,),
               ),
               FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  // AwesomeDialog(
+                  //     context: context,
+                  //     headerAnimationLoop: true,
+                  //     dialogType: DialogType.SUCCES,
+                  //     title: 'Thank You for Helping Me!',
+                  //     desc: " ",
+                  //     autoHide: Duration(seconds: 1),
+                  //     width: 500
+                  // )..show();
+                },
                 child: Icon(Icons.favorite, color: Colors.pink,),
               ),
               FlatButton(

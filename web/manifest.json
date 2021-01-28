@@ -1,11 +1,11 @@
 {
-    "name": "virtual_approval_flutter",
-    "short_name": "virtual_approval_flutter",
+    "name": "BYUH Tutors",
+    "short_name": "BYUH Tutors",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter application.",
+    "description": "A Flutter Web application for BYUH Tutors.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

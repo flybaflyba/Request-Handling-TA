@@ -61,7 +61,7 @@ class _StudentRequestsPageState extends State<StudentRequestsPage> {
           );
 
           if(snapshot.hasData){
-            final content = snapshot.data.documents;
+            final content = snapshot.data.docs;
             for(var requestDocumentSnapshot in content){
               Request request = new Request();
               request.setRequestInfoWithDocumentSnapshot(requestDocumentSnapshot);

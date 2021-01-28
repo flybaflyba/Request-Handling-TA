@@ -129,11 +129,7 @@ class _RequestsHistoryPageState extends State<RequestsHistoryPage> {
             child: ListView(
               children: [
                 SizedBox(height: 20,),
-
-
                 UniversalMethods.titleText('Your Requests History'),
-
-
                 requestsList('taker email', FirebaseAuth.instance.currentUser.email, 'There is no Request'),
                 SizedBox(height: 100,)
 

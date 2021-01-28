@@ -64,6 +64,7 @@ class _SendRequestPageState extends State<SendRequestPage> {
                   SizedBox(height: 20,),
                   UniversalMethods.titleText("Send a Request"),
 
+
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Row(
@@ -255,6 +256,8 @@ class _SendRequestPageState extends State<SendRequestPage> {
 
                                     print(department);
 
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => StudentRequestsPage(emailPassedIn: email),));
+
                                   } catch(e) {
                                     print("something went wrong");
                                   }
@@ -287,7 +290,7 @@ class _SendRequestPageState extends State<SendRequestPage> {
                       child:
                       TextButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => StudentRequestsPage(emailPassedIn: email,),));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => StudentRequestsPage(),));
                         },
                         child: Text("Check My Requests"),
                       )

@@ -20,7 +20,6 @@ class StudentRequestsPage extends StatefulWidget {
   StudentRequestsPage({Key key, this.emailPassedIn}) : super(key: key);
 
   var emailPassedIn;
-
   @override
   _StudentRequestsPageState createState() => _StudentRequestsPageState();
 }
@@ -29,6 +28,15 @@ class StudentRequestsPage extends StatefulWidget {
 class _StudentRequestsPageState extends State<StudentRequestsPage> {
 
   var email = "";
+
+  @override
+  void initState() {
+    super.initState();
+    if(widget.emailPassedIn != null) {
+      email = widget.emailPassedIn;
+    }
+
+  }
 
   TextEditingController textEditingController = new TextEditingController();
 
@@ -111,9 +119,12 @@ class _StudentRequestsPageState extends State<StudentRequestsPage> {
       );
   }
 
+
+
   @override
   Widget build(BuildContext context) {
 
+    // print(widget.emailPassedIn);
 
     return Scaffold(
         backgroundColor: UniversalValues.backgroundColor,
@@ -125,12 +136,15 @@ class _StudentRequestsPageState extends State<StudentRequestsPage> {
 
                 SizedBox(height: 20,),
 
-
+                widget.emailPassedIn != null ? SizedBox(height: 0,) :
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Row(
                     children: <Widget>[
-                      IconButton(icon: Icon(Icons.email), onPressed: null),
+                      IconButton(icon: Icon(Icons.email), onPressed: () {
+                        print(widget.emailPassedIn);
+                        print(textEditingController.text);
+                      }),
                       Expanded(
                         child: Container(
                           margin: EdgeInsets.only(right: 20, left: 10),
@@ -139,9 +153,7 @@ class _StudentRequestsPageState extends State<StudentRequestsPage> {
                             onChanged: (value){
                               setState(() {
                                 email = value;
-                                print(email);
                               });
-
                             },
                             decoration: InputDecoration(hintText: "Your BYUH Email"),
                           ),
@@ -150,6 +162,8 @@ class _StudentRequestsPageState extends State<StudentRequestsPage> {
                     ],
                   ),
                 ),
+
+
 
                 UniversalMethods.titleText("Your Requests"),
 

@@ -2,7 +2,7 @@
     package="com.litianzhang.virtual_approval_flutter">
    <application
 
-        android:label="virtual_approval_flutter"
+        android:label="BYUH Tutors"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

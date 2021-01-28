@@ -43,10 +43,16 @@ dependencies:
   flutter_webview_plugin: ^0.3.11
   flutter_simple_calculator: ^1.0.4
 #  shared_preferences: ^0.5.12+4
+  flutter_launcher_icons: ^0.8.1 # no web, no need though
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/byu_hawaii_medallion_logo.png"
 
 dev_dependencies:
   flutter_test:

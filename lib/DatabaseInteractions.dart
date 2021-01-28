@@ -61,6 +61,20 @@ class DatabaseInteractions {
         .catchError((error) => print("Failed to add user profile: $error"));
   }
 
+  static void sendAEmail() {
+    FirebaseFirestore.instance.collection("emails")
+        .add({
+      "to": ['litianz@byuh.edu', 'masondu@go.byuh.edu', 'litian_zhang17@163.com'],
+      "message": {
+        "subject": 'Hello from Firebase!',
+        "text": 'This is the plaintext section of the email body.',
+        "html": 'This is the <code>HTML</code> section of the email body.',
+      }
+    })
+        .then((value) => print("New Email Doc Created"))
+        .catchError((error) => print("Failed to create email doc: $error"));
+  }
+
   static void saveRequest(Request request) {
     FirebaseFirestore.instance.collection(request.status + " requests")
         .doc(request.requestedAt)
@@ -79,7 +93,10 @@ class DatabaseInteractions {
       "waited time": request.waitedTime,
       "department": request.department,
     })
-        .then((value) => print("New Request Added"))
+        .then((value) {
+          print("New Request Added");
+          sendAEmail();
+    })
         .catchError((error) => print("Failed to save new request: $error"));
   }
 
